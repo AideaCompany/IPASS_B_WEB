@@ -1,0 +1,12 @@
+.main_container_home {
+  padding-top: 20vh;
+  padding-bottom: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  .container_buttons {
+    width: 100%;
+  }
+}

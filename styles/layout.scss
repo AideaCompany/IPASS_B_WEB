@@ -1,0 +1,41 @@
+.global_container {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba($color: #f1efef, $alpha: 0.5);
+}
+
+.main_container {
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  width: 70vw;
+}
+
+.custom_button {
+  background-color: black;
+  color: #ffffff;
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.custom_button_gold {
+  background-color: $mainColor;
+  color: #ffffff;
+}
+
+.custom_input {
+  background-color: black;
+  color: #ffffff;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.custom_checkbox {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}

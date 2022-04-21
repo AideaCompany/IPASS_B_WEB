@@ -1,0 +1,16 @@
+.main_container_register {
+  padding-top: 20vh;
+  padding-bottom: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 60%;
+  .container_form {
+    width: 100%;
+    align-items: center;
+  }
+  .container_buttons {
+    width: 80%;
+  }
+}
