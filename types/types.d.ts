@@ -382,3 +382,40 @@ export type registerClient = {
 export type registerConfirm = {
   token: string
 }
+
+export interface IClient extends Document, basicTable {
+  plus: boolean
+  name1: string
+  name2: string
+  lastname1: string
+  lastname2: string
+  lastname3: string
+  phone1: any
+  phone2: number
+  country: string
+  email: string
+  privateAddress: string
+  businessAddress: string
+  occupation: string
+  age: string
+  sex: string
+  ranking: number
+  channel: string
+  trm: string
+  pt: string
+  rom: string
+  lastVisit: string
+  referrals: string
+  servicesNotes: string
+  productsNotes: string
+  document: string
+  medicalNotes: string
+  socialMedia: string[]
+  photo: uploadedFile | graphqlFile
+  //type: { type: String },
+  //services: [{ type: Schema.Types.ObjectId, ref: 'services' }],
+  //products: [{ type: Schema.Types.ObjectId, ref: 'products' }],
+  password: string
+  tokenExpo: string[]
+  active: boolean
+}

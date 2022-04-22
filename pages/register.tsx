@@ -1,3 +1,4 @@
+import useAuth from '../providers/AuthContext'
 import { FormInstance, message } from 'antd'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -14,6 +15,7 @@ const Register: NextPage = () => {
   const formRefConfirm = useRef<FormInstance<registerConfirm>>(null)
   const [isConfirm, setIsConfirm] = useState(false)
   const [data, setData] = useState<registerClient>()
+  const { login } = useAuth()
   const onSubmitSignUp = async () => {
     const values = (await formRef.current?.validateFields()) as registerClient
     try {
@@ -34,7 +36,11 @@ const Register: NextPage = () => {
     const values = (await formRefConfirm.current?.validateFields()) as registerConfirm
     message.success('Registro exitoso')
     try {
-      await confirmClientFn(values.token)
+      const res = await confirmClientFn(values.token)
+      console.log(res)
+      if (res.response === '200') {
+        login(res.token)
+      }
     } catch (error) {
       console.log(error)
     } finally {

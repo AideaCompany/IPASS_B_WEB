@@ -1,0 +1,11 @@
+.main_container_welcome {
+  padding-top: 20vh;
+  padding-bottom: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .container_buttons {
+    width: 100%;
+  }
+}

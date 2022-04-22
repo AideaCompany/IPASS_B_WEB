@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
         <div className="container_buttons">
           <p className="font-Gothic text-gold">Aca podrás</p>
-          <Button title="Iniciar sesión" onClick={() => router.push('register')} />
+          <Button title="Iniciar sesión" onClick={() => router.push('login')} />
           <Button title="Registrarte" onClick={() => router.push('register')} />
         </div>
       </div>

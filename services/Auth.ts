@@ -8,5 +8,5 @@ export const SignUpClientFn = async (input: any) => {
 }
 
 export const confirmClientFn = async (token: string) => {
-  return (await client.mutate({ mutation: gql(confirmSignUpClient), variables: { token } })).data.signUpClient
+  return (await client.mutate({ mutation: gql(confirmSignUpClient), variables: { token } })).data.confirmSignUpClient
 }

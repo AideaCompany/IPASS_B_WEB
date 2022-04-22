@@ -3,7 +3,7 @@ import { getPrivilege } from '../graphql/queries'
 import { loginApp } from '../graphql/Session/loginApp'
 import { Privilege } from '../types/types'
 import client from '../graphql/config'
-import { confirmLogin } from '../graphql/mutation'
+import { confirmLogin, loginWeb } from '../graphql/mutation'
 
 export const loginService = async (input: any): Promise<{ response: string; token: string }> => {
   client.cache.reset()
@@ -20,4 +20,9 @@ export const getUserPrivilege = async (_id: any): Promise<Privilege> => {
   return await (
     await client.query({ query: gql(getPrivilege), variables: { _id } })
   ).data.getPrivilege
+}
+
+export const loginWebFn = async (input: any): Promise<{ response: string; token: string }> => {
+  client.cache.reset()
+  return (await client.mutate({ mutation: gql(loginWeb), variables: { input } })).data.loginWeb
 }

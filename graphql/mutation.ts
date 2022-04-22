@@ -5019,3 +5019,12 @@ export const verifyPhoto = /* GraphQL */ `
     verifyPhoto(input: $input)
   }
 `
+
+export const loginWeb = /* GraphQL */ `
+  mutation loginWeb($input: loginInputWeb) {
+    loginWeb(input: $input) {
+      response
+      token
+    }
+  }
+`
