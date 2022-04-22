@@ -1,20 +1,10 @@
-import useAuth from '../providers/AuthContext'
-import { Form, FormInstance } from 'antd'
 import { NextPage } from 'next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import React, { useRef, useState } from 'react'
-import Button from '../components/Button'
-import Input from '../components/Input'
-import InputPassword from '../components/InputPassword'
+import React, { useState } from 'react'
 import Layout from '../components/Layout'
-import { gql, useMutation } from '@apollo/client'
-import { loginWebFn } from '../services/session'
-import Selector from '../components/Selector'
-import countries from 'country-data'
-import { sendCodeFn } from '../services/clients'
-import LoginComponent from '../components/Login/LoginComponent'
 import ConfirmLogIn from '../components/Login/ConfirmLogIn'
+import LoginComponent from '../components/Login/LoginComponent'
+import useAuth from '../providers/AuthContext'
 
 const Login: NextPage = () => {
   // const [loginTrigger] = useMutation(gql(mutation.loginApp))
