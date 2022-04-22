@@ -372,7 +372,7 @@ export interface iLocationAttemptAnalythics extends Document, basicTable {
 
 export type registerClient = {
   name1: string
-  lastname1: string
+  lastName1: string
   country: string
   phone1: string
   email: string
@@ -387,9 +387,9 @@ export interface IClient extends Document, basicTable {
   plus: boolean
   name1: string
   name2: string
-  lastname1: string
-  lastname2: string
-  lastname3: string
+  lastName1: string
+  lastName2: string
+  lastName3: string
   phone1: any
   phone2: number
   country: string

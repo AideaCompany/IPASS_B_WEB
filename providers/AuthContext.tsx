@@ -48,6 +48,7 @@ export const AuthProvider = (props: { children: JSX.Element }) => {
   const login = async (token: string) => {
     const data = jwt.verify(token, $security.secretKey) as { data: IClient }
     const currentUser = await getClientFn(data.data._id as string)
+    console.log(currentUser)
     if (currentUser.active) {
       setUser(currentUser)
       Cookie.set('authIpassClient', token, { expires: 1 })

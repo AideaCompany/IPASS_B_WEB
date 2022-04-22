@@ -20,7 +20,7 @@ const RegisterComponent: FC<{ formRef: React.RefObject<FormInstance<any>>; onSub
         <Form ref={formRef} initialValues={{ country: '' }}>
           <div>
             <Input placeHolder="Nombre" name="name1" />
-            <Input placeHolder="Apellido" name="lastname1" />
+            <Input placeHolder="Apellido" name="lastName1" />
             <Selector
               formRef={formRef}
               name={'country'}
