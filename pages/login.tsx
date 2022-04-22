@@ -3,30 +3,25 @@ import { Form, FormInstance } from 'antd'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import InputPassword from '../components/InputPassword'
 import Layout from '../components/Layout'
 import { gql, useMutation } from '@apollo/client'
 import { loginWebFn } from '../services/session'
+import Selector from '../components/Selector'
+import countries from 'country-data'
+import { sendCodeFn } from '../services/clients'
+import LoginComponent from '../components/Login/LoginComponent'
+import ConfirmLogIn from '../components/Login/ConfirmLogIn'
 
 const Login: NextPage = () => {
-  const router = useRouter()
   // const [loginTrigger] = useMutation(gql(mutation.loginApp))
-
+  const [data, setData] = useState({} as any)
   const { login } = useAuth()
-  const formRef = useRef<FormInstance>(null)
 
-  const loginForm = async () => {
-    const { phone1, password }: { phone1: string; password: string } = await formRef.current?.validateFields()
-    try {
-      const data = await loginWebFn({ phone1, password })
-      login(data.token)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const [isConfirm, setIsConfirm] = useState(false)
 
   return (
     <Layout>
@@ -39,23 +34,7 @@ const Login: NextPage = () => {
             <a className="text-gold hover:underline">¡Registrarte acá!</a>
           </Link>
         </p>
-        <div className="container_form">
-          <Form onFinish={loginForm} ref={formRef}>
-            <div>
-              <Input placeHolder="Celular" name="phone1" />
-              <InputPassword />
-            </div>
-            <div className="text-right">
-              <Link href="/register">
-                <a className="text-black hover:underline">Olvide mi contraseña</a>
-              </Link>
-            </div>
-          </Form>
-        </div>
-
-        <div className="container_buttons">
-          <Button title="Iniciar sesión" isGold={true} onClick={loginForm} />
-        </div>
+        {isConfirm ? <ConfirmLogIn data={data} /> : <LoginComponent setIsConfirm={setIsConfirm} setData={setData} />}
       </div>
     </Layout>
   )

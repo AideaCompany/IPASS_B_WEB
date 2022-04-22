@@ -13,7 +13,7 @@ const Confirm: FC<{ data: registerClient; onConfirmSignUp: () => Promise<void>; 
     <>
       <div className="container_form">
         <Form ref={formRef}>
-          <p>{`Ingresa el código que hemos enviado a ${data.email?.replace(/(\w{1})[\w.-]+@([\w.]+\w)/, '$1*****@$2')}`}</p>
+          <p>{`Ingresa el código que hemos enviado a +${data.phone1}`}</p>
           <Input name="token" type={'number'} />
         </Form>
       </div>
