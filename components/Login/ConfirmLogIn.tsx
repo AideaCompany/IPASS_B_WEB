@@ -4,7 +4,6 @@ import React, { FC, useRef } from 'react'
 import { registerClient, registerConfirm } from '../../types/types'
 import Button from '../Button'
 import Input from '../Input'
-import { login } from '@/graphql/mutation'
 import useAuth from '../../providers/AuthContext'
 
 const Confirm: FC<{ data: registerClient }> = ({ data }) => {

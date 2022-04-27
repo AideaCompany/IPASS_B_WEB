@@ -1,9 +1,10 @@
 import { getClient } from '../graphql/Client/queries/getClient'
 import client from '../graphql/config'
-import { IClient } from '@/types/types'
+
 import { gql } from '@apollo/client'
 import { sendCode } from '../graphql/Client/mutations/sendCode'
 import { loginClient } from '../graphql/Client/mutations/loginClient'
+import { IClient } from '../types/types'
 
 export const getClientFn = async (_id: string): Promise<IClient> => {
   client.cache.reset()

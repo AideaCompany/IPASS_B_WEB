@@ -1,5 +1,5 @@
 import { getClientFn } from '../services/clients'
-import { IClient } from '@/types/types'
+import { IClient } from '../types/types'
 import Cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
 //next
