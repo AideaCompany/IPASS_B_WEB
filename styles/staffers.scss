@@ -1,0 +1,29 @@
+.Container_bar {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  .Search_bar {
+    width: 30%;
+    height: 25px;
+    margin-left: 0;
+  }
+  .Search_list {
+    width: 30%;
+    height: 23px;
+    padding-top: 4px;
+    padding-left: 1px;
+  }
+  .Main_tittle {
+    width: 30%;
+    height: 25px;
+    padding-top: 5px;
+    padding-left: 1px;
+  }
+}
+.Container_personal {
+  width: 100%;
+  height: 800px;
+}

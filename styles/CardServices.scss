@@ -1,0 +1,26 @@
+.Container_Ser {
+  width: 228px;
+  height: 288px;
+
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  .Image_containerSec {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    z-index: -1;
+
+    .sec-img {
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: -10;
+      opacity: 60%;
+    }
+  }
+}

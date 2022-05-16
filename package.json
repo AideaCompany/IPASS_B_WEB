@@ -12,7 +12,8 @@
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
     "@apollo/client": "^3.5.10",
-    "antd": "^4.19.5",
+    "@brainhubeu/react-carousel": "^2.0.4",
+    "antd": "^4.20.3",
     "apollo-upload-client": "^17.0.0",
     "country-data": "^0.0.31",
     "fogg-utils": "^2.7.5",

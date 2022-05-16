@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app'
 import { AuthProvider } from '../providers/AuthContext'
 import { ApolloProvider } from '@apollo/client'
 import Client from '../graphql/config'
-
+import '@brainhubeu/react-carousel/lib/style.css'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className="global_container">

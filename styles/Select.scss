@@ -1,0 +1,187 @@
+.Container_select {
+  width: 1280px;
+  height: 600px;
+  margin-top: 80px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  .Image_container {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    z-index: -1;
+
+    .map-img {
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: -10;
+    }
+    // .Image_background {
+    //   height: 100%;
+    //   width: 100%;
+
+    // }
+  }
+  .Image_container:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background: linear-gradient(180deg, #ffffff 28.26%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .Container_fluid {
+    width: auto;
+    height: 40%;
+    display: flex;
+    .Container_F_Text {
+      width: 30%;
+      align-items: center;
+      justify-content: center;
+
+      > p {
+        text-align: center;
+        padding-top: 45%;
+      }
+    }
+    .Container_Tarjet {
+      width: 40%;
+      display: flex;
+      flex-direction: column;
+      .Tarjet_Staffer {
+        width: full;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        > p {
+          text-align: center;
+          text-justify: center;
+        }
+        .Main_Staffer {
+          width: 100%;
+          height: 65%;
+          display: flex;
+
+          .Staffer_icon {
+            height: 100%;
+            width: 40%;
+            padding-bottom: 2px;
+            padding-left: 0%;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            > p {
+              text-align: center;
+            }
+          }
+          .Staffer_text {
+            width: 60%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            > p {
+              text-align: center;
+              padding: 1px;
+              justify-content: center;
+            }
+          }
+        }
+      }
+      .Tarjet_Service {
+        width: full;
+        height: 50%;
+
+        display: flex;
+        flex-direction: column;
+        > p {
+          text-align: center;
+        }
+        .Main_Service {
+          width: 100%;
+          height: 65%;
+          display: flex;
+          .Service_icon {
+            height: 100%;
+            width: 40%;
+            padding-bottom: 2px;
+            padding-left: 0%;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            > p {
+              text-align: center;
+            }
+          }
+          .Service_text {
+            width: 60%;
+            height: 100%;
+            justify-content: center;
+            padding-top: 15 px;
+            align-items: center;
+            > p {
+              text-align: center;
+              justify-content: center;
+            }
+          }
+        }
+      }
+    }
+    .Container_S_Text {
+      width: 30%;
+    }
+  }
+  .Container_reservation {
+    width: 90%;
+    height: 30%;
+    margin-top: 100px;
+    margin-left: 35px;
+    padding: 2%;
+    background-color: #ffffff;
+    > p {
+      text-align: center;
+    }
+    .container_buttons {
+      width: 100%;
+      height: 15%;
+      display: flex;
+      margin-top: 13%;
+      justify-content: center;
+      justify-content: center;
+      .line {
+        margin-top: 2%;
+        width: 50%;
+
+        justify-content: center;
+        justify-content: center;
+      }
+      .change {
+        width: 25%;
+        height: 15px;
+        justify-content: center;
+        justify-content: center;
+        .button {
+          padding: 3%;
+          height: 20px;
+        }
+      }
+      .cancel {
+        width: 25%;
+        margin-left: 8%;
+        justify-content: center;
+        justify-content: center;
+        .button {
+          padding: 3%;
+          height: 20px;
+        }
+      }
+    }
+  }
+}

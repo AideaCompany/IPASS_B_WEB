@@ -1,0 +1,67 @@
+.container_list_stores {
+  width: 1280px;
+  height: 600px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  .Container_bar1.Container_bar1 {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    .Search_bar1 {
+      width: 30%;
+      height: 25px;
+      margin-left: 0;
+    }
+    .Search_list1 {
+      width: 30%;
+      height: 23px;
+      padding-top: 4px;
+      padding-left: 1px;
+    }
+    .Main_tittle1 {
+      width: 30%;
+      height: 25px;
+      padding-top: 5px;
+      padding-left: 1px;
+    }
+  }
+
+  .Container_select1 {
+    width: 1280px;
+    height: 600px;
+    margin-top: 80px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+
+    .Image_container {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      position: absolute;
+      z-index: -1;
+
+      .map1-img {
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        z-index: -10;
+      }
+    }
+  }
+  .Main_carousel1 {
+    margin-top: 40px;
+    width: 20%;
+    height: 100%;
+    justify-content: right;
+    display: flex;
+    flex-direction: column;
+  }
+}
