@@ -3,12 +3,13 @@ import { createService } from '@/graphql/services/mutations/createService'
 import { updateService } from '@/graphql/services/mutations/updateService'
 import { getService } from '@/graphql/services/queries/getService'
 import { listAllServices } from '@/graphql/services/queries/listAllServices'
+import { listAvailableHour } from '@/graphql/services/queries/listAvailableHour'
 import { listService } from '@/graphql/services/queries/listService'
 import { listServiceByStaffAndStore } from '@/graphql/services/queries/listServiceByStaffAndStore'
 import { listServiceByStore } from '@/graphql/services/queries/listServiceByStore'
 import { IPaginated } from '@/types/interfaces/graphqlTypes'
 import { ICreateService, IUpdateService } from '@/types/interfaces/services/MutationServices.interface'
-import { IService } from '@/types/interfaces/services/Services.interface'
+import { IService, IServiceStaffer } from '@/types/interfaces/services/Services.interface'
 import { convertTotable } from '@/utils/utils'
 import { gql } from '@apollo/client'
 
@@ -57,4 +58,16 @@ export const getServiceFn = async (_id: string): Promise<IService> => {
   return await (
     await client.query({ query: gql(getService), variables: { _id } })
   ).data.getService
+}
+
+export const listAvailableHourFn = async (
+  storeId: string,
+  servicesId: string[],
+  servicesStaffers: IServiceStaffer[],
+  day: string
+): Promise<IService> => {
+  client.cache.reset()
+  return await (
+    await client.query({ query: gql(listAvailableHour), variables: { storeId, servicesId, servicesStaffers, day } })
+  ).data.listAvailableHour
 }
