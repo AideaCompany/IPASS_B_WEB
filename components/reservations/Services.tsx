@@ -6,9 +6,18 @@ import { stepsPageReservation } from 'pages/reservations'
 import React, { useEffect, useState } from 'react'
 import CardServices from './CardServices'
 
-const Services = ({ setStep, selectedStore }: { selectedStore: IStores; setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>> }) => {
-  const onClick = () => {
-    setStep(stepsPageReservation.hair)
+const Services = ({
+  setStep,
+  selectedStore,
+  onChange
+}: {
+  onChange: (value: IService) => void
+  selectedStore: IStores
+  setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
+}) => {
+  const onClick = (value: IService) => {
+    setStep(stepsPageReservation.selectDate)
+    onChange(value)
   }
   const [services, setServices] = useState<IService[]>([])
 
@@ -41,7 +50,7 @@ const Services = ({ setStep, selectedStore }: { selectedStore: IStores; setStep:
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
         {services.map((service, i) => (
           <React.Fragment key={i}>
-            <CardServices service={service} onClick={onClick} />
+            <CardServices service={service} onClick={() => onClick(service)} />
           </React.Fragment>
         ))}
       </div>

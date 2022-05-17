@@ -19,7 +19,8 @@ module.exports = {
     extend: {
       fontFamily: {
         Butler: ['Butler_Regular'],
-        Gothic: ['Century Gothic']
+        Gothic: ['Century Gothic'],
+        Helvetica: ['Helvetica Neue']
       }
     }
   },

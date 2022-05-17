@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "next build",
-    "start": "next start",
+    "start": "next start  -p 3001",
     "lint": "next lint",
     "lint:fix": "eslint . --ext .js,.tsx,.ts --fix"
   },
@@ -25,10 +25,12 @@
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "sass": "^1.50.0",
-    "subscriptions-transport-ws": "^0.11.0"
+    "subscriptions-transport-ws": "^0.11.0",
+    "swiper": "^8.1.5"
   },
   "devDependencies": {
     "@types/apollo-upload-client": "^17.0.0",
+    "@types/brainhubeu__react-carousel": "^2.0.5",
     "@types/country-data": "^0.0.2",
     "@types/js-cookie": "^3.0.1",
     "@types/jsonwebtoken": "^8.5.8",

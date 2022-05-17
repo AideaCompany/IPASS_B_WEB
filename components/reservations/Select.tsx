@@ -30,19 +30,18 @@ const Select = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<step
                 </p>
                 z
               </div>
-
               <div className="Staffer_text ">
                 <p className="Title font-Gothic text-right ">Selecciona tu staffer de preferencia</p>{' '}
               </div>
             </div>
           </div>
-          <div className="Tarjet_Service ">
+          <div className="Tarjet_Service " onClick={() => setStep(stepsPageReservation.services)}>
             <p className="Title font-Gothic text-right font-bold text-lg">Servicio</p>
             <div className="Main_Service">
               <div className="Service_icon " style={{ fontSize: '45px' }}>
                 <p>
                   <ScissorOutlined />
-                </p>{' '}
+                </p>
               </div>
               <div className="Service_text ">
                 <p className="Title font-Gothic text-right "> Selecciona el servicio que deseas adquirir</p>{' '}

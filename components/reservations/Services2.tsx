@@ -1,4 +1,4 @@
-import { listServiceByStaffAndStoreFn, listServiceByStoreFn } from '@/services/services'
+import { listServiceByStaffAndStoreFn } from '@/services/services'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'

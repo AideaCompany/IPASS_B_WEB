@@ -95,8 +95,10 @@
           }
         }
       }
+      .Tarjet_Service:hover {
+        cursor: pointer;
+      }
       .Tarjet_Service {
-        width: full;
         height: 50%;
 
         display: flex;
