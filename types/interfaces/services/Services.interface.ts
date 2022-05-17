@@ -1,7 +1,7 @@
-import { graphqlFile, uploadedFile } from 'interfaces'
-import { IServiceType } from 'interfaces/ServiceType/serviceType.interface'
-import { IStaff } from 'interfaces/staff/staff.interface'
-import { ISubService } from 'interfaces/SubServices/SubServices.interface'
+import { graphqlFile, uploadedFile } from '..'
+import { IServiceType } from '../ServiceType/serviceType.interface'
+import { IStaff } from '../staff/staff.interface'
+import { ISubService } from '../SubServices/SubServices.interface'
 import { IProduct } from '../Product/Product.interface'
 
 export type IProducts = {
