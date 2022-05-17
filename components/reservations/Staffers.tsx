@@ -43,7 +43,7 @@ const Staffers = ({
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          j<p className="Title font-Gothic text-right "> Profesionales</p>{' '}
+          <p className="Title font-Gothic text-right "> Profesionales</p>{' '}
         </div>
       </div>
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
