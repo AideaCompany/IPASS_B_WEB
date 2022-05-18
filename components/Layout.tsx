@@ -1,8 +1,12 @@
 import { UserOutlined } from '@ant-design/icons'
 import { ShoppingCard } from '../icons/personalIcons'
 import React, { FC } from 'react'
+import { Badge } from 'antd'
+import useCar from '@/providers/CarContext'
 
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { car } = useCar()
+
   return (
     <>
       <div className="header  ">
@@ -10,7 +14,9 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
           <p>VANT</p>
         </div>
         <div className="car " style={{ fontSize: '30px' }}>
-          <ShoppingCard />
+          <Badge color={'#D2B782'} count={car?.services?.length}>
+            <ShoppingCard style={{ fontSize: '30px' }} />
+          </Badge>
         </div>
 
         <div className="profile" style={{ fontSize: '30px' }}>

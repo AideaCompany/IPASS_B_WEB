@@ -1,32 +1,26 @@
+import useCar from '@/providers/CarContext'
 import { listServiceByStoreFn } from '@/services/services'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { stepsPageReservation } from 'pages/reservations'
 import React, { useEffect, useState } from 'react'
 import CardServices from './CardServices'
 
-const Services = ({
-  setStep,
-  selectedStore,
-  onChange
-}: {
-  onChange: (value: IService) => void
-  selectedStore: IStores
-  setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
-}) => {
+const Services = ({ selectedStore, onChange }: { onChange: (value: IService) => void; selectedStore: IStores }) => {
+  const { car } = useCar()
   const onClick = (value: IService) => {
-    setStep(stepsPageReservation.selectDate)
     onChange(value)
   }
   const [services, setServices] = useState<IService[]>([])
 
   useEffect(() => {
     getData()
-  }, [])
+  }, [car])
 
   const getData = async () => {
-    setServices(await listServiceByStoreFn(selectedStore._id as string))
+    setServices(
+      (await listServiceByStoreFn(selectedStore._id as string)).filter(e => !car?.services.map(l => (l.service as IService)._id).includes(e._id))
+    )
   }
 
   return (

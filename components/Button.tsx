@@ -1,4 +1,3 @@
-import { LineHeightOutlined } from '@ant-design/icons'
 import React, { FC } from 'react'
 
 const Button: FC<{ title: string; onClick: () => void; styles?: React.CSSProperties; isGold?: boolean; customClassName?: string }> = ({

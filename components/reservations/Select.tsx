@@ -1,4 +1,3 @@
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { ScissorOutlined, UserOutlined } from '@ant-design/icons'
 import { stepsPageReservation } from 'pages/reservations'
 import React from 'react'
