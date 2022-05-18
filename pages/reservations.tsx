@@ -23,7 +23,7 @@ export enum stepsPageReservation {
   'selectDate' = 'selectDate'
 }
 const Reservations = (props: { stores: IStores[]; staffer: IStaff[] }) => {
-  const [step, setStep] = useState<stepsPageReservation>(stepsPageReservation.selectDate)
+  const [step, setStep] = useState<stepsPageReservation>(stepsPageReservation.store)
   const [selectedStore, setSelectedStore] = useState<IStores>()
   const [selectedStaff, setSelectedStaff] = useState<IStaff>()
   const [service, setService] = useState<IService>()
@@ -55,7 +55,7 @@ const Reservations = (props: { stores: IStores[]; staffer: IStaff[] }) => {
       {step === stepsPageReservation.selectDate && selectedStore && selectedStaff && (
         <Services2 selectedStore={selectedStore} selectedStaff={selectedStaff} setStep={setStep} />
       )}
-      {step === stepsPageReservation.selectDate && <SelectDate store={selectedStore} service={service} />}
+      {step === stepsPageReservation.selectDate && selectedStore && service && <SelectDate store={selectedStore} service={[service]} />}
       {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
     </Layout>
   )

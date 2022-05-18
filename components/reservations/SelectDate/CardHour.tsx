@@ -1,3 +1,4 @@
+import { availableHours } from '@/types/interfaces/services/Services.interface'
 import React from 'react'
 
 const CardHour = ({ onClick }: { onClick: () => void }) => {
