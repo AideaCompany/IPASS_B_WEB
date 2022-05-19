@@ -9,9 +9,10 @@ import { listServiceByStaffAndStore } from '@/graphql/services/queries/listServi
 import { listServiceByStore } from '@/graphql/services/queries/listServiceByStore'
 import { IPaginated } from '@/types/interfaces/graphqlTypes'
 import { ICreateService, IUpdateService } from '@/types/interfaces/services/MutationServices.interface'
-import { IService, IServiceStaffer } from '@/types/interfaces/services/Services.interface'
+import { availableHours, IService, IServiceStaffer } from '@/types/interfaces/services/Services.interface'
 import { convertTotable } from '@/utils/utils'
 import { gql } from '@apollo/client'
+import { Moment } from 'moment-timezone'
 
 export const getAllServices = async (page: number, limit: number, filters: any): Promise<IPaginated<IService>> => {
   client.cache.reset()
@@ -64,8 +65,8 @@ export const listAvailableHourFn = async (
   storeId: string,
   servicesId: string[],
   servicesStaffers: IServiceStaffer[],
-  day: string
-): Promise<IService> => {
+  day: Moment
+): Promise<availableHours[][]> => {
   client.cache.reset()
   return await (
     await client.query({ query: gql(listAvailableHour), variables: { storeId, servicesId, servicesStaffers, day } })

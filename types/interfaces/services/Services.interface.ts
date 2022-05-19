@@ -32,3 +32,9 @@ export interface IServiceStaffer {
   staff: string | IStaff
   service: string | IService
 }
+
+export type availableHours = {
+  service: IService
+  staffer: IStaff
+  hour: string
+}

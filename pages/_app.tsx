@@ -6,12 +6,15 @@ import { ApolloProvider } from '@apollo/client'
 import Client from '../graphql/config'
 import 'swiper/css'
 import 'swiper/css/pagination'
+import { CarProvider } from '@/providers/CarContext'
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div className="global_container">
       <ApolloProvider client={Client}>
         <AuthProvider>
-          <Component {...pageProps} />
+          <CarProvider>
+            <Component {...pageProps} />
+          </CarProvider>
         </AuthProvider>
       </ApolloProvider>
     </div>
