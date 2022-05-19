@@ -1,21 +1,21 @@
-import { getClientCurrentShoppingCardFn } from '@/services/shoppingCar'
-import { IShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import React, { useContext, useEffect, useState } from 'react'
 import useAuth from './AuthContext'
 
 type reservationContext = {
-  car: IShoppingCard
-  setCar: (car: IShoppingCard) => void
+  stores: IStores[]
+  selectedStore: IStores | undefined
+  setSelectedStore: React.Dispatch<React.SetStateAction<IStores | undefined>>
   getData: () => Promise<void>
 }
 const ReservationContext = React.createContext<reservationContext>({} as reservationContext)
 
-export const ReservationProvider = (props: { children: JSX.Element }) => {
+export const ReservationProvider = (props: { children: JSX.Element; stores: IStores[] }) => {
   //props
-  const { children } = props
+  const { children, stores } = props
   const { user } = useAuth()
   //States
-  const [car, setCar] = useState<IShoppingCard>({} as IShoppingCard)
+  const [selectedStore, setSelectedStore] = useState<IStores | undefined>()
 
   useEffect(() => {
     if (user) {
@@ -24,15 +24,16 @@ export const ReservationProvider = (props: { children: JSX.Element }) => {
   }, [user])
 
   const getData = async () => {
-    const value = await getClientCurrentShoppingCardFn(user._id as string)
-    setCar(value)
+    // const value = await getClientCurrentShoppingCardFn(user._id as string)
+    // setCar(value)
   }
 
   return (
     <ReservationContext.Provider
       value={{
-        car,
-        setCar,
+        stores,
+        selectedStore,
+        setSelectedStore,
         getData
       }}
     >

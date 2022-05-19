@@ -10,8 +10,8 @@ import React from 'react'
 const Reservations = ({ stores }: { stores: IStores[] }) => {
   return (
     <Layout>
-      <ReservationProvider>
-        <ReservationsComponent stores={stores} />
+      <ReservationProvider stores={stores}>
+        <ReservationsComponent />
       </ReservationProvider>
     </Layout>
   )
