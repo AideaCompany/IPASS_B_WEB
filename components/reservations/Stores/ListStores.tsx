@@ -1,3 +1,4 @@
+import useReservation from '@/providers/ReservationContext'
 import { CaretDownOutlined } from '@ant-design/icons'
 import { List } from 'antd'
 
@@ -6,18 +7,12 @@ import { IStores } from '../../../types/interfaces/Stores/stores.interface'
 import { stepsPageReservation } from '../reservationsComponent'
 import CardStore from './CardStore'
 
-const ListStores = ({
-  stores,
-  setStep,
-  onChangeStore
-}: {
-  stores: IStores[]
-  onChangeStore: (value: IStores) => void
-  setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
-}) => {
+const ListStores = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>> }) => {
+  const { stores, setSelectedStore } = useReservation()
+
   const onClick = (store: IStores) => {
     setStep(stepsPageReservation.Select)
-    onChangeStore(store)
+    setSelectedStore(store)
   }
   return (
     <div className="container_list_stores">
