@@ -112,21 +112,21 @@ const Reservations = (props: { stores: IStores[]; staffer: IStaff[] }) => {
           )}
           {current === 6 && step === stepsPageReservation.selectDate && <SelectDate store={selectedStore} service={service} />}
           {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
+          {step === stepsPageReservation.store && <ListStores onChangeStore={onChangeStore} setStep={setStep} stores={props.stores} />}
+          {step === stepsPageReservation.Select && <Select setStep={setStep} />}
+          {step === stepsPageReservation.staffers && selectedStore && (
+            <Staffers onChangeStaff={onChangeStaff} selectedStore={selectedStore} setStep={setStep} />
+          )}
+          {/* {step === stepsPageReservation.hair && <Hair setStep={setStep} stores={props.stores} />} */}
+          {step === stepsPageReservation.services && selectedStore && <Services onChange={onChangeService} selectedStore={selectedStore} />}
+          {step === stepsPageReservation.services2 && selectedStore && selectedStaff && (
+            <Services2 selectedStore={selectedStore} selectedStaff={selectedStaff} setStep={setStep} />
+          )}
+          {step === stepsPageReservation.selectDate && <SelectDate />}
+          {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
+          <AskContinueOrAdd goHours={goHours} goStart={goStart} visible={visibleAsk} onCancel={() => setVisibleAsk(false)} />
         </div>
       </div>
-      {step === stepsPageReservation.store && <ListStores onChangeStore={onChangeStore} setStep={setStep} stores={props.stores} />}
-      {step === stepsPageReservation.Select && <Select setStep={setStep} />}
-      {step === stepsPageReservation.staffers && selectedStore && (
-        <Staffers onChangeStaff={onChangeStaff} selectedStore={selectedStore} setStep={setStep} />
-      )}
-      {/* {step === stepsPageReservation.hair && <Hair setStep={setStep} stores={props.stores} />} */}
-      {step === stepsPageReservation.services && selectedStore && <Services onChange={onChangeService} selectedStore={selectedStore} />}
-      {step === stepsPageReservation.services2 && selectedStore && selectedStaff && (
-        <Services2 selectedStore={selectedStore} selectedStaff={selectedStaff} setStep={setStep} />
-      )}
-      {step === stepsPageReservation.selectDate && <SelectDate />}
-      {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
-      <AskContinueOrAdd goHours={goHours} goStart={goStart} visible={visibleAsk} onCancel={() => setVisibleAsk(false)} />
     </Layout>
   )
 }
