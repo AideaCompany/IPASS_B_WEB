@@ -1,8 +1,27 @@
-import React from 'react'
+import { ILocation } from '@/types/types'
+import { FormInstance, Steps } from 'antd'
+import React, { useCallback, useRef, useState } from 'react'
+import Hair from '../Hair'
 
 const CardHour = ({ onClick }: { onClick: () => void }) => {
+  const formRef = useRef<FormInstance<ILocation>>(null)
+  const [current, setCurrent] = useState(0)
+  const [data, setData] = useState<ILocation>()
+  //#region functions
+  const HandleChangeCurrent = useCallback(
+    (type: 'next' | 'back') => {
+      const currentData = formRef.current?.getFieldsValue() as ILocation
+      setData(currentVal => ({ ...currentVal, ...currentData }))
+      if (type === 'next') {
+        setCurrent(current + 1)
+      } else {
+        setCurrent(current - 1)
+      }
+    },
+    [current]
+  )
   return (
-    <div className="Container_Main_H ">
+    <div className="Container_Main_H border ">
       <div className="Container_Times ">
         <div className="Title_Hour ">
           <p className="font-Butler font-medium text-lef text-xl">Mañana</p>
