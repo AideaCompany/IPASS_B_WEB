@@ -1,7 +1,8 @@
 import { ScissorOutlined, UserOutlined } from '@ant-design/icons'
-import { stepsPageReservation } from 'pages/reservations'
+
 import React from 'react'
 import Button from '../Button'
+import { stepsPageReservation } from './reservationsComponent'
 
 const Select = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>> }) => {
   const onClick = () => {
@@ -59,7 +60,7 @@ const Select = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<step
           </div>
           <div className="cancel ">
             <Button title="Cancelar" onClick={onClick} customClassName="button  text-xs" />
-          </div>{' '}
+          </div>
         </div>
       </div>
     </div>

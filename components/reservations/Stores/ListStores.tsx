@@ -1,8 +1,9 @@
 import { CaretDownOutlined } from '@ant-design/icons'
 import { List } from 'antd'
-import { stepsPageReservation } from 'pages/reservations'
+
 import React from 'react'
 import { IStores } from '../../../types/interfaces/Stores/stores.interface'
+import { stepsPageReservation } from '../reservationsComponent'
 import CardStore from './CardStore'
 
 const ListStores = ({
