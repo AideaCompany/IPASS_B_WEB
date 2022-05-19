@@ -1,10 +1,10 @@
-import { IStores } from '../../types/interfaces/Stores/stores.interface'
-
-import { Carousel, List } from 'antd'
-import React from 'react'
-import CardStore from './CardStore'
-import { stepsPageReservation } from 'pages/reservations'
 import { CaretDownOutlined } from '@ant-design/icons'
+import { List } from 'antd'
+
+import React from 'react'
+import { IStores } from '../../../types/interfaces/Stores/stores.interface'
+import { stepsPageReservation } from '../reservationsComponent'
+import CardStore from './CardStore'
 
 const ListStores = ({
   stores,
@@ -20,7 +20,7 @@ const ListStores = ({
     onChangeStore(store)
   }
   return (
-    <div className="container_list_stores">
+    <div className="container_list_stores border">
       <div className="Container_bar1 ">
         <div className="Search_bar flex appearance-none   left-2 m-5 sm:max-w-screen-sm text-stone-900">
           <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
