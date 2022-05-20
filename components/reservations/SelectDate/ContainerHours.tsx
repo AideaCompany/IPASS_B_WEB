@@ -40,14 +40,11 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         if (
           moment
             .tz('America/Guatemala')
-            .isBefore(
-              moment.tz('America/Guatemala').set({ hour: parseInt(e[0].hour.split(':')[0]), minute: parseInt(e[0].hour.split(':')[1]) }),
-              'hour'
-            )
+            .isAfter(moment.tz('America/Guatemala').set({ hour: parseInt(e[0].hour.split(':')[0]), minutes: parseInt(e[0].hour.split(':')[1]) }))
         ) {
-          return true
+          return false
         }
-        return false
+        return true
       } else {
         return true
       }

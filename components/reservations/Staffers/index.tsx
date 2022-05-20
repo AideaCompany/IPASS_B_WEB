@@ -1,20 +1,14 @@
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { listStaffByStoreFn } from '@/services/staff'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { stepsPageReservation } from 'pages/reservations'
 import React, { useEffect, useState } from 'react'
 import CardStaffers from './CardStaffers'
 
-const Staffers = ({
-  setStep,
-  selectedStore,
-  onChangeStaff
-}: {
-  onChangeStaff: (value: IStaff) => void
-  selectedStore: IStores
-  setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
-}) => {
+const Staffers = ({ selectedStore, onChangeStaff }: { onChangeStaff: (value: IStaff) => void; selectedStore: IStores }) => {
+  const { setStep } = useReservation()
+
   const onClick = (staff: IStaff) => {
     setStep(stepsPageReservation.services2)
     onChangeStaff(staff)

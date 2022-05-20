@@ -4,7 +4,9 @@ module.exports = {
     colors: {
       gold: '#D2B782',
       black: '#000000',
-      white: '#ffffff'
+      'light-black': '#222222',
+      white: '#ffffff',
+      gray: '#CCCCCC'
     },
     container: {
       center: true,
@@ -24,5 +26,5 @@ module.exports = {
       }
     }
   },
-  plugins: []
+  plugins: [require('flowbite/plugin')]
 }

@@ -1,11 +1,10 @@
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { stepsPageReservation } from 'pages/reservations'
 import React from 'react'
 import CardHair from './CardHair'
-import CardServices from './CardServices'
 
-const Hair = ({ stores, setStep }: { stores: IStores[]; setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>> }) => {
+const Hair = () => {
+  const { setStep } = useReservation()
   const onClick = () => {
     setStep(stepsPageReservation.Type)
   }

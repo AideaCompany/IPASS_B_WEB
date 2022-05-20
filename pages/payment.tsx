@@ -1,23 +1,10 @@
-import useAuth from '../providers/AuthContext'
-import { Checkbox, Form, FormInstance, message } from 'antd'
+import { Form } from 'antd'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import React, { useRef, useState } from 'react'
-import Layout from '../components/Layout'
-import Confirm from '../components/Register/Confirm'
-import RegisterComponent from '../components/Register/RegisterComponent'
-import { confirmClientFn, SignUpClientFn } from '../services/Auth'
-import { registerClient, registerConfirm } from '../types/types'
+import React from 'react'
 import Input from '../components/Input'
+import Layout from '../components/Layout'
 
 const Register: NextPage = () => {
-  const router = useRouter()
-  const formRef = useRef<FormInstance<registerClient>>(null)
-  const formRefConfirm = useRef<FormInstance<registerConfirm>>(null)
-  const [isConfirm, setIsConfirm] = useState(false)
-  const [data, setData] = useState<registerClient>()
-  const { login } = useAuth()
-
   return (
     <Layout>
       <div className="main_container_payment ">

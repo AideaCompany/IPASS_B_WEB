@@ -4,7 +4,7 @@ import React from 'react'
 const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStores) => void }) => {
   return (
     <>
-      <div className="Container_Sto  " onClick={() => onClick(store)}>
+      <div className="Container_Sto cursor-pointer " onClick={() => onClick(store)}>
         <div className="Image_containerS ">
           <HomeOutlined style={{ fontSize: '60px', color: '#08c', justifyContent: 'center' }} />
         </div>

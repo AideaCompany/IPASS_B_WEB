@@ -1,12 +1,24 @@
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import React, { useContext, useEffect, useState } from 'react'
 import useAuth from './AuthContext'
-
+export enum stepsPageReservation {
+  'store' = 'store',
+  'Select' = 'Select',
+  'services' = 'services',
+  'services2' = 'services2',
+  'staffers' = 'staffers',
+  'hair' = 'hair',
+  'Type' = 'Type',
+  'selectDate' = 'selectDate',
+  'payment' = 'payment'
+}
 type reservationContext = {
   stores: IStores[]
   selectedStore: IStores | undefined
   setSelectedStore: React.Dispatch<React.SetStateAction<IStores | undefined>>
   getData: () => Promise<void>
+  setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
+  step: stepsPageReservation
 }
 const ReservationContext = React.createContext<reservationContext>({} as reservationContext)
 
@@ -16,6 +28,7 @@ export const ReservationProvider = (props: { children: JSX.Element; stores: ISto
   const { user } = useAuth()
   //States
   const [selectedStore, setSelectedStore] = useState<IStores | undefined>()
+  const [step, setStep] = useState(stepsPageReservation.store)
 
   useEffect(() => {
     if (user) {
@@ -31,6 +44,8 @@ export const ReservationProvider = (props: { children: JSX.Element; stores: ISto
   return (
     <ReservationContext.Provider
       value={{
+        step,
+        setStep,
         stores,
         selectedStore,
         setSelectedStore,
