@@ -2,8 +2,9 @@ import { listStaffByStoreFn } from '@/services/staff'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { stepsPageReservation } from 'pages/reservations'
+
 import React, { useEffect, useState } from 'react'
+import { stepsPageReservation } from '../reservationsComponent'
 import CardStaffers from './CardStaffers'
 
 const Staffers = ({
@@ -16,7 +17,7 @@ const Staffers = ({
   setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
 }) => {
   const onClick = (staff: IStaff) => {
-    setStep(stepsPageReservation.services2)
+    setStep(stepsPageReservation.selectDate)
     onChangeStaff(staff)
   }
   const [staffers, setStaffers] = useState<IStaff[]>([])

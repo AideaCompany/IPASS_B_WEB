@@ -1,5 +1,5 @@
 .Container_select {
-  width: 1280px;
+  width: 100%;
   height: 600px;
   margin-top: 80px;
   align-items: center;
@@ -56,6 +56,9 @@
       width: 40%;
       display: flex;
       flex-direction: column;
+      .Tarjet_Staffer:hover {
+        cursor: pointer;
+      }
       .Tarjet_Staffer {
         width: full;
         height: 50%;

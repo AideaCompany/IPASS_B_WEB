@@ -6,7 +6,7 @@ const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStore
     <>
       <div className="Container_Sto  " onClick={() => onClick(store)}>
         <div className="Image_containerS ">
-          <HomeOutlined style={{ fontSize: '60px', color: '#08c', justifyContent: 'center' }} />
+          <img src="/images/Store.png" className="map1-img"></img>
         </div>
         <div className="Container_Information">
           <div className="mb-8">

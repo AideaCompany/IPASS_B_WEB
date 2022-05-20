@@ -8,6 +8,7 @@ const Select = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<step
   const onClick = () => {
     setStep(stepsPageReservation.staffers)
   }
+
   return (
     <div className="Container_select ">
       <div className="Image_container">
@@ -21,7 +22,7 @@ const Select = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<step
           <p className="Title font-Gothic text-right font-bold text-xl ">Reservar por </p>
         </div>
         <div className="Container_Tarjet divide-y divide-slate-100">
-          <div className="Tarjet_Staffer ">
+          <div className="Tarjet_Staffer " onClick={onClick}>
             <p className="Title font-Gothic text-right font-bold text-lg">Personal</p>
             <div className="Main_Staffer ">
               <div className="Staffer_icon " style={{ fontSize: '45px' }}>

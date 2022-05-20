@@ -15,7 +15,7 @@ const ListStores = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<
     setSelectedStore(store)
   }
   return (
-    <div className="container_list_stores border">
+    <div className="container_list_stores ">
       <div className="Container_bar1 ">
         <div className="Search_bar flex appearance-none   left-2 m-5 sm:max-w-screen-sm text-stone-900">
           <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -37,17 +37,15 @@ const ListStores = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<
           {/* <div className="Image_background"></div> */}
           <img src="/images/Maps.png" className="map1-img"></img>
         </div>
-        <div className="Main_carousel1 m-2 ">
-          <div className="Container_cardStores1 ">
-            <List
-              dataSource={stores}
-              renderItem={item => (
-                <React.Fragment key={item.name}>
-                  <CardStore store={item} onClick={onClick} />
-                </React.Fragment>
-              )}
-            ></List>
-          </div>
+        <div className="Main_carousel1  m-2 ">
+          <List
+            dataSource={stores}
+            renderItem={item => (
+              <React.Fragment key={item.name}>
+                <CardStore store={item} onClick={onClick} />
+              </React.Fragment>
+            )}
+          ></List>
         </div>
       </div>
     </div>

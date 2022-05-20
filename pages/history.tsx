@@ -5,6 +5,7 @@ import useAuth from '@/providers/AuthContext'
 import { getClientShoppingCardsFn } from '@/services/shoppingCar'
 import { IShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import React, { useEffect, useState } from 'react'
+import { List } from 'antd'
 
 const History = () => {
   const { user } = useAuth()
@@ -22,11 +23,29 @@ const History = () => {
 
   return (
     <Layout>
-      {history.map((history, i) => (
-        <React.Fragment key={i}>
-          <CardHistory history={history} />
-        </React.Fragment>
-      ))}
+      <div className="Container_MainH ">
+        <div className="Tittle">
+          <p className="text-left text-black font-Gothic font-bold text-xl">Consulta el historial de tus servicios</p>
+        </div>
+        <div className="CardH">
+          <List
+            itemLayout="vertical"
+            size="large"
+            dataSource={history}
+            renderItem={item => (
+              //<React.Fragment key={item.}>
+              <CardHistory history={item} />
+              //  </React.Fragment>
+            )}
+            pagination={{
+              onChange: page => {
+                console.log(page)
+              },
+              pageSize: 3
+            }}
+          ></List>
+        </div>
+      </div>
     </Layout>
   )
 }
