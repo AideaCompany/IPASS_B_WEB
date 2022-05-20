@@ -34,7 +34,7 @@ const ListStores = () => {
           <p className="Title font-Gothic text-right "> </p>{' '}
         </div>
       </div>
-      <div className="Container_select1 ">
+      <div className="Container_select1  ">
         <div className="Image_container">
           {/* <div className="Image_background"></div> */}
           <img src="/images/Maps.png" className="map1-img"></img>

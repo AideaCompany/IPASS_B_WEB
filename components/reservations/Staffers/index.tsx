@@ -3,12 +3,7 @@ import { listStaffByStoreFn } from '@/services/staff'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
-<<<<<<< HEAD
-
-=======
->>>>>>> ce7e04d1c97c290deee82d80255df54944f6bf72
 import React, { useEffect, useState } from 'react'
-import { stepsPageReservation } from '../reservationsComponent'
 import CardStaffers from './CardStaffers'
 
 const Staffers = ({ selectedStore, onChangeStaff }: { onChangeStaff: (value: IStaff) => void; selectedStore: IStores }) => {
