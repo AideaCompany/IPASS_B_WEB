@@ -63,7 +63,7 @@ const ModalDate = ({
 
   return (
     <div
-      className="bg-white mt-12 rounded-lg shadow p-4 absolute top-0 left-0"
+      className="bg-white mt-12 w-full rounded-lg shadow p-4 absolute top-8 left-0"
       style={{ width: '17rem', display: showDatePicker ? 'initial' : 'none' }}
     >
       <div className="flex justify-between items-center mb-2">
