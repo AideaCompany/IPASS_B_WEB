@@ -8,34 +8,18 @@ import Steps from '@/components/reservations/Steps'
 import ListStores from '@/components/reservations/Stores/ListStores'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
-import useReservation from '@/providers/ReservationContext'
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { addShoppingCardFn } from '@/services/shoppingCar'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
-import { FormInstance } from 'rc-field-form'
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useState } from 'react'
 
-export enum stepsPageReservation {
-  'store' = 'store',
-  'Select' = 'Select',
-  'services' = 'services',
-  'services2' = 'services2',
-  'staffers' = 'staffers',
-  'hair' = 'hair',
-  'Type' = 'Type',
-  'selectDate' = 'selectDate',
-  'payment' = 'payment'
-}
 const ReservationsComponent = () => {
   //#region  states
-  const { selectedStore } = useReservation()
+  const { selectedStore, step, setStep } = useReservation()
   //#region ref
-  const formRef = useRef<FormInstance<IStores>>(null)
-
   const { user } = useAuth()
   const { getData } = useCar()
-  const [step, setStep] = useState<stepsPageReservation>(stepsPageReservation.store)
   const [selectedStaff, setSelectedStaff] = useState<IStaff>()
   const [service, setService] = useState<IService>()
   const [visibleAsk, setVisibleAsk] = useState(false)
@@ -74,21 +58,16 @@ const ReservationsComponent = () => {
     <>
       <div className="Container_Reservation ">
         <div className="Container_Steps w-full ">
-          <Steps current={Object.keys(mySteps).findIndex(e => e === step)} />
+          <Steps current={mySteps.findIndex(e => e === step)} />
         </div>
         <div className="Container_pages ">
-          {step === stepsPageReservation.store && <ListStores setStep={setStep} />}
-          {step === stepsPageReservation.Select && <Select setStep={setStep} />}
-          {step === stepsPageReservation.staffers && selectedStore && (
-            <Staffers onChangeStaff={onChangeStaff} selectedStore={selectedStore} setStep={setStep} />
-          )}
+          {step === stepsPageReservation.store && <ListStores />}
+          {step === stepsPageReservation.Select && <Select />}
+          {step === stepsPageReservation.staffers && selectedStore && <Staffers onChangeStaff={onChangeStaff} selectedStore={selectedStore} />}
           {/* {step === stepsPageReservation.hair && <Hair setStep={setStep} stores={props.stores} />} */}
           {step === stepsPageReservation.services && selectedStore && <Services onChange={onChangeService} selectedStore={selectedStore} />}
           {step === stepsPageReservation.services2 && selectedStore && selectedStaff && (
-            <Services2 selectedStore={selectedStore} selectedStaff={selectedStaff} setStep={setStep} />
-          )}
-          {step === stepsPageReservation.selectDate && selectedStore && selectedStaff && (
-            <Services2 selectedStore={selectedStore} selectedStaff={selectedStaff} setStep={setStep} />
+            <Services2 selectedStore={selectedStore} selectedStaff={selectedStaff} />
           )}
           {step === stepsPageReservation.selectDate && <SelectDate />}
           {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}

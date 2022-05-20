@@ -1,10 +1,11 @@
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { ScissorOutlined, UserOutlined } from '@ant-design/icons'
 
 import React from 'react'
 import Button from '../Button'
-import { stepsPageReservation } from './reservationsComponent'
 
-const Select = ({ setStep }: { setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>> }) => {
+const Select = () => {
+  const { setStep } = useReservation()
   const onClick = () => {
     setStep(stepsPageReservation.staffers)
   }

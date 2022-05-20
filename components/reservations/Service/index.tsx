@@ -4,7 +4,7 @@ import { IService } from '@/types/interfaces/services/Services.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
-import CardServices from '../CardServices'
+import CardServices from './CardServices'
 
 const Services = ({ selectedStore, onChange }: { onChange: (value: IService) => void; selectedStore: IStores }) => {
   const { car } = useCar()

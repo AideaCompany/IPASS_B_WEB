@@ -2,7 +2,7 @@ import { IService } from '@/types/interfaces/services/Services.interface'
 import React from 'react'
 const CardServices = ({ onClick, service }: { onClick: () => void; service: IService }) => {
   return (
-    <div className="Container_Ser w-56  h-72 lg:max-w-full lg:flex " onClick={onClick}>
+    <div className="Container_Ser w-56  h-72 lg:max-w-full lg:flex cursor-pointer " onClick={onClick}>
       <div className="Image_containerSec">
         {/* <div className="Image_background"></div> */}
         <img src="/images/Secado.png" className="sec-img"></img>

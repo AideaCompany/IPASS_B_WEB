@@ -3,6 +3,7 @@ import { ShoppingCard } from '../icons/personalIcons'
 import React, { FC } from 'react'
 import { Badge } from 'antd'
 import useCar from '@/providers/CarContext'
+import Link from 'next/link'
 
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { car } = useCar()
@@ -20,7 +21,9 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
         </div>
 
         <div className="profile" style={{ fontSize: '30px' }}>
-          <UserOutlined />
+          <Link href={'profile'}>
+            <UserOutlined />
+          </Link>
         </div>
       </div>
       <div className="container mx-auto main_container  ">{children}</div>
