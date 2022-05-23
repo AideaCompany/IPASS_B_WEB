@@ -5,8 +5,7 @@ module.exports = {
       gold: '#D2B782',
       black: '#000000',
       'light-black': '#222222',
-      white: '#ffffff',
-      gray: '#CCCCCC'
+      white: '#ffffff'
     },
     container: {
       center: true,

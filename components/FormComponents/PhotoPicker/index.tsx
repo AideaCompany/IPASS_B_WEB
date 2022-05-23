@@ -1,9 +1,11 @@
+import { uploadedFile } from '@/types/interfaces'
+import { EditOutlined } from '@ant-design/icons'
 import React, { useState } from 'react'
 
-const PhotoPicker = () => {
-  const [photo, setPhoto] = useState<File>()
-  const [urlToImg, setUrlToImg] = useState('')
+const PhotoPicker = ({ onChange, initialValue }: { onChange: (value: File) => void; initialValue?: uploadedFile }) => {
+  const [urlToImg, setUrlToImg] = useState(initialValue?.key ?? '')
   function readURL(input: File) {
+    onChange(input)
     if (input) {
       var reader = new FileReader()
 
@@ -26,7 +28,7 @@ const PhotoPicker = () => {
         }
       }
     }
-    setPhoto(files[0] as File)
+
     readURL(files[0] as File)
   }
 
@@ -39,18 +41,33 @@ const PhotoPicker = () => {
       }}
       className="flex justify-center w-full h-full"
     >
-      <div className="rounded-lg w-full shadow-md bg-gray-50">
-        {photo && urlToImg !== '' ? (
+      <div className="rounded-lg w-full shadow-md bg-gray-50 relative">
+        {urlToImg !== '' ? (
           <div className="flex justify-center w-full h-full">
-            <img style={{ objectFit: 'cover', width: '100%' }} src={urlToImg}></img>
+            <img style={{ objectFit: 'contain', width: '100%' }} src={urlToImg}></img>
+            <div
+              style={{ backgroundColor: 'rgba(243, 241, 239,0.4)' }}
+              className="w-full opacity-0 hover:opacity-100 h-full flex items-center justify-center align-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+            >
+              <label className="border rounded-full h-10 w-10 flex items-center justify-center cursor-pointer">
+                {<EditOutlined style={{ fontSize: '1.2rem' }} />}
+                <input
+                  onChange={ev => {
+                    if (ev.target.files?.item(0)) {
+                      readURL(ev.target.files?.item(0) as File)
+                    }
+                  }}
+                  accept="image/*"
+                  type="file"
+                  className="hidden"
+                />
+              </label>
+            </div>
           </div>
         ) : (
-          <div className="m-4 h-full ">
+          <div className="m-4 ">
             <div className="flex items-center justify-center align-center w-full">
-              <label
-                style={{ height: '80%' }}
-                className="cursor-pointer flex flex-col w-full border-4 border-dashed hover:bg-gray-100 hover:border-gray-300"
-              >
+              <label className="cursor-pointer flex flex-col w-full border-4 border-dashed">
                 <div className="flex flex-col items-center justify-center pt-7">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -64,14 +81,12 @@ const PhotoPicker = () => {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <p className="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">Selecciona o arrastra una foto</p>
+                  <p className="p-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">Selecciona o arrastra una foto</p>
                 </div>
                 <input
                   onChange={ev => {
-                    console.log(ev.target.files?.item(0))
                     if (ev.target.files?.item(0)) {
                       readURL(ev.target.files?.item(0) as File)
-                      setPhoto(ev.target.files?.item(0) as File)
                     }
                   }}
                   accept="image/*"
@@ -84,9 +99,6 @@ const PhotoPicker = () => {
         )}
       </div>
     </div>
-    // <div>
-    //   <img src="/images/map.png" classNameName="map-img"></img>
-    // </div>
   )
 }
 

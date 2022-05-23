@@ -1,6 +1,9 @@
+import useAuth from '@/providers/AuthContext'
+import { removeNullObjValues } from '@/utils/utils'
 import { Form, FormInstance } from 'antd'
 import countries from 'country-data'
 import React, { useRef } from 'react'
+import Button from '../Button'
 import DatePicker from '../FormComponents/DatePicker'
 import Input from '../FormComponents/Input'
 import InputNumber from '../FormComponents/InputNumber'
@@ -17,7 +20,7 @@ const FormComponent = () => {
     {
       type: 'input',
       label: 'Nombre 2',
-      required: true,
+      required: false,
       name: 'name2'
     },
     {
@@ -76,7 +79,7 @@ const FormComponent = () => {
     {
       type: 'select',
       label: 'Género',
-      required: true,
+      required: false,
       name: 'sex',
       values: ['Masculino', 'Femenino'].map(e => ({
         value: e,
@@ -91,26 +94,49 @@ const FormComponent = () => {
       required: true
     }
   ]
+  const { user } = useAuth()
+
+  const updateUser = async () => {
+    const values = await formRef.current?.validateFields()
+    console.log(values)
+  }
 
   return (
     <div className="form_container">
-      <Form ref={formRef}>
-        {formItems.map(item => {
-          if (item.type === 'input') {
-            return <Input item={item} />
-          }
-          if (item.type === 'select') {
-            return <Selector formRef={formRef} placeHolder={item.label} name={item.name} values={item.values ? item.values : []} />
-          }
-          if (item.type === 'number') {
-            return <InputNumber item={item} />
-          }
-          if (item.type === 'date') {
-            return <DatePicker item={item} />
-          }
-          return ''
-        })}
-      </Form>
+      <div className="form_elements">
+        {user && (
+          <Form initialValues={{ ...removeNullObjValues(user), ...{ document: '' } }} ref={formRef}>
+            <>
+              {formItems.map((item, i) => {
+                let element = <></>
+                if (item.type === 'input') {
+                  element = <Input item={item} />
+                }
+                if (item.type === 'select') {
+                  element = (
+                    <Selector
+                      required={item.required}
+                      formRef={formRef}
+                      placeHolder={item.label}
+                      name={item.name}
+                      values={item.values ? item.values : []}
+                    />
+                  )
+                }
+                if (item.type === 'number') {
+                  element = <InputNumber item={item} />
+                }
+                if (item.type === 'date') {
+                  element = <DatePicker item={item} />
+                }
+                return <React.Fragment key={i}>{element}</React.Fragment>
+              })}
+            </>
+          </Form>
+        )}
+      </div>
+
+      <Button title="Guardar cambios" onClick={updateUser} />
     </div>
   )
 }

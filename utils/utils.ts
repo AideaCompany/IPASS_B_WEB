@@ -2,7 +2,6 @@ import { IContact } from '@/types/interfaces/Contact/Contact.interface'
 import { FilterType } from '@/types/interfaces/graphqlTypes'
 import { ILocationEntries, typeUser } from '@/types/interfaces/ILocationEntries/LocationEntries.interface'
 import { IUser } from '@/types/interfaces/user/User.interface'
-import { formatData } from '@/types/types'
 import { basicTable } from '@/types/typeTemplate'
 import { ModalProps } from 'antd'
 import moment, { MomentInput, Moment } from 'moment-timezone'
@@ -62,7 +61,7 @@ export enum perNamesEnum {
   'admin' = 'admin'
 }
 
-export const getFormatData = (data: ILocationEntries[]): formatData[] =>
+export const getFormatData = (data: ILocationEntries[]): any[] =>
   data.map(e => ({
     key: e._id,
     type: e.type as 'I' | 'R' | 'V',
@@ -74,7 +73,7 @@ export const getFormatData = (data: ILocationEntries[]): formatData[] =>
     contact: e.contact as string
   }))
 
-export const getFormatDataOne = (data: ILocationEntries): formatData => ({
+export const getFormatDataOne = (data: ILocationEntries): any => ({
   key: data._id,
   type: data.type as typeUser,
   name: data.type === 'I' ? (data.contact as IContact).firstName : (data.host as IUser).name,
@@ -120,3 +119,5 @@ export const getSex = (sex: string): string => {
 
   return sexs[sex]
 }
+
+export const removeNullObjValues = (value: object) => Object.fromEntries(Object.entries(value).filter(([_, v]) => v != null))

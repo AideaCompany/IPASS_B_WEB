@@ -63,7 +63,7 @@ const ModalDate = ({
 
   return (
     <div
-      className="bg-white mt-12 w-full rounded-lg shadow p-4 absolute top-8 left-0"
+      className="bg-white mt-12 w-full rounded-lg shadow p-4 absolute top-8 left-0 z-50"
       style={{ width: '17rem', display: showDatePicker ? 'initial' : 'none' }}
     >
       <div className="flex justify-between items-center mb-2">
@@ -85,7 +85,7 @@ const ModalDate = ({
             }}
           >
             <svg className="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
             </svg>
           </button>
           <button
@@ -101,26 +101,26 @@ const ModalDate = ({
             }}
           >
             <svg className="h-6 w-6 text-gray-500 inline-flex" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
       </div>
 
       <div className="flex flex-wrap mb-3 -mx-1">
-        {DAYS.map(el => (
-          <div style={{ width: '14.26%' }} className="px-1">
+        {DAYS.map((el, i) => (
+          <div key={i} style={{ width: '14.26%' }} className="px-1">
             <div className="text-gray-800 font-medium text-center text-xs">{el}</div>
           </div>
         ))}
       </div>
 
       <div className="flex flex-wrap -mx-1">
-        {blankdays.map(el => (
-          <div style={{ width: '14.28%' }} className="text-center border p-1 border-transparent text-sm"></div>
+        {blankdays.map((el, i) => (
+          <div key={i} style={{ width: '14.28%' }} className="text-center border p-1 border-transparent text-sm"></div>
         ))}
-        {no_of_days.map(el => (
-          <div style={{ width: '14.28%' }} className="px-1 mb-1">
+        {no_of_days.map((el, i) => (
+          <div key={i} style={{ width: '14.28%' }} className="px-1 mb-1">
             <div
               onClick={() => getDateValue(el)}
               className={`cursor-pointer text-center text-sm leading-none rounded-full leading-loose transition ease-in-out duration-100

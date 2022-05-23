@@ -1,4 +1,6 @@
 import useAuth from '@/providers/AuthContext'
+import { updateClientFn } from '@/services/clients'
+import { message } from 'antd'
 import { DarkMode, DisableNotifications, History, PaymentMethods, Profile, Schedule, Support, TermsOfService } from 'icons/profileIcons'
 import React from 'react'
 import PhotoPicker from '../FormComponents/PhotoPicker'
@@ -48,12 +50,15 @@ const Config = () => {
     }
   ]
   const { user } = useAuth()
-
+  const updatePhoto = async (value: File) => {
+    await updateClientFn({ _id: user?._id as string, photo: value })
+    message.success('Foto de perfil actualizada')
+  }
   return (
     <div className="config_container">
-      <p className="font-Helvetica text-black font-bold text-lg">{`${user.name1} (${user.email})`}</p>
+      <p className="font-Helvetica text-black font-bold text-lg">{`${user?.name1} (${user?.email})`}</p>
       <div className="container_image">
-        <PhotoPicker />
+        <PhotoPicker onChange={updatePhoto} initialValue={user?.photo} />
       </div>
       <div className="container_config_elements">
         {configElements.map((configElement, i) => (

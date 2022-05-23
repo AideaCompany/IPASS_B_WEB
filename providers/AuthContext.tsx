@@ -1,17 +1,17 @@
-import { getClientFn } from '../services/clients'
-import { IClient } from '../types/types'
 import Cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
 //next
 import { useRouter } from 'next/router'
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react'
 import { $security } from '../config'
-import { default as Client, setToken } from '../graphql/config'
+import { setToken } from '../graphql/config'
+import { getClientFn } from '../services/clients'
+import { IClient } from '../types/types'
 
 // import useData from './DataContext'
 
 type typeAuthContext = {
-  user: IClient
+  user: IClient | null
   isAuthenticated: boolean
   login: (token: string, firstLogin?: boolean) => Promise<void>
   loading: boolean
@@ -28,7 +28,7 @@ export const AuthProvider = (props: { children: JSX.Element }) => {
   //next
   const router = useRouter()
   //States
-  const [user, setUser] = useState<IClient>({} as IClient)
+  const [user, setUser] = useState<IClient | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
   const [spinning, setSpinning] = useState(true)
 
