@@ -48,12 +48,14 @@
       justify-content: center;
       padding-top: 5%;
       padding-right: 2%;
+
+      z-index: -1;
       .Tarjet_Service:hover {
         cursor: pointer;
-        > p {
-          text-align: center;
-          padding-top: 45%;
-        }
+      }
+      > p {
+        text-align: center;
+        padding-top: 45%;
       }
     }
     .Container_S_Text {

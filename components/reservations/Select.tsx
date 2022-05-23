@@ -16,7 +16,7 @@ const Select = () => {
       <div className="Container_fluid ">
         <div className="Container_F_Text " onClick={onClick}>
           <img src="/images/Profesional.png" className="map-img"></img>
-          <p className="Title font-Gothic text-right font-bold text-xl "> </p>
+          <p className="Title font-Gothic text-right font-bold text-xl "> Profesionales</p>
         </div>
 
         <div className="Container_S_Text " onClick={() => setStep(stepsPageReservation.services)}>
