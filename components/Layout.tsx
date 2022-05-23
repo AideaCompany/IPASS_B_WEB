@@ -75,7 +75,7 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
           <CardResume></CardResume>
         </div>
         <div className="Container_Info_Buy   ">
-          <div className="Container_TotalS   text-center "> Total de servicios</div>
+          <div className="Container_TotalS   text-center "> Total de servicios: </div>
           <div className="Container_SubP  divide-y divide-slate-200 font-bold ">Subtotal</div>
         </div>
         <div className="Container_Price divide-y divide-slate-200">
