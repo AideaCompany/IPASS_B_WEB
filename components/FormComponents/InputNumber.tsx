@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const InputNumber = ({ item }: { item: { label: string; name: string; required: boolean; type: string } }) => {
   const MyNumberInput = ({ value, onChange }: { onChange: (value: string) => void; value: string }) => {
-    const [myValue, setMyValue] = useState(parseInt(value) ?? NaN)
+    const [myValue, setMyValue] = useState(parseInt(value) ?? '')
     useEffect(() => {
       if (!value) {
         onChange('')
