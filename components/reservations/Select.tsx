@@ -12,48 +12,18 @@ const Select = () => {
 
   return (
     <div className="Container_select ">
-      <div className="Image_container">
-        {/* <div className="Image_background"></div> */}
-        <img src="/images/fondo.png" className="map-img"></img>
-      </div>
-
-      <p className="Title font-Gothic text-right">Mis reservas </p>
+      <p className="Title font-Gothic text-right ">Mis reservas </p>
       <div className="Container_fluid ">
-        <div className="Container_F_Text ">
-          <p className="Title font-Gothic text-right font-bold text-xl ">Reservar por </p>
+        <div className="Container_F_Text " onClick={onClick}>
+          <img src="/images/Profesional.png" className="map-img"></img>
+          <p className="Title font-Gothic text-right font-bold text-xl "> </p>
         </div>
-        <div className="Container_Tarjet divide-y divide-slate-100">
-          <div className="Tarjet_Staffer " onClick={onClick}>
-            <p className="Title font-Gothic text-right font-bold text-lg">Personal</p>
-            <div className="Main_Staffer ">
-              <div className="Staffer_icon " style={{ fontSize: '45px' }}>
-                <p>
-                  <UserOutlined />
-                </p>
-                z
-              </div>
-              <div className="Staffer_text ">
-                <p className="Title font-Gothic text-right ">Selecciona tu staffer de preferencia</p>{' '}
-              </div>
-            </div>
-          </div>
-          <div className="Tarjet_Service " onClick={() => setStep(stepsPageReservation.services)}>
-            <p className="Title font-Gothic text-right font-bold text-lg">Servicio</p>
-            <div className="Main_Service">
-              <div className="Service_icon " style={{ fontSize: '45px' }}>
-                <p>
-                  <ScissorOutlined />
-                </p>
-              </div>
-              <div className="Service_text ">
-                <p className="Title font-Gothic text-right "> Selecciona el servicio que deseas adquirir</p>{' '}
-              </div>
-            </div>
-          </div>
+
+        <div className="Container_S_Text " onClick={() => setStep(stepsPageReservation.services)}>
+          <img src="/images/Servicios.png" className="map-img"></img>
         </div>
-        <div className="Container_S_Text "></div>
       </div>
-      <div className="Container_reservation ">
+      <div className="Container_reservation  ">
         <p className="Title font-Gothic text-right  font-bold border-b border-color-gray">Reserva màs reciente</p>
         <div className="container_buttons">
           <div className="line  divide-y divide-slate-200"></div>
