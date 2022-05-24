@@ -1,12 +1,7 @@
-import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { CaretDownOutlined, ScissorOutlined, UserOutlined } from '@ant-design/icons'
 import React from 'react'
 
 const Type = () => {
-  const { setStep } = useReservation()
-  const onClick = () => {
-    setStep(stepsPageReservation.hair)
-  }
   return (
     <div className="Main_Container">
       <div className="Container_bar ">
@@ -22,7 +17,7 @@ const Type = () => {
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          <p className="Title font-Gothic text-right "> tipo de servicio</p>{' '}
+          <p className="Title font-Gothic text-right "> tipo de servicio</p>
         </div>
       </div>
       <div className="Container_fluid2  ">

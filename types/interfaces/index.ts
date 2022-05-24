@@ -1,4 +1,4 @@
-import locales from '@/i18n/locales'
+import { locales } from 'moment-timezone'
 import { Stream } from 'stream'
 import { fileType } from '../typeTemplate'
 import { IContact } from './Contact/Contact.interface'

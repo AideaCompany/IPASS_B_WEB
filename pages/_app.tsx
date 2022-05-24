@@ -1,4 +1,5 @@
 import { CarProvider } from '@/providers/CarContext'
+import { LoadingProvider } from '@/providers/LoadingContext'
 import { ApolloProvider } from '@apollo/client'
 import 'antd/dist/antd.css'
 import type { AppProps } from 'next/app'
@@ -14,7 +15,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ApolloProvider client={Client}>
         <AuthProvider>
           <CarProvider>
-            <Component {...pageProps} />
+            <LoadingProvider>
+              <Component {...pageProps} />
+            </LoadingProvider>
           </CarProvider>
         </AuthProvider>
       </ApolloProvider>

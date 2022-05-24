@@ -1,5 +1,5 @@
 import { Form } from 'antd'
-import { Moment } from 'moment'
+import moment, { Moment } from 'moment'
 import React, { useEffect, useState } from 'react'
 import ModalDate from './ModalDate'
 const DatePicker = ({ item }: { item: { label: string; name: string; required: boolean; type: string } }) => {
@@ -24,11 +24,19 @@ const DatePicker = ({ item }: { item: { label: string; name: string; required: b
           onClick={() => setShowDate(!showDate)}
           type="text"
           readOnly
-          value={currentValue ? currentValue.locale('es').format('LL') : ''}
+          value={currentValue ? moment(currentValue).locale('es').format('LL') : ''}
           className="bg-gray-50 border border-gray-200 text-gray-900 text-md rounded-sm focus:ring-gold focus:border-gold block w-full p-2.5"
           placeholder={item.label}
         />
-        <ModalDate datePickerValue={currentValue} setDatePickerValue={setCurrentValue} setShowDatePicker={setShowDate} showDatePicker={showDate} />
+        <ModalDate
+          datePickerValue={currentValue}
+          setDatePickerValue={val => {
+            setCurrentValue(val)
+            onChange(val as Moment)
+          }}
+          setShowDatePicker={setShowDate}
+          showDatePicker={showDate}
+        />
       </div>
     )
   }

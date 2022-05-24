@@ -18,6 +18,7 @@ const Staffers = ({ selectedStore, onChangeStaff }: { onChangeStaff: (value: ISt
   useEffect(() => {
     getData()
   }, [])
+
   const getData = async () => {
     setStaffers(await listStaffByStoreFn(selectedStore._id as string))
   }

@@ -59,7 +59,7 @@ const ContainerHours = ({ day }: { day: Moment }) => {
     console.log(value)
     for (const newValue of value) {
       const actualElementCar = car.services.find(e => newValue.service._id === ((e as IShoppingService).service as IService)._id)
-      await updateShoppingCardServiceFn(user._id as string, actualElementCar?._id as string, {
+      await updateShoppingCardServiceFn(user?._id as string, actualElementCar?._id as string, {
         service: (newValue?.service as IService)._id,
         staff: (newValue?.staffer as IStaff)._id,
         hour: newValue.hour,
@@ -67,7 +67,7 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         store: (car?.services[0].store as IStores)._id
       })
     }
-    await validateShoppingCardFn(user._id as string)
+    await validateShoppingCardFn(user?._id as string)
     router.push('history')
   }
 

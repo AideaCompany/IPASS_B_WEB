@@ -1,7 +1,7 @@
-import { graphqlFile, uploadedFile } from 'interfaces'
-import { Document } from 'mongoose'
+import { basicTable } from '@/types/typeTemplate'
+import { graphqlFile, uploadedFile } from '../'
 
-export interface IClient extends Document {
+export interface IClient extends basicTable {
   encryptPassword: (password: string) => Promise<string>
   matchPassword: (password: string) => Promise<boolean>
   plus: boolean

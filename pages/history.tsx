@@ -32,10 +32,10 @@ const History = () => {
             itemLayout="vertical"
             size="large"
             dataSource={history}
-            renderItem={item => (
-              //<React.Fragment key={item.}>
-              <CardHistory history={item} />
-              //  </React.Fragment>
+            renderItem={(item, i) => (
+              <React.Fragment key={i}>
+                <CardHistory history={item} />
+              </React.Fragment>
             )}
             pagination={{
               onChange: page => {

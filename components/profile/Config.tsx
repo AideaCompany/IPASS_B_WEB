@@ -2,11 +2,15 @@ import useAuth from '@/providers/AuthContext'
 import { updateClientFn } from '@/services/clients'
 import { message } from 'antd'
 import { DarkMode, DisableNotifications, History, PaymentMethods, Profile, Schedule, Support, TermsOfService } from 'icons/profileIcons'
-import React from 'react'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
 import PhotoPicker from '../FormComponents/PhotoPicker'
+import { MyToggle } from '../FormComponents/Toggle'
 import ConfigElements from './ConfigElements'
 
 const Config = () => {
+  const router = useRouter()
+  const [toggleValue, setToggleValue] = useState(false)
   const configElements = [
     {
       icon: <Profile />,
@@ -26,7 +30,7 @@ const Config = () => {
     {
       icon: <History />,
       text: 'Historial de reservas',
-      onClick: () => {}
+      onClick: () => router.push('/history')
     },
     {
       icon: <Support />,
@@ -35,7 +39,12 @@ const Config = () => {
     },
     {
       icon: <DarkMode />,
-      text: <>Modo Oscuro</>,
+      text: (
+        <div style={{ marginLeft: '30px' }} className="font-Helvetica text-light-black font-normal  text-lg flex">
+          <span style={{ marginRight: '30px' }}>Modo oscuro</span>
+          <MyToggle value={toggleValue} onChange={setToggleValue} />
+        </div>
+      ),
       onClick: () => {}
     },
     {

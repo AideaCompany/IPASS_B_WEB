@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const InputNumber = ({ item }: { item: { label: string; name: string; required: boolean; type: string } }) => {
   const MyNumberInput = ({ value, onChange }: { onChange: (value: string) => void; value: string }) => {
-    const [myValue, setMyValue] = useState(parseInt(value) ?? '')
+    const [myValue, setMyValue] = useState(value ? parseInt(value) : '')
     useEffect(() => {
       if (!value) {
         onChange('')
@@ -20,7 +20,6 @@ const InputNumber = ({ item }: { item: { label: string; name: string; required: 
           type={'number'}
           value={myValue}
           onChange={e => {
-            console.log(typeof e.target.value)
             setMyValue(parseInt(e.target.value))
             onChange(e.target.value)
           }}
@@ -30,7 +29,7 @@ const InputNumber = ({ item }: { item: { label: string; name: string; required: 
       </div>
     )
   }
-  console.log(item.required)
+
   return (
     <Form.Item style={{ margin: 0 }} name={item.name} rules={[{ required: item.required, message: `El campo es requerido` }]}>
       {

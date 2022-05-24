@@ -1,6 +1,5 @@
 import Layout from '@/components/Layout'
-import ReservationsComponent from '@/components/reservations/reservationsComponent'
-
+import ReservationsComponent from '@/components/reservations/ReservationsComponent'
 import { ReservationProvider } from '@/providers/ReservationContext'
 import { getAllStores } from '@/services/stores'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'

@@ -25,7 +25,7 @@ export const CarProvider = (props: { children: JSX.Element }) => {
   }, [user])
 
   const getData = async () => {
-    const value = await getClientCurrentShoppingCardFn(user._id as string)
+    const value = await getClientCurrentShoppingCardFn(user?._id as string)
     setCar(value)
   }
 

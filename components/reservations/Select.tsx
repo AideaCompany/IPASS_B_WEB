@@ -1,6 +1,4 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { ScissorOutlined, UserOutlined } from '@ant-design/icons'
-
 import React from 'react'
 import Button from '../Button'
 

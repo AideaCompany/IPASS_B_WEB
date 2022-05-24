@@ -1,12 +1,12 @@
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
-import { HomeOutlined } from '@ant-design/icons'
 import React from 'react'
+import Image from 'next/image'
 const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStores) => void }) => {
   return (
     <>
       <div className="Container_Sto cursor-pointer " onClick={() => onClick(store)}>
         <div className="Image_containerS ">
-          <img src="/images/Store.png" className="map1-img"></img>
+          <Image alt="" src="/images/Store.png" className="map1-img" />
         </div>
         <div className="Container_Information">
           <div className="mb-8">

@@ -17,7 +17,7 @@ const Selector: FC<{
   const MyCustomSelect = ({ onChange, value }: { onChange: (value: string) => void; value: string }) => {
     const [open, setOpen] = useState(false)
     const selectorRef = useRef(null)
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState(value ?? '')
     const calculateHeight = () => {
       const totals = values.filter(value => (search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
       switch (totals.length) {
@@ -33,6 +33,11 @@ const Selector: FC<{
           return 'h-40'
       }
     }
+    useEffect(() => {
+      if (!value) {
+        onChange('')
+      }
+    }, [])
 
     useEffect(() => {
       /**

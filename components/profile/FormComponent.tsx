@@ -1,6 +1,8 @@
 import useAuth from '@/providers/AuthContext'
+import useLoading from '@/providers/LoadingContext'
+import { updateClientFn } from '@/services/clients'
 import { removeNullObjValues } from '@/utils/utils'
-import { Form, FormInstance } from 'antd'
+import { Form, FormInstance, message } from 'antd'
 import countries from 'country-data'
 import React, { useRef } from 'react'
 import Button from '../Button'
@@ -95,17 +97,34 @@ const FormComponent = () => {
     }
   ]
   const { user } = useAuth()
+  const { setLoading } = useLoading()
 
   const updateUser = async () => {
     const values = await formRef.current?.validateFields()
-    console.log(values)
+    setLoading(true)
+    await updateClientFn({
+      _id: user?._id,
+      ...values,
+      country: countries.callingCountries.all.find(e => e.countryCallingCodes[0] === values.country)?.countryCallingCodes[0]
+    })
+    setLoading(false)
+    message.success('Datos actualizados')
   }
 
   return (
     <div className="form_container">
       <div className="form_elements">
         {user && (
-          <Form initialValues={{ ...removeNullObjValues(user), ...{ document: '' } }} ref={formRef}>
+          <Form
+            initialValues={{
+              ...removeNullObjValues({
+                ...user,
+                country: countries.callingCountries.all.find(e => e.countryCallingCodes[0] === user.country)?.name
+              }),
+              ...{ document: user.document ?? '' }
+            }}
+            ref={formRef}
+          >
             <>
               {formItems.map((item, i) => {
                 let element = <></>
