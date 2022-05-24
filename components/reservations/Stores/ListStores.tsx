@@ -1,12 +1,10 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { CaretDownOutlined } from '@ant-design/icons'
 import { List } from 'antd'
-
 import React from 'react'
 import { IStores } from '../../../types/interfaces/Stores/stores.interface'
-
 import CardStore from './CardStore'
-import Image from 'next/image'
+
 const ListStores = () => {
   const { stores, setSelectedStore } = useReservation()
 
@@ -37,7 +35,7 @@ const ListStores = () => {
       <div className="Container_select1  ">
         <div className="Image_container">
           {/* <div className="Image_background"></div> */}
-          <Image src="/images/Maps.png" className="map1-img" alt="" />
+          <img src="/images/Maps.png" className="map1-img" alt="" />
         </div>
         <div className="Main_carousel1  m-2 ">
           <List

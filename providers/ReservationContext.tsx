@@ -22,13 +22,13 @@ type reservationContext = {
 }
 const ReservationContext = React.createContext<reservationContext>({} as reservationContext)
 
-export const ReservationProvider = (props: { children: JSX.Element; stores: IStores[] }) => {
+export const ReservationProvider = (props: { children: JSX.Element; stores: IStores[]; currentStep: stepsPageReservation }) => {
   //props
-  const { children, stores } = props
+  const { children, stores, currentStep } = props
   const { user } = useAuth()
   //States
   const [selectedStore, setSelectedStore] = useState<IStores | undefined>()
-  const [step, setStep] = useState(stepsPageReservation.store)
+  const [step, setStep] = useState(currentStep)
 
   useEffect(() => {
     if (user) {

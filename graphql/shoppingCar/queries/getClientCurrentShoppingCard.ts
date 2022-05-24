@@ -18,6 +18,9 @@ export const getClientCurrentShoppingCard = /* GraphQL */ `
           discounts
           serviceTime
           sex
+          photo {
+            key
+          }
           returnTime
           createdAt
           updatedAt

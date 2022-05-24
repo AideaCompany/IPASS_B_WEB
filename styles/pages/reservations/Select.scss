@@ -44,26 +44,16 @@
     display: flex;
     .Container_F_Text {
       width: 50%;
-      align-items: center;
-      justify-content: center;
-      padding-top: 5%;
-      padding-right: 2%;
-
-      z-index: -1;
-      .Tarjet_Service:hover {
-        cursor: pointer;
-      }
-      > p {
+      position: relative;
+      cursor: pointer;
+      margin: 20px;
+      p {
         text-align: center;
-        padding-top: 45%;
-      }
-    }
-    .Container_S_Text {
-      width: 50%;
-      padding-top: 5%;
-      padding-left: 2%;
-      .Tarjet_Service:hover {
-        cursor: pointer;
+        position: absolute;
+        transform: translate();
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
   }

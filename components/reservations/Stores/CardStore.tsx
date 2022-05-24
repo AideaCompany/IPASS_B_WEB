@@ -1,12 +1,11 @@
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import React from 'react'
-import Image from 'next/image'
 const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStores) => void }) => {
   return (
     <>
       <div className="Container_Sto cursor-pointer " onClick={() => onClick(store)}>
         <div className="Image_containerS ">
-          <Image alt="" src="/images/Store.png" className="map1-img" />
+          <img alt="" src="/images/Store.png" className="map1-img" />
         </div>
         <div className="Container_Information">
           <div className="mb-8">

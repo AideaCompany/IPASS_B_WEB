@@ -17,8 +17,9 @@ const Select = () => {
           <p className="Title font-Gothic text-right font-bold text-xl "> Profesionales</p>
         </div>
 
-        <div className="Container_S_Text " onClick={() => setStep(stepsPageReservation.services)}>
+        <div className="Container_F_Text " onClick={() => setStep(stepsPageReservation.services)}>
           <img src="/images/Servicios.png" className="map-img"></img>
+          <p className="Title font-Gothic text-right font-bold text-xl "> Servicios</p>
         </div>
       </div>
       <div className="Container_reservation  ">
