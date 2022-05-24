@@ -10,7 +10,7 @@ const Welcome: NextPage = () => {
       <div className="main_container_welcome">
         <p className="font-Butler font-bold text-7xl">VANT</p>
         <p className="text-gold font-semibold text-xl">Te da la bienvenida</p>
-        <p className="text-gold font-semibold text-2xl">{`${user.name1} ${user.lastName1}`}</p>
+        <p className="text-gold font-semibold text-2xl">{`${user?.name1} ${user?.lastName1}`}</p>
       </div>
     </Layout>
   )

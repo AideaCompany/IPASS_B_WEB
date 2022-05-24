@@ -1,0 +1,139 @@
+.Container_fluid2 {
+  width: auto;
+  height: 100%;
+  display: flex;
+  .Container_F_Text {
+    width: 30%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+
+    > p {
+      text-align: center;
+      margin-top: 80%;
+    }
+  }
+  .Container_Tarjet {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    .Tarjet_men {
+      width: full;
+      height: 33%;
+      display: flex;
+      flex-direction: column;
+      > p {
+        text-align: center;
+        text-justify: center;
+      }
+      .Main_Staffer {
+        width: 100%;
+        height: 65%;
+        display: flex;
+
+        .Staffer_icon {
+          height: 100%;
+          width: 40%;
+          padding-bottom: 2px;
+          padding-left: 0%;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          > p {
+            text-align: center;
+          }
+        }
+        .Staffer_text {
+          width: 60%;
+          height: 100%;
+          justify-content: center;
+          align-items: center;
+          > p {
+            text-align: center;
+            padding: 1px;
+            justify-content: center;
+          }
+        }
+      }
+    }
+    .Tarjet_Women {
+      width: full;
+      height: 33%;
+
+      display: flex;
+      flex-direction: column;
+      > p {
+        text-align: center;
+      }
+      .Main_Service {
+        width: 100%;
+        height: 65%;
+        display: flex;
+        .Service_icon {
+          height: 100%;
+          width: 40%;
+          padding-bottom: 2px;
+          padding-left: 0%;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          > p {
+            text-align: center;
+          }
+        }
+        .Service_text {
+          width: 60%;
+          height: 100%;
+          justify-content: center;
+          padding-top: 15 px;
+          align-items: center;
+          > p {
+            text-align: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+    .Tarjet_Children {
+      width: full;
+      height: 33%;
+
+      display: flex;
+      flex-direction: column;
+      > p {
+        text-align: center;
+      }
+      .Main_Service {
+        width: 100%;
+        height: 65%;
+        display: flex;
+        .Service_icon {
+          height: 100%;
+          width: 40%;
+          padding-bottom: 2px;
+          padding-left: 0%;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          > p {
+            text-align: center;
+          }
+        }
+        .Service_text {
+          width: 60%;
+          height: 100%;
+          justify-content: center;
+          padding-top: 15 px;
+          align-items: center;
+          > p {
+            text-align: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+  .Container_S_Text {
+    width: 30%;
+  }
+}

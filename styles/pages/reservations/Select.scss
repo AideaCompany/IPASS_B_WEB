@@ -1,0 +1,118 @@
+.Container_select {
+  width: 100%;
+  height: 600px;
+  margin-top: 80px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  .Image_container {
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    position: absolute;
+    z-index: -1;
+
+    .map-img {
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: -10;
+    }
+    // .Image_background {
+    //   height: 100%;
+    //   width: 100%;
+
+    // }
+  }
+  .Image_container:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background: linear-gradient(180deg, #ffffff 28.26%, rgba(255, 255, 255, 0) 100%);
+  }
+
+  .Container_fluid {
+    width: auto;
+    height: 35%;
+    display: flex;
+    .Container_F_Text {
+      width: 50%;
+      align-items: center;
+      justify-content: center;
+      padding-top: 5%;
+      padding-right: 2%;
+
+      z-index: -1;
+      .Tarjet_Service:hover {
+        cursor: pointer;
+      }
+      > p {
+        text-align: center;
+        padding-top: 45%;
+      }
+    }
+    .Container_S_Text {
+      width: 50%;
+      padding-top: 5%;
+      padding-left: 2%;
+      .Tarjet_Service:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  .Container_reservation {
+    width: 90%;
+    height: 30%;
+    margin-top: 100px;
+    margin-left: 35px;
+    padding: 2%;
+    background-color: #ffffff;
+    > p {
+      text-align: center;
+    }
+    .container_buttons {
+      width: 100%;
+      height: 15%;
+      display: flex;
+      margin-top: 13%;
+      justify-content: center;
+      justify-content: center;
+      -webkit-box-shadow: -4px 9px 13px -9px #000000;
+      box-shadow: -4px 9px 13px -9px #000000;
+      .line {
+        margin-top: 2%;
+        width: 50%;
+
+        justify-content: center;
+        justify-content: center;
+      }
+      .change {
+        width: 25%;
+        height: 15px;
+        justify-content: center;
+        justify-content: center;
+        .button {
+          padding: 3%;
+          height: 20px;
+        }
+      }
+      .cancel {
+        width: 25%;
+        margin-left: 8%;
+        justify-content: center;
+        justify-content: center;
+        .button {
+          padding: 3%;
+          height: 20px;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
+import { Form, FormInstance } from 'antd'
 import React, { FC, useEffect, useRef, useState } from 'react'
-import { Form, FormInstance, Select } from 'antd'
 
 type valueSelector = {
   value: string
@@ -15,7 +15,6 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
 }) => {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
-  const [selected, setSelected] = useState<valueSelector>()
   const selectorRef = useRef(null)
 
   const calculateHeight = () => {

@@ -1,16 +1,14 @@
-import useAuth from '../providers/AuthContext'
 import { FormInstance, message } from 'antd'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import React, { useRef, useState } from 'react'
 import Layout from '../components/Layout'
 import Confirm from '../components/Register/Confirm'
 import RegisterComponent from '../components/Register/RegisterComponent'
+import useAuth from '../providers/AuthContext'
 import { confirmClientFn, SignUpClientFn } from '../services/Auth'
 import { registerClient, registerConfirm } from '../types/types'
 
 const Register: NextPage = () => {
-  const router = useRouter()
   const formRef = useRef<FormInstance<registerClient>>(null)
   const formRefConfirm = useRef<FormInstance<registerConfirm>>(null)
   const [isConfirm, setIsConfirm] = useState(false)

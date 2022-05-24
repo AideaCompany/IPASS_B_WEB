@@ -1,0 +1,27 @@
+.Container_Sto {
+  width: auto;
+  height: 280px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-shadow: -4px 9px 13px -9px #000000;
+  box-shadow: -4px 9px 13px -9px #000000;
+  margin-bottom: 20px;
+  .Image_containerS {
+    width: 90%;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2px;
+    background-color: #ffff;
+  }
+  .Container_Information {
+    width: 90%;
+    height: 100px;
+    background-color: #ffff;
+  }
+}
+.Container_Sto:hover {
+  cursor: pointer;
+}

@@ -1,0 +1,21 @@
+.container_select_date {
+  width: 100%;
+  .container_carousel {
+    width: 100%;
+    margin-top: 20px;
+    height: fit-content;
+    .cardDay {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 55px;
+      height: 80px;
+      border-width: 0.84px;
+      border-color: #e8e8e8;
+      padding: 10px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  }
+}

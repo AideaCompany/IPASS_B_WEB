@@ -4,12 +4,10 @@ import React, { useState } from 'react'
 import Layout from '../components/Layout'
 import ConfirmLogIn from '../components/Login/ConfirmLogIn'
 import LoginComponent from '../components/Login/LoginComponent'
-import useAuth from '../providers/AuthContext'
 
 const Login: NextPage = () => {
   // const [loginTrigger] = useMutation(gql(mutation.loginApp))
   const [data, setData] = useState({} as any)
-  const { login } = useAuth()
 
   const [isConfirm, setIsConfirm] = useState(false)
 

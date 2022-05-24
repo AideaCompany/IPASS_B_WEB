@@ -1,0 +1,15 @@
+.Container_Reservation {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  .Container_Steps {
+    width: 100%;
+    height: 120px;
+    margin-top: 20px;
+  }
+  .Container_pages {
+    width: 100%;
+    height: auto;
+  }
+}

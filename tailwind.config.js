@@ -4,6 +4,7 @@ module.exports = {
     colors: {
       gold: '#D2B782',
       black: '#000000',
+      'light-black': '#222222',
       white: '#ffffff'
     },
     container: {
@@ -19,7 +20,8 @@ module.exports = {
     extend: {
       fontFamily: {
         Butler: ['Butler_Regular'],
-        Gothic: ['Century Gothic']
+        Gothic: ['Century Gothic'],
+        Helvetica: ['Helvetica Neue']
       }
     }
   },

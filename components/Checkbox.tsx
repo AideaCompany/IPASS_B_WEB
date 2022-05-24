@@ -1,5 +1,5 @@
 import { Form } from 'antd'
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 
 const Checkbox: FC<{ name: string; label: string | React.ReactNode }> = ({ name, label }) => {
   return (

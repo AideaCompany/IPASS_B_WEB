@@ -7,6 +7,7 @@ export const getClient = /* GraphQL */ `
         filename
         key
       }
+      country
       name1
       name2
       createdAt
