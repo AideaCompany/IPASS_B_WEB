@@ -1,19 +1,23 @@
 .main_container_payment {
   width: 100vw;
   height: 100vh;
-  background-color: rgba($color: #f1efef, $alpha: 0.5);
-  > p {
-    text-align: center;
-  }
-  .container_logo {
-    width: auto;
-    align-items: center;
-    justify-content: space-around;
-  }
+  margin-top: 10%;
+
   .container_description {
     width: auto;
     align-items: center;
     justify-content: space-around;
+  }
+  .Main_Payment {
+    width: 100%;
+    display: flex;
+    .Container_CardResume {
+      width: 60%;
+      height: auto;
+    }
+    .Container_Info_Card {
+      width: 40%;
+    }
   }
   .container_pay {
     width: auto;

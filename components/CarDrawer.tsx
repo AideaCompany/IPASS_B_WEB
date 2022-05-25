@@ -40,18 +40,21 @@ const CarDrawer = () => {
                 </React.Fragment>
               ))}
             </div>
-            <div className="Container_Info_Buy   ">
-              <div className="Container_TotalS   text-center "> {`Total de servicios: ${car?.services?.length}`}</div>
-              <div className="Container_SubP  divide-y divide-slate-200 font-bold ">{`Subtotal: Q${numeral(price).format('0,0')}`}</div>
-            </div>
-            <div className="Container_Price divide-y divide-slate-200">
-              <div className="Container_PR  font-helvetica text-center divide-y divide-slate-200">
-                {`Valor por reserva Q${numeral(price * 0.15).format('0,0')}`}
+            <div className="Container_Info_Buy ">
+              <div className="Titles_Buy font-helvetica text-right divide-y divide-gray-300">
+                <p>Total de servicios:</p>
+                <p> Valor de la reserva:</p>
+                <p>Precio Total:</p>
+                <p>Subtotal:</p>
               </div>
-              <div className="Container_TP  font-bold  text-center divide-y divide-slate-200">{`Precio total : Q${numeral(price * 1.15).format(
-                '0,0'
-              )}`}</div>
+              <div className="Container_Price divide-y divide-blue-200">
+                <p>{`${car?.services?.length}`}</p>
+                <p>{`${numeral(price * 0.15).format('0,0')}`}</p>
+                <p>{`${numeral(price * 1.15).format('0,0')}`}</p>
+                <p>{`${numeral(price).format('0,0')}`}</p>
+              </div>
             </div>
+
             <div className="Container_Info_Button h-1/6 ">
               <Button title="Confirmar reserva" onClick={onClick} customClassName="button  text-xs" />
             </div>

@@ -8,8 +8,13 @@ const Register: NextPage = () => {
   return (
     <Layout>
       <div className="main_container_payment ">
-        <p className="container_logo  font-Butler font-medium text-7xl m-0">VANT</p>
-        <p className="container_description text-gold font-semibold text-xl">Bienvenido al portal de pagos</p>
+        <p className="container_description border text-left  font-semibold text-base">Juan Perez tu número de reserva es #123345</p>
+        <div className="Main_Payment border">
+          <div className="Container_CardResume border"></div>
+          <div className="Container_Info_Card ">
+            <p className=" border text-left  font-bold font-semibold text-base">Tarjetas Registradas</p>
+          </div>
+        </div>
         <div className="container_pay  m-0">
           <div className="container_form flex flex-col  m-0">
             <Form className="dates ">
