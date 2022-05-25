@@ -20,6 +20,7 @@ const CarDrawer = () => {
   }
   const { car } = useCar()
   const router = useRouter()
+
   const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price).reduce((a, b) => a + b)
 
   return (
@@ -45,7 +46,6 @@ const CarDrawer = () => {
             </div>
             <div className="Container_Price divide-y divide-slate-200">
               <div className="Container_PR  font-helvetica text-center divide-y divide-slate-200">
-                {' '}
                 {`Valor por reserva Q${numeral(price * 0.15).format('0,0')}`}
               </div>
               <div className="Container_TP  font-bold  text-center divide-y divide-slate-200">{`Precio total : Q${numeral(price * 1.15).format(
