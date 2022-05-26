@@ -17,14 +17,19 @@ const ContainerHours = ({ day }: { day: Moment }) => {
   const [validHoursAfternoon, setValidHoursAfternoon] = useState<availableHours[][]>([])
   const [validHoursNight, setValidHoursNight] = useState<availableHours[][]>([])
   const [loading, setLoading] = useState(true)
-  const { car } = useCar()
+  const { car, getData: getCar } = useCar()
   const { user } = useAuth()
   const router = useRouter()
   useEffect(() => {
-    getData()
-  }, [day])
+    if (car) {
+      if (Object.keys(car).length > 0) {
+        getData()
+      }
+    }
+  }, [day, car])
 
   const getData = async () => {
+    console.log(car)
     setLoading(true)
     const hours = (
       await listAvailableHourFn(
@@ -68,6 +73,7 @@ const ContainerHours = ({ day }: { day: Moment }) => {
       })
     }
     await validateShoppingCardFn(user?._id as string)
+    await getCar()
     router.push('history')
   }
 
