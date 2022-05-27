@@ -11,7 +11,7 @@ const CardResume = ({ service }: { service: IShoppingService }) => {
         <img src={(service.service as IService)?.photo?.key} className="sec-img"></img>
       </div>
       <div className="Main_Info_Resu p-4  h-30">
-        <div className="Container_PR  h-1/4 font-helvetica text-center divide-y divide-slate-200">{(service.service as IService).name}</div>
+        <div className="Container_PR  h-1/4 font-helvetica text-left divide-y divide-slate-200">{(service.service as IService).name}</div>
         <div className="Container_TP    text-left h-1/4  divide-y divide-slate-200">
           {`Staffer: ${service.staff ? (service.staff as IStaff)?.name1 : 'No asignado '}`}
         </div>

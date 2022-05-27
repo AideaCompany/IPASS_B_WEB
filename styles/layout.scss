@@ -6,10 +6,11 @@
   flex-direction: column;
 }
 .header {
-  width: 70%;
+  width: 80%;
   height: 10vh;
   display: flex;
-  margin-left: 15%;
+  margin-left: 10%;
+
   padding-top: 10px;
   background-color: white;
   .title {
@@ -47,7 +48,7 @@
   background-color: #ffffff;
   display: flex;
   justify-content: center;
-  width: 70vw;
+  width: 80vw;
 }
 
 .custom_button {
