@@ -1,9 +1,11 @@
+import useAuth from '@/providers/AuthContext'
 import { UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import CarDrawer from './CarDrawer'
 
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { user } = useAuth()
   return (
     <>
       <div className="header ">
@@ -38,12 +40,16 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
             </defs>
           </svg>
         </div>
-        <div className="history  " style={{ fontSize: '30px' }}>
-          <Link href={'history'}>
-            <img src="/images/History.png" />
-          </Link>
-        </div>
-        <CarDrawer />
+        {user && (
+          <>
+            <div className="history  " style={{ fontSize: '30px' }}>
+              <Link href={'history'}>
+                <img src="/images/History.png" />
+              </Link>
+            </div>
+            <CarDrawer />
+          </>
+        )}
         <div className="profile " style={{ fontSize: '30px' }}>
           <Link href={'profile'}>
             <UserOutlined />
