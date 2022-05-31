@@ -13,6 +13,7 @@ import { addShoppingCardFn } from '@/services/shoppingCar'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import React, { useState } from 'react'
+import Genere from './Genere'
 
 const ReservationsComponent = () => {
   //#region  states
@@ -52,7 +53,13 @@ const ReservationsComponent = () => {
     setStep(stepsPageReservation.Select)
   }
 
-  const mySteps = [stepsPageReservation.store, stepsPageReservation.services, stepsPageReservation.selectDate, stepsPageReservation.payment]
+  const mySteps = [
+    stepsPageReservation.Genere,
+    stepsPageReservation.store,
+    stepsPageReservation.services,
+    stepsPageReservation.selectDate,
+    stepsPageReservation.payment
+  ]
 
   return (
     <>
@@ -61,6 +68,7 @@ const ReservationsComponent = () => {
           <Steps current={mySteps.findIndex(e => e === step)} />
         </div>
         <div className="Container_pages ">
+          {step === stepsPageReservation.Genere && <Genere />}
           {step === stepsPageReservation.store && <ListStores />}
           {step === stepsPageReservation.Select && <Select />}
           {step === stepsPageReservation.staffers && selectedStore && <Staffers onChangeStaff={onChangeStaff} selectedStore={selectedStore} />}

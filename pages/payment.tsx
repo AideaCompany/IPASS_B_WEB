@@ -1,6 +1,8 @@
 import Button from '@/components/Button'
 import CardResume from '@/components/CardResume'
 import Checkbox from '@/components/Checkbox'
+import ModalCard from '@/components/ModalCard'
+import ModalService from '@/components/ModalService'
 import useCar from '@/providers/CarContext'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { IService } from '@/types/interfaces/services/Services.interface'
@@ -14,19 +16,6 @@ import Input from '../components/Input'
 import Layout from '../components/Layout'
 
 const Register: NextPage = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false)
-
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
-
-  const handleOk = () => {
-    setIsModalVisible(false)
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
-  }
   const { car } = useCar()
   const { setStep } = useReservation()
   const onClick = () => {
@@ -76,22 +65,8 @@ const Register: NextPage = () => {
               <p>15/20</p>
               <p>Guate</p>
             </div>
-            <div className="New_form_Pay flex space-x-36 p-2 pl-4 font-semibold ">
-              <Button title="Agregar Metodo de Pago       +" onClick={showModal} customClassName="button  bg-indigo-500 w-20 text-xs"></Button>
-            </div>
+            <ModalCard></ModalCard>
 
-            <Modal title="Información de tu tarjeta " visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-              <Form className="dates h-96 mb-0 mt-0 flex flex-col space-y-1">
-                <p className="font-Gothic text-black">Por favor ingresa los siguientes datos</p>
-                <Input placeHolder="Número de tarjeta " name="number" />
-                <Input placeHolder="Nombre" name="name1" />
-                <Input placeHolder="Apellido" name="lastName1" />
-
-                <Input placeHolder="Fecha de expiración" name="Expired" />
-                <Input placeHolder="CVV" name="CVV" />
-                <Input placeHolder="ID" type="number" name="ID" />
-              </Form>
-            </Modal>
             <div className="Container_Offerts  pt-4 font-semibold ">
               <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
             </div>

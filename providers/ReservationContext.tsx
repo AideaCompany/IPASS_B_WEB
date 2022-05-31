@@ -2,6 +2,7 @@ import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import React, { useContext, useEffect, useState } from 'react'
 import useAuth from './AuthContext'
 export enum stepsPageReservation {
+  'Genere' = 'Genere',
   'store' = 'store',
   'Select' = 'Select',
   'services' = 'services',

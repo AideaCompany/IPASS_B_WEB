@@ -48,13 +48,13 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
               </Link>
             </div>
             <CarDrawer />
+            <div className="profile " style={{ fontSize: '30px' }}>
+              <Link href={'profile'}>
+                <UserOutlined />
+              </Link>
+            </div>
           </>
         )}
-        <div className="profile " style={{ fontSize: '30px' }}>
-          <Link href={'profile'}>
-            <UserOutlined />
-          </Link>
-        </div>
       </div>
       <div className="container mx-auto main_container  ">{children}</div>
     </>
