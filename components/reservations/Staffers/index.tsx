@@ -2,18 +2,17 @@ import ModalStaffer from '@/components/ModalStaffer'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { listStaffByStoreFn } from '@/services/staff'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
 import { Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 import CardStaffers from './CardStaffers'
 
-const Staffers = ({ selectedStore, onChangeStaff }: { onChangeStaff: (value: IStaff) => void; selectedStore: IStores }) => {
-  const { setStep } = useReservation()
+const Staffers = () => {
+  const { setStep, selectedStore, setSelectedStaff } = useReservation()
 
   const onClick = (staff: IStaff) => {
-    setStep(stepsPageReservation.selectDate)
-    onChangeStaff(staff)
+    setSelectedStaff(staff)
+    setStep(stepsPageReservation.servicesByStaffer)
   }
   const [staffers, setStaffers] = useState<IStaff[]>([])
 
@@ -22,7 +21,7 @@ const Staffers = ({ selectedStore, onChangeStaff }: { onChangeStaff: (value: ISt
   }, [])
 
   const getData = async () => {
-    setStaffers(await listStaffByStoreFn(selectedStore._id as string))
+    setStaffers(await listStaffByStoreFn(selectedStore?._id as string))
   }
   const content = <ModalStaffer></ModalStaffer>
 
