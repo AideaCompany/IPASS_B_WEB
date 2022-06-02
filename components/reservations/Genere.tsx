@@ -1,6 +1,5 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import React, { useState } from 'react'
-import Button from '../Button'
 
 const Genere = () => {
   const [genere, setSelectGenere] = useState<string>('')
