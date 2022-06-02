@@ -1,19 +1,13 @@
-import ModalStaffer from '@/components/ModalStaffer'
-import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import useReservation from '@/providers/ReservationContext'
 import { listStaffByStoreFn } from '@/services/staff'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 import CardStaffers from './CardStaffers'
 
 const Staffers = () => {
-  const { setStep, selectedStore, setSelectedStaff } = useReservation()
+  const { selectedStore } = useReservation()
 
-  const onClick = (staff: IStaff) => {
-    setSelectedStaff(staff)
-    setStep(stepsPageReservation.servicesByStaffer)
-  }
   const [staffers, setStaffers] = useState<IStaff[]>([])
 
   useEffect(() => {
@@ -39,7 +33,7 @@ const Staffers = () => {
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          <p className="Title font-Gothic text-right "> Profesionales</p>{' '}
+          <p className="Title font-Gothic text-right "> Profesionales</p>
         </div>
       </div>
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">

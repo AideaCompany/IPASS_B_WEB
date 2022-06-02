@@ -1,12 +1,11 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import React, { useState } from 'react'
+import React from 'react'
 
 const Genere = () => {
-  const [genere, setSelectGenere] = useState<string>('')
-  const { setStep } = useReservation()
+  const { setStep, setGenere } = useReservation()
   const onClick = (paramGenere: string) => {
     setStep(stepsPageReservation.store)
-    setSelectGenere(paramGenere)
+    setGenere(paramGenere)
   }
 
   return (

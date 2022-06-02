@@ -25,6 +25,8 @@ type reservationContext = {
   visibleAsk: boolean
   setVisibleAsk: React.Dispatch<React.SetStateAction<boolean>>
   setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
+  genere: string
+  setGenere: React.Dispatch<React.SetStateAction<string>>
   step: stepsPageReservation
 }
 const ReservationContext = React.createContext<reservationContext>({} as reservationContext)
@@ -38,10 +40,12 @@ export const ReservationProvider = (props: { children: JSX.Element; stores: ISto
   const [selectedService, setSelectedService] = useState<IService | undefined>()
   const [visibleAsk, setVisibleAsk] = useState<boolean>(false)
   const [step, setStep] = useState(currentStep)
-
+  const [genere, setGenere] = useState<string>('')
   return (
     <ReservationContext.Provider
       value={{
+        genere,
+        setGenere,
         visibleAsk,
         setVisibleAsk,
         selectedService,

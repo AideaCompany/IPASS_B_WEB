@@ -4,7 +4,7 @@ import useReservation from '@/providers/ReservationContext'
 import { listServiceByStoreFn } from '@/services/services'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { Popover, Tooltip } from 'antd'
+import { Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 import CardServices from './CardServices'
 
