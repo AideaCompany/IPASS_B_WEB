@@ -1,18 +1,30 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import { listStoresByGenereFn } from '@/services/stores'
 import { CaretDownOutlined } from '@ant-design/icons'
 import { List } from 'antd'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { IStores } from '../../../types/interfaces/Stores/stores.interface'
 import CardStore from './CardStore'
 
 const ListStores = () => {
-  const { stores, setSelectedStore } = useReservation()
+  const [stores, setStores] = useState<IStores[]>([])
+  const { setSelectedStore } = useReservation()
 
-  const { setStep } = useReservation()
+  const { setStep, genere } = useReservation()
 
   const onClick = (store: IStores) => {
     setStep(stepsPageReservation.Select)
     setSelectedStore(store)
+  }
+
+  useEffect(() => {
+    if (genere) {
+      getData()
+    }
+  }, [genere])
+
+  const getData = async () => {
+    setStores(await listStoresByGenereFn(genere))
   }
   return (
     <div className="container_list_stores ">
