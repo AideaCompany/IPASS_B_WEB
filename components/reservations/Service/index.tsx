@@ -10,11 +10,8 @@ import CardServices from './CardServices'
 
 const Services = () => {
   const { car } = useCar()
-  const { selectedStore, setSelectedService, setVisibleAsk } = useReservation()
-  const onClick = (value: IService) => {
-    setSelectedService(value)
-    setVisibleAsk(true)
-  }
+  const { selectedStore } = useReservation()
+
   const [services, setServices] = useState<IService[]>([])
 
   useEffect(() => {
@@ -26,7 +23,6 @@ const Services = () => {
       (await listServiceByStoreFn(selectedStore?._id as string)).filter(e => !car?.services.map(l => (l.service as IService)._id).includes(e._id))
     )
   }
-  const content = <ModalService></ModalService>
 
   return (
     <div className="Main_Container">
@@ -43,15 +39,13 @@ const Services = () => {
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          <Popover content={content} placement="leftBottom" trigger="click">
-            <p className="Title font-Gothic text-right "> Servicios</p>{' '}
-          </Popover>
+          <p className="Title font-Gothic text-right "> Servicios</p>{' '}
         </div>
       </div>
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
         {services.map((service, i) => (
           <React.Fragment key={i}>
-            <CardServices service={service} onClick={() => onClick(service)} />
+            <CardServices service={service} />
           </React.Fragment>
         ))}
       </div>

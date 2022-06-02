@@ -1,9 +1,7 @@
-import ModalStaffer from '@/components/ModalStaffer'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { listStaffByStoreFn } from '@/services/staff'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 import CardStaffers from './CardStaffers'
 

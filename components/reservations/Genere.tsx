@@ -13,10 +13,10 @@ const Genere = () => {
   return (
     <div className="Container_Genere  w-full ">
       <p className="Title font-Gothic text-right ">Mis reservas </p>
-      <div className="Container_fluid w-full  flex space-x-4 mt-16 h-72">
-        <div className="Container_Men w-1/3 " onClick={() => onClick('men')}>
-          <img src="/images/Caballeros.png" className="map-img"></img>
-          <p className="Title font-Gothic text-right font-bold text-xl "> Hombres</p>
+      <div className="Container_fluid w-full  flex space-x-4 mt-16 h-72 dark:md:hover:bg-fuchsia-600">
+        <div className="Container_Men w-1/3 dark:md:hover:bg-fuchsia-600" onClick={() => onClick('men')}>
+          <img src="/images/Caballeros.png" className="map-img hover:bg-sky-700 "></img>
+          <p className="Title font-Gothic text-right font-bold text-xl dark:md:hover:bg-fuchsia-600"> Hombres</p>
         </div>
 
         <div className="Container_women w-1/3 " onClick={() => onClick('women')}>

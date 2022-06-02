@@ -7,33 +7,19 @@ import { availableHours, IService, IServiceStaffer } from '@/types/interfaces/se
 import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
-import { Modal } from 'antd'
 import moment, { Moment } from 'moment-timezone'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import CardHour from './CardHour'
 import ListHours from './ListHours'
 
-const hsMorning = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
-const hsAfternoon = ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00']
-const hsNight = ['20:00', '21:00', '22:00']
-
 const ContainerHours = ({ day }: { day: Moment }) => {
-  const [validHours, setvalidHours] = useState<availableHours[][]>([])
-  const [open, setOpen] = useState(false)
+  const [validHoursMorning, setValidHoursMorning] = useState<availableHours[][]>([])
+  const [validHoursAfternoon, setValidHoursAfternoon] = useState<availableHours[][]>([])
+  const [validHoursNight, setValidHoursNight] = useState<availableHours[][]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedHour, setselectedHour] = useState('')
   const { car } = useCar()
   const { user } = useAuth()
   const router = useRouter()
-
-  console.log(parseInt(selectedHour.split(':')[0]))
-  useEffect(() => {
-    if (selectedHour !== '') {
-      setOpen(true)
-    }
-  }, [selectedHour])
-
   useEffect(() => {
     getData()
   }, [day])
@@ -63,10 +49,9 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         return true
       }
     })
-    setvalidHours(hours)
-    // setValidHoursMorning(hours.filter(e => parseInt(e[0].hour.split(':')[0]) < 12))
-    // setValidHoursAfternoon(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 12 && parseInt(e[0].hour.split(':')[0]) < 17))
-    // setValidHoursNight(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 17))
+    setValidHoursMorning(hours.filter(e => parseInt(e[0].hour.split(':')[0]) < 12))
+    setValidHoursAfternoon(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 12 && parseInt(e[0].hour.split(':')[0]) < 17))
+    setValidHoursNight(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 17))
     setLoading(false)
   }
 
@@ -85,38 +70,16 @@ const ContainerHours = ({ day }: { day: Moment }) => {
     router.push('history')
   }
 
-  const handleClose = () => {
-    setOpen(false)
-    setselectedHour('')
-  }
-
   return (
-    <>
-      <Spin loading={loading}>
-        <div className="Container_Main_H ">
-          <div className="Container_Times ">
-            <div className="Title_Hour">
-              <p className="font-Butler font-medium text-lef text-xl">Mañana</p>
-            </div>
-            <div className="box_Hour grid grid-cols-6 gap-4">
-              {hsMorning.map(e => (
-                <CardHour onClick={() => setselectedHour(e)} hour={e} />
-              ))}
-            </div>
-
-            {/* <ListHours onClick={onClick} title={'Tarde'} hours={validHoursAfternoon} />
-          <ListHours onClick={onClick} title={'Noche'} hours={validHoursNight} /> */}
-          </div>
+    <Spin loading={loading}>
+      <div className="Container_Main_H ">
+        <div className="Container_Times ">
+          <ListHours onClick={onClick} title={'Mañana'} hours={validHoursMorning} />
+          <ListHours onClick={onClick} title={'Tarde'} hours={validHoursAfternoon} />
+          <ListHours onClick={onClick} title={'Noche'} hours={validHoursNight} />
         </div>
-      </Spin>
-      <Modal visible={open} onCancel={handleClose}>
-        <ListHours
-          onClick={onClick}
-          title={'Mañana'}
-          hours={validHours.filter(e => parseInt(e[0].hour.split(':')[0]) == parseInt(selectedHour.split(':')[0]))}
-        />
-      </Modal>
-    </>
+      </div>
+    </Spin>
   )
 }
 
