@@ -56,14 +56,12 @@ const Register: NextPage = () => {
               <p>Titular</p>
               <p># Tarjeta</p>
               <p>Fecha exp</p>
-              <p>Banco</p>
             </div>
             <div className="Info_Cards_preview flex space-x-12 p-1 font-bold font-semibold ">
               <CreditCardOutlined style={{ fontSize: '15px' }} />
               <p>Perez</p>
               <p>5678</p>
               <p>15/20</p>
-              <p>Guate</p>
             </div>
             <ModalCard></ModalCard>
 
@@ -71,8 +69,12 @@ const Register: NextPage = () => {
               <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
             </div>
             <div className="Container_OffertsC  flex pt-4 font-semibold ">
-              <input type="text" className="appearance-none bg-transparent w-2/3 px-4 py-2 " placeholder="Ingresar código de descuento"></input>
-              <Button title="Aceptar" onClick={onClick} customClassName="button1 w-92 text-xs "></Button>
+              <div className="Medium w-2/3  h-12 aling-botton">
+                <input type="text" className="appearance-none bg-transparent w-full h-12  " placeholder="Ingresar código de descuento"></input>
+              </div>
+              <div className="Medium2 w-1/3  m-0 h-8 aling-botton">
+                <Button title="Aceptar" onClick={onClick} customClassName="b1 h-8 m-0 text-xs "></Button>
+              </div>
             </div>
             <div className="Container_Info_Buy ">
               <div className="Titles_Buy font-helvetica text-left">

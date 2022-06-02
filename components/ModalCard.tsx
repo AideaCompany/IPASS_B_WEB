@@ -29,7 +29,6 @@ const ModalCard = () => {
           <Input placeHolder="Número de tarjeta " name="number" />
           <Input placeHolder="Nombre" name="name1" />
           <Input placeHolder="Apellido" name="lastName1" />
-
           <Input placeHolder="Fecha de expiración" name="Expired" />
           <Input placeHolder="CVV" name="CVV" />
           <Input placeHolder="ID" type="number" name="ID" />
