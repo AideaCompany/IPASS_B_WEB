@@ -7,10 +7,17 @@ import { loginClient } from '../graphql/Client/mutations/loginClient'
 import { IClient } from '../types/types'
 import { updateClient } from '@/graphql/Client/mutations/updateClient'
 import { IUpdateClient } from '@/types/interfaces/Clients/MutationClient.interface'
+import { createCard } from '@/graphql/Client/mutations/createCard'
+import { listClientCards } from '@/graphql/Client/queries/listClientCards'
 
 export const getClientFn = async (_id: string): Promise<IClient> => {
   client.cache.reset()
   return (await client.query({ query: gql(getClient), variables: { _id } })).data.getClient as IClient
+}
+
+export const listClientCardsFn = async (_id: string): Promise<string> => {
+  client.cache.reset()
+  return (await client.query({ query: gql(listClientCards), variables: { _id } })).data.listClientCards
 }
 
 export const sendCodeFn = async (input: any): Promise<boolean> => {
@@ -25,4 +32,9 @@ export const loginClientFn = async (token: string) => {
 export const updateClientFn = async (input: IUpdateClient): Promise<boolean> => {
   client.cache.reset()
   return (await client.mutate({ mutation: gql(updateClient), variables: { input } })).data.updateClient
+}
+
+export const createCardFn = async (id: string, card: string): Promise<boolean> => {
+  client.cache.reset()
+  return (await client.mutate({ mutation: gql(createCard), variables: { id, card } })).data.createCard
 }

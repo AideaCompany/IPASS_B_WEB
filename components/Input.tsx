@@ -1,15 +1,16 @@
 import { Form } from 'antd'
 import React, { FC } from 'react'
 
-const Input: FC<{ type?: React.HTMLInputTypeAttribute; name: string; placeHolder?: string; icon?: React.ReactNode; onClickIcon?: () => void }> = ({
-  type = 'text',
-  name,
-  placeHolder,
-  icon,
-  onClickIcon
-}) => {
+const Input: FC<{
+  type?: React.HTMLInputTypeAttribute
+  name: string
+  placeHolder?: string
+  icon?: React.ReactNode
+  onClickIcon?: () => void
+  required?: boolean
+}> = ({ type = 'text', name, placeHolder, icon, required = false, onClickIcon }) => {
   return (
-    <Form.Item name={name}>
+    <Form.Item name={name} rules={[{ required, message: 'Parámetro requerido' }]}>
       <div className="relative">
         <input
           type={type}
