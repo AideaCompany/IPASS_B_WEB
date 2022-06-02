@@ -4,7 +4,6 @@ import React from 'react'
 import numeral from 'numeral'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 const CardResume = ({ service }: { service: IShoppingService }) => {
-  console.log(service)
   return (
     <div className="Main_C_Resume  w-full h-30">
       <div className="Main_Photo_Resu w-20  h-30">

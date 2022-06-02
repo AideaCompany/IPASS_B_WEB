@@ -2,7 +2,7 @@ import Spin from '@/components/Spin'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
 import { listAvailableHourFn } from '@/services/services'
-import { updateShoppingCardServiceFn, validateShoppingCardFn } from '@/services/shoppingCar'
+import { goPayShoppingCardFn, updateShoppingCardServiceFn } from '@/services/shoppingCar'
 import { availableHours, IService, IServiceStaffer } from '@/types/interfaces/services/Services.interface'
 import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
@@ -16,16 +16,19 @@ const ContainerHours = ({ day }: { day: Moment }) => {
   const [validHoursMorning, setValidHoursMorning] = useState<availableHours[][]>([])
   const [validHoursAfternoon, setValidHoursAfternoon] = useState<availableHours[][]>([])
   const [validHoursNight, setValidHoursNight] = useState<availableHours[][]>([])
-  const [loading, setLoading] = useState(true)
-  const { car } = useCar()
+  const [loading, setLoading] = useState(false)
+  const { car, getData: updateCar } = useCar()
   const { user } = useAuth()
   const router = useRouter()
   useEffect(() => {
-    getData()
-  }, [day])
+    if (car) {
+      getData()
+    }
+  }, [day, car])
 
   const getData = async () => {
     setLoading(true)
+    console.log(car)
     const hours = (
       await listAvailableHourFn(
         (car?.services[0].store as IStores)._id as string,
@@ -49,6 +52,7 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         return true
       }
     })
+    console.log(hours)
     setValidHoursMorning(hours.filter(e => parseInt(e[0].hour.split(':')[0]) < 12))
     setValidHoursAfternoon(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 12 && parseInt(e[0].hour.split(':')[0]) < 17))
     setValidHoursNight(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 17))
@@ -57,7 +61,7 @@ const ContainerHours = ({ day }: { day: Moment }) => {
 
   const onClick = async (value: availableHours[]) => {
     for (const newValue of value) {
-      const actualElementCar = car.services.find(e => newValue.service._id === ((e as IShoppingService).service as IService)._id)
+      const actualElementCar = car?.services.find(e => newValue.service._id === ((e as IShoppingService).service as IService)._id)
       await updateShoppingCardServiceFn(user?._id as string, actualElementCar?._id as string, {
         service: (newValue?.service as IService)._id,
         staff: (newValue?.staffer as IStaff)._id,
@@ -66,8 +70,9 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         store: (car?.services[0].store as IStores)._id
       })
     }
-    await validateShoppingCardFn(user?._id as string)
-    router.push('history')
+    await goPayShoppingCardFn(user?._id as string)
+    updateCar()
+    router.push('payment')
   }
 
   return (
