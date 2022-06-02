@@ -1,9 +1,6 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { IService } from '@/types/interfaces/services/Services.interface'
-import { Form, Modal } from 'antd'
-import React, { useState } from 'react'
+import React from 'react'
 import Button from './Button'
-import Input from './Input'
 
 const ModalService = ({ service }: { service: IService }) => {
   const { setSelectedService, setVisibleAsk } = useReservation()
