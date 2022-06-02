@@ -1,9 +1,7 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { IService } from '@/types/interfaces/services/Services.interface'
-import { Form, Modal, Rate } from 'antd'
-import React, { useState } from 'react'
+import { Rate } from 'antd'
+import React from 'react'
 import Button from './Button'
-import Input from './Input'
 
 const ModalStaffer = () => {
   const { setStep } = useReservation()
