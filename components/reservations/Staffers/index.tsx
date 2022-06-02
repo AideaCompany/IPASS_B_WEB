@@ -23,7 +23,6 @@ const Staffers = () => {
   const getData = async () => {
     setStaffers(await listStaffByStoreFn(selectedStore?._id as string))
   }
-  const content = <ModalStaffer></ModalStaffer>
 
   return (
     <div className="Main_Container">
@@ -40,15 +39,13 @@ const Staffers = () => {
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          <Popover content={content} placement="leftBottom" trigger="click">
-            <p className="Title font-Gothic text-right "> Profesionales</p>{' '}
-          </Popover>
+          <p className="Title font-Gothic text-right "> Profesionales</p>{' '}
         </div>
       </div>
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
         {staffers.map((staffer, i) => (
           <React.Fragment key={i}>
-            <CardStaffers staffer={staffer} onClick={() => onClick(staffer)} />
+            <CardStaffers staffer={staffer} />
           </React.Fragment>
         ))}
       </div>

@@ -1,23 +1,25 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { IService } from '@/types/interfaces/services/Services.interface'
-import { Form, Modal, Rate } from 'antd'
-import React, { useState } from 'react'
+import { IStaff } from '@/types/interfaces/staff/staff.interface'
+import { fileType } from '@/types/typeTemplate'
+import { Rate } from 'antd'
+import React from 'react'
 import Button from './Button'
-import Input from './Input'
 
-const ModalStaffer = () => {
-  const { setStep } = useReservation()
-  const onClick = () => {
-    setStep(stepsPageReservation.staffers)
+const ModalStaffer = ({ staffer }: { staffer: IStaff }) => {
+  const { setStep, setSelectedStaff } = useReservation()
+
+  const onClick = (staff: IStaff) => {
+    setSelectedStaff(staff)
+    setStep(stepsPageReservation.servicesByStaffer)
   }
   return (
     <div>
       <div className="Main_Modal_Service m-0 w-72">
         <div className="Photo_Modal h-52 flex justify-center content-center  aling-center w-full">
-          <img src="/images/Peinado.png" className="sec-img aling-center h-52 flex  content-center justify-center"></img>
+          <img src={(staffer.photo as fileType).key} className="sec-img aling-center h-52 flex  content-center justify-center"></img>
         </div>
         <div className="Question_Information w-full font-helvetica mt-2 text-center divide-y divide-slate-200 font-bold text-base">
-          <p> Juan Perez</p>
+          <p> {staffer?.name}</p>
         </div>
         <div className="Information_Modal flex w-full divide-y divide-slate-200">
           <div className="Question_Information w-1/2 font-helvetica mt-2 text-left text-sm divide-y divide-slate-200">
@@ -38,7 +40,7 @@ const ModalStaffer = () => {
         <div className="Container_Comments  mt-8  w-full ">
           <p>Comentarios</p>
           <input className="w-full  h-16 mb-2"></input>
-          <Button title="Seleccionar" onClick={onClick} customClassName="w-full mt-10"></Button>
+          <Button title="Seleccionar" onClick={() => onClick(staffer)} customClassName="w-full mt-10"></Button>
         </div>
       </div>
     </div>

@@ -14,7 +14,6 @@ import { IService } from '@/types/interfaces/services/Services.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import React, { useState } from 'react'
 import Genere from './Genere'
-import React from 'react'
 
 const ReservationsComponent = () => {
   //#region  states
