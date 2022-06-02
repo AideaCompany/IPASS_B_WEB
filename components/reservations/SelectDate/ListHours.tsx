@@ -10,11 +10,13 @@ const ListHours = ({ title, hours, onClick }: { title: string; hours: availableH
       </div>
       {hours.length > 0 ? (
         <div className="box_Hour grid grid-cols-6 gap-4">
-          {hours.map((e, i) => (
-            <React.Fragment key={i}>
-              <CardHour onClick={() => onClick(e)} hour={e[0]} />
-            </React.Fragment>
-          ))}
+          {hours.map((e, i) => {
+            return (
+              <React.Fragment key={i}>
+                <CardHour onClick={() => onClick(e)} hour={e[0]} />
+              </React.Fragment>
+            )
+          })}
         </div>
       ) : (
         <p>No hay horarios disponibles</p>
