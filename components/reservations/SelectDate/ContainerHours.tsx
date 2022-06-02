@@ -56,7 +56,6 @@ const ContainerHours = ({ day }: { day: Moment }) => {
   }
 
   const onClick = async (value: availableHours[]) => {
-    console.log(value)
     for (const newValue of value) {
       const actualElementCar = car.services.find(e => newValue.service._id === ((e as IShoppingService).service as IService)._id)
       await updateShoppingCardServiceFn(user?._id as string, actualElementCar?._id as string, {

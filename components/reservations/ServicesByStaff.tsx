@@ -1,28 +1,29 @@
-import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import useCar from '@/providers/CarContext'
+import useReservation from '@/providers/ReservationContext'
 import { listServiceByStaffAndStoreFn } from '@/services/services'
 import { IService } from '@/types/interfaces/services/Services.interface'
-import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
 import CardServices from './Service/CardServices'
 
-const Services2 = ({ selectedStore, selectedStaff }: { selectedStore: IStores; selectedStaff: IStaff }) => {
-  const { setStep } = useReservation()
-
-  const onClick = () => {
-    setStep(stepsPageReservation.hair)
+const ServicesByStaff = () => {
+  const { car } = useCar()
+  const { selectedStore, selectedStaff, setSelectedService, setVisibleAsk } = useReservation()
+  const onClick = (value: IService) => {
+    setSelectedService(value)
+    setVisibleAsk(true)
   }
   const [services, setServices] = useState<IService[]>([])
 
   useEffect(() => {
     getData()
-  }, [])
+  }, [car])
 
   const getData = async () => {
-    const data = await listServiceByStaffAndStoreFn(selectedStore._id as string, selectedStaff._id as string)
-    setServices(data)
+    console.log(selectedStore?._id as string, selectedStaff?._id as string)
+    const data = await listServiceByStaffAndStoreFn(selectedStore?._id as string, selectedStaff?._id as string)
     console.log(data)
+    setServices(data)
   }
 
   return (
@@ -40,7 +41,7 @@ const Services2 = ({ selectedStore, selectedStaff }: { selectedStore: IStores; s
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          <p className="Title font-Gothic text-right "> Servicios2</p>{' '}
+          <p className="Title font-Gothic text-right "> Servicios</p>
         </div>
       </div>
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
@@ -54,4 +55,4 @@ const Services2 = ({ selectedStore, selectedStaff }: { selectedStore: IStores; s
   )
 }
 
-export default Services2
+export default ServicesByStaff

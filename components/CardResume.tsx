@@ -11,15 +11,13 @@ const CardResume = ({ service }: { service: IShoppingService }) => {
         <img src={(service.service as IService)?.photo?.key} className="sec-img"></img>
       </div>
       <div className="Main_Info_Resu p-4  h-30">
-        <div className="Container_PR   font-bold h-1/4 font-helvetica text-center divide-y divide-slate-200">
-          {(service.service as IService).name}
-        </div>
+        <div className="Container_PR  h-1/4 font-helvetica text-left divide-y divide-slate-200">{(service?.service as IService)?.name}</div>
         <div className="Container_TP    text-left h-1/4  divide-y divide-slate-200">
-          {`Staffer: ${service.staff ? (service.staff as IStaff)?.name1 : 'No asignado '}`}
+          {`Staffer: ${service.staff ? (service.staff as IStaff)?.name : 'No asignado '}`}
         </div>
         <div className="Container_PR  font-helvetica h-1/4  text-left divide-y divide-slate-200">{`Hora: ${service.hour ?? 'No asignado '}`}</div>
         <div className="Container_TP    text-left h-1/4 divide-y divide-slate-200">
-          {`Precio: Q${numeral((service.service as IService).price).format('0,0')} `}
+          {`Precio: Q${numeral((service?.service as IService)?.price).format('0,0')} `}
         </div>
       </div>
       <div className="Main_Icons_Resu justify-center p-4 h-30">

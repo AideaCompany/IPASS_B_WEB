@@ -1,12 +1,14 @@
+import useAuth from '@/providers/AuthContext'
 import { UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import CarDrawer from './CarDrawer'
 
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { user } = useAuth()
   return (
     <>
-      <div className="header  ">
+      <div className="header ">
         <div className="title  font-Butler font-bold text-6xl ">
           <svg width="125" height="35" viewBox="0 0 125 35" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clipPath="url(#clip0_198_705)">
@@ -38,12 +40,21 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
             </defs>
           </svg>
         </div>
-        <CarDrawer />
-        <div className="profile" style={{ fontSize: '30px' }}>
-          <Link href={'profile'}>
-            <UserOutlined />
-          </Link>
-        </div>
+        {user && (
+          <>
+            <div className="history  " style={{ fontSize: '30px' }}>
+              <Link href={'history'}>
+                <img src="/images/History.png" />
+              </Link>
+            </div>
+            <CarDrawer />
+            <div className="profile " style={{ fontSize: '30px' }}>
+              <Link href={'profile'}>
+                <UserOutlined />
+              </Link>
+            </div>
+          </>
+        )}
       </div>
       <div className="container mx-auto main_container  ">{children}</div>
     </>

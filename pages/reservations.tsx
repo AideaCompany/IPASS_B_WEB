@@ -21,6 +21,6 @@ export default Reservations
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const stores = await getAllStores()
-  const currentStep = ctx.query.step ?? stepsPageReservation.store
+  const currentStep = ctx.query.step ?? stepsPageReservation.Genere
   return { props: { stores, currentStep } }
 }
