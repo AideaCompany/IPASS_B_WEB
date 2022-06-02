@@ -16,7 +16,10 @@
     "@themesberg/tailwind-datepicker": "^1.1.0",
     "antd": "^4.20.3",
     "apollo-upload-client": "^17.0.0",
+    "cookie": "^0.5.0",
     "country-data": "^0.0.31",
+    "crypo": "^0.1.4",
+    "crypto": "^1.0.1",
     "flowbite": "^1.4.5",
     "flowbite-react": "^0.0.24",
     "fogg-utils": "^2.7.5",
@@ -35,6 +38,7 @@
   "devDependencies": {
     "@types/apollo-upload-client": "^17.0.0",
     "@types/brainhubeu__react-carousel": "^2.0.5",
+    "@types/cookie": "^0.5.1",
     "@types/country-data": "^0.0.2",
     "@types/js-cookie": "^3.0.1",
     "@types/jsonwebtoken": "^8.5.8",

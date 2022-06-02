@@ -418,4 +418,13 @@ export interface IClient extends Document, basicTable {
   password: string
   tokenExpo: string[]
   active: boolean
+  cards: ICards[]
+}
+
+export interface ICards {
+  number: string
+  name1: string
+  lastName1: string
+  Expired: string
+  ID: string
 }
