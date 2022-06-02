@@ -2,19 +2,34 @@ import Button from '@/components/Button'
 import CardResume from '@/components/CardResume'
 import Checkbox from '@/components/Checkbox'
 import ModalCard from '@/components/ModalCard'
+import CardTable from '@/components/Payment/CardTable'
+import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import { listClientCardsFn } from '@/services/clients'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
-import { CheckCircleOutlined, CreditCardOutlined } from '@ant-design/icons'
-import { NextPage } from 'next'
+import { ICards, IClient } from '@/types/types'
+import { decodeValues } from '@/utils/utils'
+import { $security } from 'config'
+import * as cookie from 'cookie'
+import jwt from 'jsonwebtoken'
+import { GetServerSidePropsContext } from 'next'
 import numeral from 'numeral'
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from '../components/Layout'
 
-const Register: NextPage = () => {
+const Register = ({ cards }: { cards: ICards[] }) => {
+  const { user } = useAuth()
   const { car } = useCar()
   const { setStep } = useReservation()
+  const [currentCards, setCurrentCards] = useState(cards)
+
+  const updateCards = async () => {
+    const newCards = await listClientCardsFn(user?._id as string)
+    setCurrentCards(decodeValues(newCards))
+  }
+
   const onClick = () => {
     setStep(stepsPageReservation.staffers)
   }
@@ -44,26 +59,8 @@ const Register: NextPage = () => {
             </div>
           </div>
           <div className="Container_Info_Card ">
-            <div className="title flex space-x-2 p-1">
-              <CreditCardOutlined style={{ fontSize: '20px' }} />
-              <p className=" text-left font-semibold text-base flex space-x-4">Tarjetas Registradas</p>
-            </div>
-            <div className="Info_T_Cards_preview flex space-x-8 p-1 font-semibold ">
-              <CheckCircleOutlined style={{ fontSize: '20px', color: '#1BB66E' }} />
-              <p>Titular</p>
-              <p># Tarjeta</p>
-              <p>Fecha exp</p>
-              <p>Banco</p>
-            </div>
-            <div className="Info_Cards_preview flex space-x-12 p-1 font-bold font-semibold ">
-              <CreditCardOutlined style={{ fontSize: '15px' }} />
-              <p>Perez</p>
-              <p>5678</p>
-              <p>15/20</p>
-              <p>Guate</p>
-            </div>
-            <ModalCard></ModalCard>
-
+            <CardTable cards={currentCards} />
+            <ModalCard onComplete={updateCards} />
             <div className="Container_Offerts  pt-4 font-semibold ">
               <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
             </div>
@@ -97,3 +94,18 @@ const Register: NextPage = () => {
 }
 
 export default Register
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const token = ctx?.req?.headers?.cookie
+  if (token) {
+    if (cookie.parse(token).authIpassClient) {
+      const { data } = jwt.verify(cookie.parse(token).authIpassClient, $security.secretKey) as { data: IClient }
+      const cards = await listClientCardsFn(data._id as string)
+      const currentStep = ctx.query.step ?? stepsPageReservation.Genere
+      return { props: { cards: decodeValues(cards), currentStep } }
+    }
+  } else {
+    return {
+      notFound: true
+    }
+  }
+}
