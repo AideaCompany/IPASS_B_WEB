@@ -10,9 +10,7 @@ import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { addShoppingCardFn } from '@/services/shoppingCar'
-import { IService } from '@/types/interfaces/services/Services.interface'
-import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import React, { useState } from 'react'
+import React from 'react'
 import Genere from './Genere'
 
 const ReservationsComponent = () => {
