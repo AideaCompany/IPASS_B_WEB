@@ -8,12 +8,17 @@ const CardTable = ({ cards = [] }: { cards: ICards[] }) => {
         <CreditCardOutlined style={{ fontSize: '20px' }} />
         <p className=" text-left font-semibold text-base flex space-x-4">Tarjetas Registradas</p>
       </div>
-      <div className="Info_T_Cards_preview flex space-x-8 p-1 font-semibold ">
+      <div className="Info_T_Cards_preview flex w-full space-x-8 p-1 font-semibold ">
         <CheckCircleOutlined style={{ fontSize: '20px', color: '#1BB66E' }} />
-        <p>Titular</p>
-        <p># Tarjeta</p>
-        <p>Fecha exp</p>
-        <p>Banco</p>
+        <div className="w-1/3">
+          <p>Titular</p>
+        </div>
+        <div className="w-1/3">
+          <p>N. tarjeta</p>
+        </div>
+        <div className="w-1/3">
+          <p>F. Venci</p>
+        </div>
       </div>
 
       {cards?.map((card, i) => (

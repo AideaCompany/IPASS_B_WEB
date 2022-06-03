@@ -1,8 +1,11 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import { IService } from '@/types/interfaces/services/Services.interface'
 import { generes } from '@/types/interfaces/Stores/stores.interface'
+import { Popover } from 'antd'
 import React from 'react'
+import ModalService from '../ModalService'
 
-const Genere = () => {
+const Genere = ({ service }: { service: IService }) => {
   const { setStep, setGenere } = useReservation()
   const onClick = (paramGenere: string) => {
     setStep(stepsPageReservation.store)
@@ -12,6 +15,7 @@ const Genere = () => {
   return (
     <div className="Container_Genere  w-full ">
       <p className="Title font-Gothic text-right ">Mis reservas </p>
+
       <div className="Container_fluid w-full  flex space-x-4 mt-16 h-72 dark:md:hover:bg-fuchsia-600">
         <div className="Container_Men w-1/3 cursor-pointer " onClick={() => onClick(generes.MEN)}>
           <img src="/images/Caballeros.png" className="map-img"></img>
