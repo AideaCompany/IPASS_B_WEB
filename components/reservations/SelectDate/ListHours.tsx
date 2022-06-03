@@ -1,8 +1,38 @@
-import { availableHours } from '@/types/interfaces/services/Services.interface'
-import React from 'react'
+import { Modal } from 'antd'
+import React, { useState } from 'react'
 import CardHour from './CardHour'
 
-const ListHours = ({ title, hours, onClick }: { title: string; hours: availableHours[][]; onClick: (value: availableHours[]) => void }) => {
+const ListHours = ({
+  title,
+  hours,
+  onClick,
+  HourSelect,
+  setHourSelect,
+  hoursToShowModal
+}: {
+  title: string
+  hours: string[]
+  onClick: (value: string) => void
+  HourSelect: string
+  setHourSelect: React.Dispatch<React.SetStateAction<string>>
+  hoursToShowModal: string[]
+}) => {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const showModal = (value: string) => {
+    setHourSelect(value)
+    setIsModalVisible(true)
+  }
+  console.log(setHourSelect)
+
+  const handleOk = () => {
+    setIsModalVisible(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
+
   return (
     <>
       <div className="Title_Hour">
@@ -13,7 +43,14 @@ const ListHours = ({ title, hours, onClick }: { title: string; hours: availableH
           {hours.map((e, i) => {
             return (
               <React.Fragment key={i}>
-                <CardHour onClick={() => onClick(e)} hour={e[0]} />
+                <CardHour onClick={() => showModal(e)} hour={e} />
+                <Modal title="Selecciona tu hora de reserva" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                  {hoursToShowModal.map((e, j) => (
+                    <React.Fragment key={j}>
+                      <CardHour onClick={() => onClick(e)} hour={e} />
+                    </React.Fragment>
+                  ))}
+                </Modal>
               </React.Fragment>
             )
           })}

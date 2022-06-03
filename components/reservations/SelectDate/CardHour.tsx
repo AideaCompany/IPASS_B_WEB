@@ -1,22 +1,30 @@
-import { availableHours } from '@/types/interfaces/services/Services.interface'
+import { Modal } from 'antd'
 import React from 'react'
 
-const CardHour = ({ onClick, hour }: { onClick: () => void; hour: availableHours | string }) => {
+const CardHour = ({ onClick, hour }: { onClick: () => void; hour: string }) => {
   //#region functions
 
   const formatHour = (value: string) => {
-    const minutes = parseInt(value.split(':')[1])
-    if (minutes < 10) {
-      return `${value.split(':')[0]}:0${minutes}`
+    const format = ':00'
+    const format2 = '0'
+    let Result2
+    if (parseInt(value) < 10) {
+      Result2 = format2.concat(value)
+    } else {
+      Result2 = value
     }
-    return value
+    const HourFormat = Result2.concat(format)
+
+    console.log(HourFormat)
+    return HourFormat
   }
+
   return (
     <p
       className="hover:underline  hover:bg-gold hover:text-white font-Butler cursor-pointer border font-medium text-center font-bond text-lg"
       onClick={onClick}
     >
-      {(hour as availableHours)?.hour ? formatHour((hour as availableHours).hour) : formatHour(hour as string)}
+      {formatHour(hour)}
     </p>
   )
 }
