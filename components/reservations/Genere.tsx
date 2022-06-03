@@ -1,11 +1,8 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { IService } from '@/types/interfaces/services/Services.interface'
 import { generes } from '@/types/interfaces/Stores/stores.interface'
-import { Popover } from 'antd'
 import React from 'react'
-import ModalService from '../ModalService'
 
-const Genere = ({ service }: { service: IService }) => {
+const Genere = () => {
   const { setStep, setGenere } = useReservation()
   const onClick = (paramGenere: string) => {
     setStep(stepsPageReservation.store)

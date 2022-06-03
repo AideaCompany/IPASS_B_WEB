@@ -1,10 +1,8 @@
-import ModalService from '@/components/ModalService'
 import useCar from '@/providers/CarContext'
 import useReservation from '@/providers/ReservationContext'
 import { listServiceByStoreFn } from '@/services/services'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
-import { Popover } from 'antd'
 import React, { useEffect, useState } from 'react'
 import CardServices from './CardServices'
 
