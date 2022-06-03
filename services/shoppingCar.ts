@@ -1,5 +1,6 @@
 import client from '@/graphql/config'
 import { addShoppingCard } from '@/graphql/shoppingCar/mutation/addShoppingCard'
+import { deleteShoppingCardService } from '@/graphql/shoppingCar/mutation/deleteShoppingCardService'
 import { updateShoppingCardService } from '@/graphql/shoppingCar/mutation/updateShoppingCardService'
 import { validateShoppingCard } from '@/graphql/shoppingCar/mutation/validateShoppingCard'
 import { getClientCurrentShoppingCard } from '@/graphql/shoppingCar/queries/getClientCurrentShoppingCard'
@@ -40,5 +41,13 @@ export const updateShoppingCardServiceFn = async (client_id: string, service: st
 export const validateShoppingCardFn = async (client_id: string): Promise<IShoppingCard> => {
   client.cache.reset()
   const paginated = await (await client.mutate({ mutation: gql(validateShoppingCard), variables: { client: client_id } })).data.validateShoppingCard
+  return paginated
+}
+
+export const deleteShoppingCardServiceFn = async (client_id: string, service: string): Promise<IShoppingCard> => {
+  client.cache.reset()
+  const paginated = await (
+    await client.mutate({ mutation: gql(deleteShoppingCardService), variables: { client: client_id, service } })
+  ).data.deleteShoppingCardService
   return paginated
 }
