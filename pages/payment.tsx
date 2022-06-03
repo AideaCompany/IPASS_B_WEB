@@ -25,7 +25,6 @@ let myInterval: any
 const Register = ({ cards }: { cards: ICards[] }) => {
   const { setStep } = useReservation()
   const [currentCards, setCurrentCards] = useState(cards)
-  const [isModalVisible, setIsModalVisible] = useState(false)
   const { user } = useAuth()
   const [car, setCar] = useState<IShoppingCard>()
   const { getData: getDataCar } = useCar()
@@ -75,17 +74,9 @@ const Register = ({ cards }: { cards: ICards[] }) => {
     }
   }, [car])
 
-  const showModal = () => {
-    setIsModalVisible(true)
-  }
-
   const updateCards = async () => {
     const newCards = await listClientCardsFn(user?._id as string)
     setCurrentCards(decodeValues(newCards))
-  }
-
-  const handleCancel = () => {
-    setIsModalVisible(false)
   }
 
   const onClick = () => {
@@ -117,7 +108,7 @@ const Register = ({ cards }: { cards: ICards[] }) => {
             </div>
           </div>
           <div className="Container_Info_Card ">
-            <CardTable cards={currentCards} />
+            <CardTable cards={currentCards} onComplete={updateCards} />
             <ModalCard onComplete={updateCards} />
             <div className="Container_Offerts  pt-4 font-semibold ">
               <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
