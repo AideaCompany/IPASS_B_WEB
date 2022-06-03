@@ -46,7 +46,7 @@ const ListHours = ({
                 <CardHour onClick={() => showModal(e)} hour={e} />
                 <Modal title="Selecciona tu hora de reserva" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                   {hoursToShowModal.map((e, j) => (
-                    <React.Fragment key={j}>
+                    <React.Fragment key={j}></React.Fragment>
                       <CardHour onClick={() => onClick(e)} hour={e} />
                     </React.Fragment>
                   ))}

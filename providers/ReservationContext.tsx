@@ -15,7 +15,6 @@ export enum stepsPageReservation {
   'payment' = 'payment'
 }
 type reservationContext = {
-  stores: IStores[]
   selectedStore: IStores | undefined
   setSelectedStore: React.Dispatch<React.SetStateAction<IStores | undefined>>
   selectedStaff: IStaff | undefined
@@ -31,9 +30,9 @@ type reservationContext = {
 }
 const ReservationContext = React.createContext<reservationContext>({} as reservationContext)
 
-export const ReservationProvider = (props: { children: JSX.Element; stores: IStores[]; currentStep: stepsPageReservation }) => {
+export const ReservationProvider = (props: { children: JSX.Element; currentStep: stepsPageReservation }) => {
   //props
-  const { children, stores, currentStep } = props
+  const { children, currentStep } = props
   //States
   const [selectedStore, setSelectedStore] = useState<IStores | undefined>()
   const [selectedStaff, setSelectedStaff] = useState<IStaff | undefined>()
@@ -54,7 +53,6 @@ export const ReservationProvider = (props: { children: JSX.Element; stores: ISto
         setSelectedStaff,
         step,
         setStep,
-        stores,
         selectedStore,
         setSelectedStore
       }}

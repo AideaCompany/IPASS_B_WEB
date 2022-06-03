@@ -12,10 +12,6 @@ import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import ListHours from './ListHours'
 
-// const hsMorning = ['6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
-// const hsAfternoon = ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00']
-// const hsNight = ['20:00', '21:00', '22:00']
-
 const ContainerHours = ({ day }: { day: Moment }) => {
   const [validHours, setvalidHours] = useState<availableHours[][]>([])
   const [open, setOpen] = useState(false)
@@ -29,13 +25,6 @@ const ContainerHours = ({ day }: { day: Moment }) => {
   const { car } = useCar()
   const { user } = useAuth()
   const router = useRouter()
-
-  useEffect(() => {
-    if (selectedHour !== '') {
-      setOpen(true)
-    }
-  }, [selectedHour])
-
   useEffect(() => {
     getData()
   }, [day])
@@ -87,6 +76,9 @@ const ContainerHours = ({ day }: { day: Moment }) => {
 
     setValidHoursMorning(result.filter(morning))
     setValidHoursAfternoon(result.filter(afternoon))
+
+    setValidHoursMorning(hours.filter(e => parseInt(e[0].hour.split(':')[0]) < 12))
+    setValidHoursAfternoon(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 12 && parseInt(e[0].hour.split(':')[0]) < 17))
     setValidHoursNight(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 17))
     setLoading(false)
   }
