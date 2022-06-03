@@ -16,10 +16,11 @@ const ContainerHours = ({ day }: { day: Moment }) => {
   const [validHoursMorning, setValidHoursMorning] = useState<availableHours[][]>([])
   const [validHoursAfternoon, setValidHoursAfternoon] = useState<availableHours[][]>([])
   const [validHoursNight, setValidHoursNight] = useState<availableHours[][]>([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const { car, getData: updateCar } = useCar()
   const { user } = useAuth()
   const router = useRouter()
+
   useEffect(() => {
     if (car) {
       getData()
@@ -52,7 +53,6 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         return true
       }
     })
-    console.log(hours)
     setValidHoursMorning(hours.filter(e => parseInt(e[0].hour.split(':')[0]) < 12))
     setValidHoursAfternoon(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 12 && parseInt(e[0].hour.split(':')[0]) < 17))
     setValidHoursNight(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 17))
@@ -76,15 +76,25 @@ const ContainerHours = ({ day }: { day: Moment }) => {
   }
 
   return (
-    <Spin loading={loading}>
-      <div className="Container_Main_H ">
-        <div className="Container_Times ">
-          <ListHours onClick={onClick} title={'Mañana'} hours={validHoursMorning} />
-          <ListHours onClick={onClick} title={'Tarde'} hours={validHoursAfternoon} />
-          <ListHours onClick={onClick} title={'Noche'} hours={validHoursNight} />
+    <>
+      <Spin loading={loading}>
+        <div className="Container_Main_H ">
+          <div className="Container_Times ">
+            <div className="Title_Hour">
+              <p className="font-Butler font-medium text-lef text-xl">Mañana</p>
+            </div>
+            {/* <div className="box_Hour grid grid-cols-6 gap-4">
+              {validHoursMorning.map(e => (
+                <CardHour onClick={() => setselectedHour(e)} hour={e} />
+              ))}
+            </div> */}
+            <ListHours onClick={onClick} title={'Tarde'} hours={validHoursMorning} />
+            <ListHours onClick={onClick} title={'Tarde'} hours={validHoursAfternoon} />
+            <ListHours onClick={onClick} title={'Noche'} hours={validHoursNight} />
+          </div>
         </div>
-      </div>
-    </Spin>
+      </Spin>
+    </>
   )
 }
 

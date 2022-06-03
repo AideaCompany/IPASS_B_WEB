@@ -1,16 +1,11 @@
-import useReservation from '@/providers/ReservationContext'
-import { ArrowRightOutlined } from '@ant-design/icons'
 import { NextPage } from 'next'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import React from 'react'
 import Layout from '../components/Layout'
 import useAuth from '../providers/AuthContext'
 
 const Welcome: NextPage = () => {
   const { user } = useAuth()
-  const { setStep } = useReservation()
-  const router = useRouter()
 
   return (
     <Layout>
