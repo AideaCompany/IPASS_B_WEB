@@ -12,10 +12,11 @@ import useReservation, { stepsPageReservation } from '@/providers/ReservationCon
 import { addShoppingCardFn } from '@/services/shoppingCar'
 import React from 'react'
 import Genere from './Genere'
+import ServiceType from './ServiceType'
 
 const ReservationsComponent = () => {
   //#region  states
-  const { selectedStore, step, setStep, selectedStaff, selectedService, visibleAsk, setVisibleAsk } = useReservation()
+  const { selectedStore, step, setStep, selectedStaff, selectedService, selectedServiceType, visibleAsk, setVisibleAsk } = useReservation()
   //#region ref
   const { user } = useAuth()
   const { getData } = useCar()
@@ -60,7 +61,8 @@ const ReservationsComponent = () => {
           {step === stepsPageReservation.Select && <Select />}
           {step === stepsPageReservation.staffers && selectedStore && <Staffers />}
           {/* {step === stepsPageReservation.hair && <Hair setStep={setStep} stores={props.stores} />} */}
-          {step === stepsPageReservation.services && selectedStore && <Services />}
+          {step === stepsPageReservation.servicesType && selectedStore && <ServiceType />}
+          {step === stepsPageReservation.services && selectedStore && selectedServiceType && <Services />}
           {step === stepsPageReservation.servicesByStaffer && selectedStore && selectedStaff && <ServicesByStaff />}
           {step === stepsPageReservation.selectDate && <SelectDate />}
           {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}

@@ -7,6 +7,7 @@ import { listAvailableHour } from '@/graphql/services/queries/listAvailableHour'
 import { listService } from '@/graphql/services/queries/listService'
 import { listServiceByStaffAndStore } from '@/graphql/services/queries/listServiceByStaffAndStore'
 import { listServiceByStore } from '@/graphql/services/queries/listServiceByStore'
+import { listServiceByStoreAndType } from '@/graphql/services/queries/listServiceByStoreAndType'
 import { IPaginated } from '@/types/interfaces/graphqlTypes'
 import { ICreateService, IUpdateService } from '@/types/interfaces/services/MutationServices.interface'
 import { availableHours, IService, IServiceStaffer } from '@/types/interfaces/services/Services.interface'
@@ -35,6 +36,14 @@ export const listServiceByStaffAndStoreFn = async (storeId: string, staffId: str
   )
 }
 
+export const listServiceByStoreAndTypeFn = async (store: string, type: string): Promise<IService[]> => {
+  client.cache.reset()
+  return convertTotable<IService>(
+    await (
+      await client.query({ query: gql(listServiceByStoreAndType), variables: { store, type } })
+    ).data.listServiceByStoreAndType
+  )
+}
 export const listAllServicesFn = async (): Promise<IService[]> => {
   client.cache.reset()
   return convertTotable<IService>(await (await client.query({ query: gql(listAllServices) })).data.listAllServices)

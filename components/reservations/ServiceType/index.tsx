@@ -1,29 +1,23 @@
 import useCar from '@/providers/CarContext'
 import useReservation from '@/providers/ReservationContext'
-import { listServiceByStoreAndTypeFn } from '@/services/services'
-import { IService } from '@/types/interfaces/services/Services.interface'
+import { listServiceTypeByStoreFn } from '@/services/servicesType'
+import { IServiceType } from '@/types/interfaces/ServiceType/serviceType.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
-import CardServices from './CardServices'
+import CardServicesType from './CardServicesType'
 
-const Services = () => {
+const ServiceType = () => {
+  const [servicesType, setServicesType] = useState<IServiceType[]>([])
   const { car } = useCar()
-  const { selectedStore, selectedServiceType } = useReservation()
-
-  const [services, setServices] = useState<IService[]>([])
+  const { selectedStore } = useReservation()
 
   useEffect(() => {
     getData()
   }, [car])
 
   const getData = async () => {
-    setServices(
-      (await listServiceByStoreAndTypeFn(selectedStore?._id as string, selectedServiceType?._id as string)).filter(
-        e => !car?.services.map(l => (l.service as IService)._id).includes(e._id)
-      )
-    )
+    setServicesType(await listServiceTypeByStoreFn(selectedStore?._id as string))
   }
-
   return (
     <div className="Main_Container">
       <div className="Container_bar ">
@@ -39,13 +33,13 @@ const Services = () => {
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          <p className="Title font-Gothic text-right "> Servicios</p>
+          <p className="Title font-Gothic text-right "> Categorías de servicios</p>
         </div>
       </div>
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
-        {services.map((service, i) => (
+        {servicesType.map((service, i) => (
           <React.Fragment key={i}>
-            <CardServices service={service} />
+            <CardServicesType service={service} />
           </React.Fragment>
         ))}
       </div>
@@ -53,4 +47,4 @@ const Services = () => {
   )
 }
 
-export default Services
+export default ServiceType
