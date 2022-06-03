@@ -1,22 +1,20 @@
-import { Modal } from 'antd'
 import React from 'react'
 
 const CardHour = ({ onClick, hour }: { onClick: () => void; hour: string }) => {
   //#region functions
 
   const formatHour = (value: string) => {
-    const format = ':00'
-    const format2 = '0'
-    let Result2
-    if (parseInt(value) < 10) {
-      Result2 = format2.concat(value)
+    if (value.search(':') === -1) {
+      if (parseInt(value) < 10) {
+        value = `0${value}`
+      }
+      value = `${value}:00`
     } else {
-      Result2 = value
+      if (parseInt(value.split(':')[0]) < 10) {
+        value = `0${value.split(':')[0]}:${value.split(':')[1] === '0' ? `00` : value.split(':')[1]}`
+      }
     }
-    const HourFormat = Result2.concat(format)
-
-    console.log(HourFormat)
-    return HourFormat
+    return value
   }
 
   return (

@@ -7,27 +7,30 @@ import { availableHours, IService, IServiceStaffer } from '@/types/interfaces/se
 import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
+import { Modal } from 'antd'
 import moment, { Moment } from 'moment-timezone'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
+import CardHour from './CardHour'
 import ListHours from './ListHours'
 
 const ContainerHours = ({ day }: { day: Moment }) => {
-  const [validHours, setvalidHours] = useState<availableHours[][]>([])
-  const [open, setOpen] = useState(false)
+  const [validHours, setValidHours] = useState<availableHours[][]>([])
   const [HourSelect, setHourSelect] = useState('')
   const [loading, setLoading] = useState(true)
-  const [selectedHour, setselectedHour] = useState('')
   const [validHoursMorning, setValidHoursMorning] = useState<string[]>([])
   const [validHoursAfternoon, setValidHoursAfternoon] = useState<string[]>([])
   const [validHoursNight, setValidHoursNight] = useState<string[]>([])
-  const [hoursToShowModal, setHoursToShowModal] = useState<string[]>([])
+  const [hoursToShowModal, setHoursToShowModal] = useState<availableHours[][]>([])
+  const [showModal, setShowModal] = useState(false)
   const { car } = useCar()
   const { user } = useAuth()
   const router = useRouter()
   useEffect(() => {
-    getData()
-  }, [day])
+    if (car) {
+      getData()
+    }
+  }, [day, car])
 
   const getData = async () => {
     setLoading(true)
@@ -54,38 +57,29 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         return true
       }
     })
-    setvalidHours(hours)
+    setValidHours(hours)
     const MyArray: string[] = []
 
-    hours.forEach(function (elemento, indice) {
-      MyArray.push(elemento[0].hour.split(':')[0])
+    hours.forEach(element => {
+      MyArray.push(element[0].hour.split(':')[0])
     })
-
     const MyArrayS = new Set(MyArray)
+    //@ts-ignore
     const result = [...MyArrayS]
-    function morning(result) {
-      return result < 12
-    }
-
-    console.log(result.filter(morning))
-    function afternoon(result) {
-      return result > 12
-    }
-
-    console.log(result.filter(afternoon))
-
-    setValidHoursMorning(result.filter(morning))
-    setValidHoursAfternoon(result.filter(afternoon))
-
-    setValidHoursMorning(hours.filter(e => parseInt(e[0].hour.split(':')[0]) < 12))
-    setValidHoursAfternoon(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 12 && parseInt(e[0].hour.split(':')[0]) < 17))
-    setValidHoursNight(hours.filter(e => parseInt(e[0].hour.split(':')[0]) >= 17))
+    setValidHoursMorning(result.filter(result => result < 12))
+    setValidHoursAfternoon(result.filter(result => result >= 12 && result < 17))
+    setValidHoursNight(result.filter(result => result >= 17))
     setLoading(false)
   }
 
-  const onClick = async (value: string) => {
+  const onClickHour = (value: string) => {
+    setHourSelect(value)
+    setShowModal(true)
+  }
+
+  const onClick = async (value: availableHours[]) => {
     for (const newValue of value) {
-      const actualElementCar = car.services.find(e => newValue.service._id === ((e as IShoppingService).service as IService)._id)
+      const actualElementCar = car?.services.find(e => newValue.service._id === ((e as IShoppingService).service as IService)._id)
       await updateShoppingCardServiceFn(user?._id as string, actualElementCar?._id as string, {
         service: (newValue?.service as IService)._id,
         staff: (newValue?.staffer as IStaff)._id,
@@ -98,18 +92,10 @@ const ContainerHours = ({ day }: { day: Moment }) => {
     router.push('history')
   }
 
-  const handleClose = () => {
-    setOpen(false)
-    setselectedHour('')
-  }
-
   useEffect(() => {
-    setHoursToShowModal(
-      validHours
-        .flat()
-        .map(e => e.hour)
-        .filter(e => e.split(':')[0] === HourSelect)
-    )
+    if (HourSelect) {
+      setHoursToShowModal(validHours.filter(e => parseInt(e[0].hour.split(':')[0]) === parseInt(HourSelect)))
+    }
   }, [HourSelect])
 
   return (
@@ -117,45 +103,30 @@ const ContainerHours = ({ day }: { day: Moment }) => {
       <Spin loading={loading}>
         <div className="Container_Main_H ">
           <div className="Container_Times ">
-            {/* <div className="box_Hour grid grid-cols-6 gap-4">
-              {validHoursMorning.map(e => (
-                <CardHour onClick={() => setselectedHour(e)} hour={e} />
-              ))}
-            </div> */}
-            <ListHours
-              hoursToShowModal={hoursToShowModal}
-              onClick={onClick}
-              title={'Mañana'}
-              hours={validHoursMorning}
-              HourSelect={HourSelect}
-              setHourSelect={setHourSelect}
-            />
-            <ListHours
-              hoursToShowModal={hoursToShowModal}
-              onClick={onClick}
-              title={'Tarde'}
-              hours={validHoursAfternoon}
-              HourSelect={HourSelect}
-              setHourSelect={setHourSelect}
-            />
-            <ListHours
-              hoursToShowModal={hoursToShowModal}
-              onClick={onClick}
-              title={'Noche'}
-              hours={validHoursNight}
-              HourSelect={HourSelect}
-              setHourSelect={setHourSelect}
-            />
+            <ListHours onClick={onClickHour} title={'Mañana'} hours={validHoursMorning} />
+            <ListHours onClick={onClickHour} title={'Tarde'} hours={validHoursAfternoon} />
+            <ListHours onClick={onClickHour} title={'Noche'} hours={validHoursNight} />
           </div>
         </div>
       </Spin>
-      {/* <Modal visible={open} onCancel={handleClose}>
-        <ListHours
-          onClick={onClick}
-          title={'Mañana'}
-          hours={validHours.filter(e => parseInt(e[0].hour.split(':')[0]) == parseInt(selectedHour.split(':')[0]))}
-        />
-      </Modal> */}
+      <Modal
+        title="Selecciona tu hora de reserva"
+        visible={showModal}
+        onOk={() => {
+          setShowModal(false)
+        }}
+        onCancel={() => {
+          setShowModal(false)
+        }}
+      >
+        <div className="box_Hour grid grid-cols-6 gap-4">
+          {hoursToShowModal.map((e, j) => (
+            <React.Fragment key={j}>
+              <CardHour onClick={() => onClick(e)} hour={e[0].hour} />
+            </React.Fragment>
+          ))}
+        </div>
+      </Modal>
     </>
   )
 }
