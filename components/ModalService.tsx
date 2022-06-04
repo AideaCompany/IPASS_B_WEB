@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import useReservation from '@/providers/ReservationContext'
 import { IService } from '@/types/interfaces/services/Services.interface'
+=======
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+>>>>>>> a19138c (fix compile)
 import React from 'react'
 import Button from './Button'
 
