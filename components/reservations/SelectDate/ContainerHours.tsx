@@ -2,7 +2,7 @@ import Spin from '@/components/Spin'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
 import { listAvailableHourFn } from '@/services/services'
-import { updateShoppingCardServiceFn, validateShoppingCardFn } from '@/services/shoppingCar'
+import { goPayShoppingCardFn, updateShoppingCardServiceFn } from '@/services/shoppingCar'
 import { availableHours, IService, IServiceStaffer } from '@/types/interfaces/services/Services.interface'
 import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
@@ -23,7 +23,7 @@ const ContainerHours = ({ day }: { day: Moment }) => {
   const [validHoursNight, setValidHoursNight] = useState<string[]>([])
   const [hoursToShowModal, setHoursToShowModal] = useState<availableHours[][]>([])
   const [showModal, setShowModal] = useState(false)
-  const { car } = useCar()
+  const { car, getData: updateCar } = useCar()
   const { user } = useAuth()
   const router = useRouter()
   useEffect(() => {
@@ -34,6 +34,7 @@ const ContainerHours = ({ day }: { day: Moment }) => {
 
   const getData = async () => {
     setLoading(true)
+    console.log(car)
     const hours = (
       await listAvailableHourFn(
         (car?.services[0].store as IStores)._id as string,
@@ -88,8 +89,9 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         store: (car?.services[0].store as IStores)._id
       })
     }
-    await validateShoppingCardFn(user?._id as string)
-    router.push('history')
+    await goPayShoppingCardFn(user?._id as string)
+    updateCar()
+    router.push('payment')
   }
 
   useEffect(() => {
