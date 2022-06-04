@@ -108,7 +108,7 @@ const Register = ({ cards }: { cards: ICards[] }) => {
             </div>
           </div>
           <div className="Container_Info_Card ">
-            <CardTable cards={currentCards} />
+            <CardTable cards={currentCards} onComplete={updateCards} />
             <ModalCard onComplete={updateCards} />
             <div className="Container_Offerts  pt-4 font-semibold ">
               <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />

@@ -163,6 +163,7 @@ export const decodeValues = (data: string): ICards[] => {
   const allValues = []
   for (let k = 0; k < decodedJwt.length; k++) {
     const decode = [Buffer.from(decodedJwt[k], 'base64').toString('utf-8')]
+
     const key = crypto
       .createHash('sha256')
       .update(process.env.NEXT_PUBLIC_CARD || 'test')
