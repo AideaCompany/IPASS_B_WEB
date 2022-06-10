@@ -13,7 +13,7 @@ const ListStores = () => {
   const { setStep, genere } = useReservation()
 
   const onClick = (store: IStores) => {
-    setStep(stepsPageReservation.Select)
+    setStep(stepsPageReservation.servicesType)
     setSelectedStore(store)
   }
 
