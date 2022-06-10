@@ -1,8 +1,12 @@
 import client from '@/graphql/config'
 import { addShoppingCard } from '@/graphql/shoppingCar/mutation/addShoppingCard'
+import { goPayShoppingCard } from '@/graphql/shoppingCar/mutation/goPayShoppingCard'
+import { InvalidateShoppingCard } from '@/graphql/shoppingCar/mutation/InvalidateShoppingCard'
+import { deleteShoppingCardService } from '@/graphql/shoppingCar/mutation/deleteShoppingCardService'
 import { updateShoppingCardService } from '@/graphql/shoppingCar/mutation/updateShoppingCardService'
 import { validateShoppingCard } from '@/graphql/shoppingCar/mutation/validateShoppingCard'
 import { getClientCurrentShoppingCard } from '@/graphql/shoppingCar/queries/getClientCurrentShoppingCard'
+import { getClientCurrentShoppingCardToPay } from '@/graphql/shoppingCar/queries/getClientCurrentShoppingCardToPay'
 import { getClientShoppingCards } from '@/graphql/shoppingCar/queries/getClientShoppingCards'
 import { IShoppingServiceBasic } from '@/types/interfaces/shoppingCard/MutationShoppingCard.interface'
 import { IShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
@@ -20,6 +24,14 @@ export const getClientCurrentShoppingCardFn = async (client_id: string): Promise
   const paginated = await (
     await client.query({ query: gql(getClientCurrentShoppingCard), variables: { client: client_id } })
   ).data.getClientCurrentShoppingCard
+  return paginated
+}
+
+export const getClientCurrentShoppingCardToPayFn = async (client_id: string): Promise<IShoppingCard> => {
+  client.cache.reset()
+  const paginated = await (
+    await client.query({ query: gql(getClientCurrentShoppingCardToPay), variables: { client: client_id } })
+  ).data.getClientCurrentShoppingCardToPay
   return paginated
 }
 
@@ -41,4 +53,25 @@ export const validateShoppingCardFn = async (client_id: string): Promise<IShoppi
   client.cache.reset()
   const paginated = await (await client.mutate({ mutation: gql(validateShoppingCard), variables: { client: client_id } })).data.validateShoppingCard
   return paginated
+}
+
+export const goPayShoppingCardFn = async (client_id: string): Promise<IShoppingCard> => {
+  client.cache.reset()
+  const paginated = await (await client.mutate({ mutation: gql(goPayShoppingCard), variables: { client: client_id } })).data.goPayShoppingCard
+  return paginated
+}
+
+export const InvalidateShoppingCardFn = async (client_id: string): Promise<IShoppingCard> => {
+  client.cache.reset()
+  const paginated = await (
+    await client.mutate({ mutation: gql(InvalidateShoppingCard), variables: { client: client_id } })
+  ).data.InvalidateShoppingCard
+  return paginated
+}
+
+export const deleteShoppingCardServiceFn = async (client_id: string, service: string): Promise<IShoppingCard> => {
+  client.cache.reset()
+  return await (
+    await client.mutate({ mutation: gql(deleteShoppingCardService), variables: { client: client_id, service } })
+  ).data.deleteShoppingCardService
 }

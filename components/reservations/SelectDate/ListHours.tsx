@@ -1,8 +1,7 @@
-import { availableHours } from '@/types/interfaces/services/Services.interface'
 import React from 'react'
 import CardHour from './CardHour'
 
-const ListHours = ({ title, hours, onClick }: { title: string; hours: availableHours[][]; onClick: (value: availableHours[]) => void }) => {
+const ListHours = ({ title, hours, onClick }: { title: string; hours: string[]; onClick: (value: string) => void }) => {
   return (
     <>
       <div className="Title_Hour">
@@ -13,7 +12,7 @@ const ListHours = ({ title, hours, onClick }: { title: string; hours: availableH
           {hours.map((e, i) => {
             return (
               <React.Fragment key={i}>
-                <CardHour onClick={() => onClick(e)} hour={e[0]} />
+                <CardHour onClick={() => onClick(e)} hour={e} />
               </React.Fragment>
             )
           })}

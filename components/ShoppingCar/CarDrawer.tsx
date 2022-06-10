@@ -7,8 +7,8 @@ import { ShoppingCard } from 'icons/personalIcons'
 import { useRouter } from 'next/router'
 import numeral from 'numeral'
 import React, { useState } from 'react'
-import Button from './Button'
-import CardResume from './CardResume'
+import Button from '../Button'
+import CardResume from '../CardResume'
 
 const CarDrawer = () => {
   const [visible, setVisible] = useState(false)
@@ -21,7 +21,7 @@ const CarDrawer = () => {
   const { car } = useCar()
   const router = useRouter()
 
-  const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price).reduce((a, b) => a + b)
+  const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price)?.reduce((a, b) => a + b)
 
   return (
     <>
@@ -43,15 +43,13 @@ const CarDrawer = () => {
             <div className="Container_Info_Buy ">
               <div className="Titles_Buy font-helvetica text-right divide-y divide-gray-300">
                 <p>Total de servicios:</p>
-                <p> Valor de la reserva:</p>
-                <p>Precio Total:</p>
-                <p>Subtotal:</p>
+                <p>Valor de la reserva:</p>
+                <p>Precio servicios:</p>
               </div>
               <div className="Container_Price divide-y divide-blue-200">
                 <p>{`${car?.services?.length}`}</p>
-                <p>{`${numeral(price * 0.15).format('0,0')}`}</p>
-                <p>{`${numeral(price * 1.15).format('0,0')}`}</p>
-                <p>{`${numeral(price).format('0,0')}`}</p>
+                <p>{`Q${numeral(price * 0.15).format('0,0')}`}</p>
+                <p>{`Q${numeral(price).format('0,0')}`}</p>
               </div>
             </div>
 

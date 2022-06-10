@@ -17,6 +17,7 @@ export interface IShoppingCard extends basicTable {
   client: string | IClient
   services: IShoppingService[]
   status: statusShoppingCard
+  timeToPay: string
 }
 
 export enum statusShoppingCard {

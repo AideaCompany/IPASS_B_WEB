@@ -1,13 +1,13 @@
-import useReservation from '@/providers/ReservationContext'
-import { IService } from '@/types/interfaces/services/Services.interface'
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import { IServiceType } from '@/types/interfaces/ServiceType/serviceType.interface'
 import React from 'react'
-import Button from './Button'
+import Button from '../../Button'
 
-const ModalService = ({ service }: { service: IService }) => {
-  const { setSelectedService, setVisibleAsk } = useReservation()
-  const onClick = (value: IService) => {
-    setSelectedService(value)
-    setVisibleAsk(true)
+const ModalService = ({ service }: { service: IServiceType }) => {
+  const { setSelectedServiceType, setStep } = useReservation()
+  const onClick = (value: IServiceType) => {
+    setSelectedServiceType(value)
+    setStep(stepsPageReservation.services)
   }
   return (
     <div>

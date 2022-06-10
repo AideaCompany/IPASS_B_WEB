@@ -8,11 +8,8 @@ import CardServices from './Service/CardServices'
 
 const ServicesByStaff = () => {
   const { car } = useCar()
-  const { selectedStore, selectedStaff, setSelectedService, setVisibleAsk } = useReservation()
-  const onClick = (value: IService) => {
-    setSelectedService(value)
-    setVisibleAsk(true)
-  }
+  const { selectedStore, selectedStaff } = useReservation()
+
   const [services, setServices] = useState<IService[]>([])
 
   useEffect(() => {
@@ -47,7 +44,7 @@ const ServicesByStaff = () => {
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
         {services.map((service, i) => (
           <React.Fragment key={i}>
-            <CardServices service={service} onClick={onClick} />
+            <CardServices service={service} />
           </React.Fragment>
         ))}
       </div>

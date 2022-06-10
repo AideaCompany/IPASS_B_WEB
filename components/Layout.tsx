@@ -2,7 +2,7 @@ import useAuth from '@/providers/AuthContext'
 import { UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import React, { FC } from 'react'
-import CarDrawer from './CarDrawer'
+import CarDrawer from './ShoppingCar/CarDrawer'
 
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuth()
