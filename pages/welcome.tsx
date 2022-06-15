@@ -9,7 +9,7 @@ const Welcome: NextPage = () => {
 
   return (
     <Layout>
-      <div className="main_container_welcome border">
+      <div className="main_container_welcome ">
         <p className="font-semibold text-xl">Bienvenido !</p>
         <p className="text-gold font-semibold text-2xl">{`${user?.name1} ${user?.lastName1}`}</p>
         <Link href="/reservations">
