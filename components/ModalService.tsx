@@ -10,7 +10,7 @@ const ModalService = ({ service }: { service: IService }) => {
     setVisibleAsk(true)
   }
   return (
-    <div>
+    <div style={{ zIndex: '99999999' }}>
       <div className="Main_Modal_Service m-0 w-72">
         <div className="Photo_Modal h-52 flex justify-center content-center  aling-center w-full">
           <img src="/images/Peinado.png" className="sec-img aling-center h-52 flex  content-center justify-center"></img>

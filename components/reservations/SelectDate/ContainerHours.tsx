@@ -106,7 +106,7 @@ const ContainerHours = ({ day }: { day: Moment }) => {
       <Spin loading={loading}>
         <div className="Container_Main_H ">
           <div className="Container_Times ">
-            <ListHours onClick={onClickHour} title={'Mañana'} hours={validHoursMorning} />
+            <ListHours onClick={onClickHour} title={'Por la Mañana'} hours={validHoursMorning} />
             <ListHours onClick={onClickHour} title={'Tarde'} hours={validHoursAfternoon} />
             <ListHours onClick={onClickHour} title={'Noche'} hours={validHoursNight} />
           </div>
