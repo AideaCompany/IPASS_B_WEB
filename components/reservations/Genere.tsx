@@ -5,7 +5,7 @@ import React from 'react'
 const Genere = () => {
   const { setStep, setGenere } = useReservation()
   const onClick = (paramGenere: string) => {
-    setStep(stepsPageReservation.Select)
+    setStep(stepsPageReservation.store)
     setGenere(paramGenere)
   }
 

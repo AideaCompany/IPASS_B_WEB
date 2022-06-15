@@ -54,6 +54,7 @@ export const ReservationProvider = (props: { children: JSX.Element; currentStep:
         setGenere,
         visibleAsk,
         setVisibleAsk,
+
         selectedService,
         setSelectedService,
         selectedStaff,
