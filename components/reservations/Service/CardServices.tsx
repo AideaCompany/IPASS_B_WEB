@@ -1,10 +1,22 @@
 import ModalService from '@/components/ModalService'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { Popover } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 const CardServices = ({ service }: { service: IService }) => {
+  const [visible, setVisible] = useState(false)
+
+  const handleVisibleChange = (newVisible: boolean) => {
+    setVisible(newVisible)
+  }
+
   return (
-    <Popover content={<ModalService service={service}></ModalService>} placement="leftBottom" trigger="click">
+    <Popover
+      visible={visible}
+      onVisibleChange={handleVisibleChange}
+      content={<ModalService setVisible={setVisible} service={service}></ModalService>}
+      placement="leftBottom"
+      trigger="click"
+    >
       <div className="Container_Ser w-56  h-72 lg:max-w-full lg:flex cursor-pointer ">
         <div className="Image_containerSec">
           {/* <div className="Image_background"></div> */}

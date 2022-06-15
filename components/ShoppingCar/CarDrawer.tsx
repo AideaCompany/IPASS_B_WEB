@@ -2,7 +2,8 @@ import useCar from '@/providers/CarContext'
 import { stepsPageReservation } from '@/providers/ReservationContext'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
-import { Badge, Drawer } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons'
+import { Badge, Drawer, Tooltip } from 'antd'
 import { ShoppingCard } from 'icons/personalIcons'
 import { useRouter } from 'next/router'
 import numeral from 'numeral'
@@ -43,7 +44,12 @@ const CarDrawer = () => {
             <div className="Container_Info_Buy ">
               <div className="Titles_Buy font-helvetica text-right divide-y divide-gray-300">
                 <p>Total de servicios:</p>
-                <p>Valor de la reserva:</p>
+                <p>
+                  <Tooltip title="Este valor se cobrará unicamante si no se asiste o no se reprograma la reserva">
+                    <QuestionCircleOutlined style={{ fontSize: '15px' }} />
+                  </Tooltip>
+                  Valor de la reserva:
+                </p>
                 <p>Precio servicios:</p>
               </div>
               <div className="Container_Price divide-y divide-blue-200">

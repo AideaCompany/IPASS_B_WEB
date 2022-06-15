@@ -67,10 +67,15 @@ const FormComponent = () => {
       required: false
     },
     {
-      type: 'input',
+      type: 'select',
       label: 'Ocupación',
       name: 'occupation',
-      required: false
+      required: false,
+      values: ['Ingeniero', 'Periodista', 'Abogado'].map(e => ({
+        value: e,
+        label: e,
+        icon: <></>
+      }))
     },
     {
       type: 'date',

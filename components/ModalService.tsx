@@ -3,10 +3,11 @@ import { IService } from '@/types/interfaces/services/Services.interface'
 import React from 'react'
 import Button from './Button'
 
-const ModalService = ({ service }: { service: IService }) => {
+const ModalService = ({ service, setVisible }: { service: IService; setVisible: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const { setSelectedService, setVisibleAsk } = useReservation()
   const onClick = (value: IService) => {
     setSelectedService(value)
+    setVisible(false)
     setVisibleAsk(true)
   }
   return (
