@@ -1,6 +1,6 @@
 import useReservation from '@/providers/ReservationContext'
 import { IService } from '@/types/interfaces/services/Services.interface'
-import React, { useState } from 'react'
+import React from 'react'
 import Button from './Button'
 
 const ModalService = ({ service, setVisible }: { service: IService; setVisible: React.Dispatch<React.SetStateAction<boolean>> }) => {
