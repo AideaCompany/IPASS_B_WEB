@@ -8,7 +8,7 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuth()
   return (
     <>
-      <div className="header ">
+      <div className="header mt-6">
         <Link href={'reservations'}>
           <div className="title  font-Butler font-bold text-6xl">
             <svg width="125" height="35" viewBox="0 0 125 35" fill="none" xmlns="http://www.w3.org/2000/svg">

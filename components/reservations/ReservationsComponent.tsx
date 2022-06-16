@@ -52,7 +52,8 @@ const ReservationsComponent = () => {
   return (
     <>
       <div className="Container_Reservation ">
-        <div className="Container_Steps w-full ">
+        <p className="Title font-Gothic text-right pt-4 ">Mis reservas </p>
+        <div className="Container_Steps w-full pt-4">
           <Steps current={mySteps.findIndex(e => e === step)} />
         </div>
         <div className="Container_pages ">
