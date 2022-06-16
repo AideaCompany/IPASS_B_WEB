@@ -28,22 +28,18 @@ const ListStores = () => {
   }
   return (
     <div className="container_list_stores ">
-      <div className="Container_bar1 ">
-        <div className="Search_list1 flex appearance-none border-b  left-2 m-5 sm:max-w-screen-sm w-1/3 text-stone-900 ">
+      <div className="Container_bar1 w-full ">
+        <div className="Search_list1 flex appearance-none border-b  left-4 m-5 sm:max-w-screen-sm w-1/3 text-stone-900 ">
           <input type="text" className="appearance-none bg-transparent px-4 py-2 w-60" placeholder="Seleccionar Departamento"></input>
           <CaretDownOutlined />
         </div>
         <div className="Search_list1 flex appearance-none border-b  left-2 m-5 sm:max-w-screen-sm w-1/3 text-stone-900 ">
-          <input type="text" className="appearance-none bg-transparent px-4 py-2 w-60" placeholder="Seleccionar ciudad"></input>
+          <input type="text" className="appearance-none bg-transparent px-4 py-2 " placeholder="Seleccionar ciudad"></input>
           <CaretDownOutlined />
         </div>
         <div className="Search_list1 flex appearance-none border-b  left-2 m-5 sm:max-w-screen-sm w-1/3 text-stone-900 ">
           <input type="text" className="appearance-none bg-transparent px-4 py-2 w-60" placeholder="Seleccionar zona"></input>
           <CaretDownOutlined />
-        </div>
-
-        <div className="Main_tittle1 ">
-          <p className="Title font-Gothic text-right "> </p>{' '}
         </div>
       </div>
       <div className="Container_select1  w-full ">

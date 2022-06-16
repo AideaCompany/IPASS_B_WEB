@@ -50,38 +50,35 @@
   }
   .Container_reservation {
     width: 90%;
-    height: 30%;
+    height: 40%;
     margin-top: 20px;
     margin-left: 35px;
     padding: 2%;
     background-color: #ffffff;
     border: 0.63px solid #cfcfcf;
     > p {
-      text-align: center;
     }
     .container_buttons {
       width: 100%;
-      height: 15%;
+      height: 20%;
       display: flex;
-      margin-top: 13%;
       justify-content: center;
       justify-content: center;
 
       .line {
         margin-top: 2%;
-        width: 50%;
-
+        width: 60%;
         justify-content: center;
         justify-content: center;
       }
       .change {
         width: 25%;
-        height: 15px;
+        height: 30px;
         justify-content: center;
         justify-content: center;
         .button {
           padding: 3%;
-          height: 20px;
+          height: 30px;
         }
       }
       .cancel {
@@ -91,7 +88,7 @@
         justify-content: center;
         .button {
           padding: 3%;
-          height: 20px;
+          height: 30px;
         }
       }
     }
