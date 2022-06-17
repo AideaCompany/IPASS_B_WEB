@@ -2,13 +2,14 @@ import useCar from '@/providers/CarContext'
 import { stepsPageReservation } from '@/providers/ReservationContext'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
-import { Badge, Drawer } from 'antd'
+import { QuestionCircleOutlined } from '@ant-design/icons'
+import { Badge, Drawer, Tooltip } from 'antd'
 import { ShoppingCard } from 'icons/personalIcons'
 import { useRouter } from 'next/router'
 import numeral from 'numeral'
 import React, { useState } from 'react'
-import Button from './Button'
-import CardResume from './CardResume'
+import Button from '../Button'
+import CardResume from '../CardResume'
 
 const CarDrawer = () => {
   const [visible, setVisible] = useState(false)
@@ -21,7 +22,7 @@ const CarDrawer = () => {
   const { car } = useCar()
   const router = useRouter()
 
-  const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price).reduce((a, b) => a + b)
+  const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price)?.reduce((a, b) => a + b)
 
   return (
     <>
@@ -40,18 +41,23 @@ const CarDrawer = () => {
                 </React.Fragment>
               ))}
             </div>
-            <div className="Container_Info_Buy ">
-              <div className="Titles_Buy font-helvetica text-right divide-y divide-gray-300">
+            <div className="Container_Info_Buy  pt-32">
+              <div className="Titles_Buy font-helvetica pl-0 text-left divide-y divide-gray-300 flex flex-col space-y-2">
                 <p>Total de servicios:</p>
-                <p> Valor de la reserva:</p>
-                <p>Precio Total:</p>
-                <p>Subtotal:</p>
+                <div className="flex space-x-4 pt-0">
+                  <p>Valor de la reserva:</p>
+                  <div className=" pt-0">
+                    <Tooltip title="Este valor se cobrará unicamante si no se asiste o no se reprograma la reserva">
+                      <QuestionCircleOutlined style={{ fontSize: '15px' }} />
+                    </Tooltip>
+                  </div>
+                </div>
+                <p>Precio servicios:</p>
               </div>
-              <div className="Container_Price divide-y divide-blue-200">
+              <div className="Container_Price divide-y text-right divide-blue-200 flex flex-col space-y-2">
                 <p>{`${car?.services?.length}`}</p>
-                <p>{`${numeral(price * 0.15).format('0,0')}`}</p>
-                <p>{`${numeral(price * 1.15).format('0,0')}`}</p>
-                <p>{`${numeral(price).format('0,0')}`}</p>
+                <p>{`Q${numeral(price * 0.15).format('0,0')}`}</p>
+                <p>{`Q${numeral(price).format('0,0')}`}</p>
               </div>
             </div>
 

@@ -1,11 +1,15 @@
+import { IService } from '@/types/interfaces/services/Services.interface'
+import { IServiceType } from '@/types/interfaces/ServiceType/serviceType.interface'
+import { IStaff } from '@/types/interfaces/staff/staff.interface'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
-import React, { useContext, useEffect, useState } from 'react'
-import useAuth from './AuthContext'
+import React, { useContext, useState } from 'react'
 export enum stepsPageReservation {
+  'Genere' = 'Genere',
   'store' = 'store',
   'Select' = 'Select',
+  'servicesType' = 'servicesType',
   'services' = 'services',
-  'services2' = 'services2',
+  'servicesByStaffer' = 'servicesByStaffer',
   'staffers' = 'staffers',
   'hair' = 'hair',
   'Type' = 'Type',
@@ -13,43 +17,52 @@ export enum stepsPageReservation {
   'payment' = 'payment'
 }
 type reservationContext = {
-  stores: IStores[]
   selectedStore: IStores | undefined
   setSelectedStore: React.Dispatch<React.SetStateAction<IStores | undefined>>
-  getData: () => Promise<void>
+  selectedStaff: IStaff | undefined
+  setSelectedStaff: React.Dispatch<React.SetStateAction<IStaff | undefined>>
+  selectedService: IService | undefined
+  setSelectedService: React.Dispatch<React.SetStateAction<IService | undefined>>
+  visibleAsk: boolean
+  setVisibleAsk: React.Dispatch<React.SetStateAction<boolean>>
   setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
+  genere: string
+  setGenere: React.Dispatch<React.SetStateAction<string>>
   step: stepsPageReservation
+  selectedServiceType: IServiceType | undefined
+  setSelectedServiceType: React.Dispatch<React.SetStateAction<IServiceType | undefined>>
 }
 const ReservationContext = React.createContext<reservationContext>({} as reservationContext)
 
-export const ReservationProvider = (props: { children: JSX.Element; stores: IStores[]; currentStep: stepsPageReservation }) => {
+export const ReservationProvider = (props: { children: JSX.Element; currentStep: stepsPageReservation }) => {
   //props
-  const { children, stores, currentStep } = props
-  const { user } = useAuth()
+  const { children, currentStep } = props
   //States
   const [selectedStore, setSelectedStore] = useState<IStores | undefined>()
+  const [selectedStaff, setSelectedStaff] = useState<IStaff | undefined>()
+  const [selectedService, setSelectedService] = useState<IService | undefined>()
+  const [selectedServiceType, setSelectedServiceType] = useState<IServiceType | undefined>()
+  const [visibleAsk, setVisibleAsk] = useState<boolean>(false)
   const [step, setStep] = useState(currentStep)
-
-  useEffect(() => {
-    if (user) {
-      getData()
-    }
-  }, [user])
-
-  const getData = async () => {
-    // const value = await getClientCurrentShoppingCardFn(user._id as string)
-    // setCar(value)
-  }
-
+  const [genere, setGenere] = useState<string>('')
   return (
     <ReservationContext.Provider
       value={{
+        setSelectedServiceType,
+        selectedServiceType,
+        genere,
+        setGenere,
+        visibleAsk,
+        setVisibleAsk,
+
+        selectedService,
+        setSelectedService,
+        selectedStaff,
+        setSelectedStaff,
         step,
         setStep,
-        stores,
         selectedStore,
-        setSelectedStore,
-        getData
+        setSelectedStore
       }}
     >
       {children}

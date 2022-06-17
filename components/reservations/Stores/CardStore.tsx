@@ -1,5 +1,5 @@
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
-import React from 'react'
+import { Rate } from 'antd'
 const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStores) => void }) => {
   return (
     <>
@@ -8,10 +8,16 @@ const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStore
           <img alt="" src="/images/Store.png" className="map1-img" />
         </div>
         <div className="Container_Information">
-          <div className="mb-8">
+          <div className="mb-8 h-24">
             <p className="text-sm text-gray-600 flex items-center"></p>
-            <div className="text-gray-900 font-bold text-xl mb-2"> {store.name}</div>
-            <p className="text-gray-700 text-base">{store.address}</p>
+
+            <div className="w-full ">
+              <Rate></Rate>
+              <div className="text-gray-900 font-bold text-sm  mt-2"> {store.name}</div>
+              <div className="text-gray-700 text-xs  mt-2"> {store.address}</div>
+              <div className="text-gray-700 text-xs  mt-2 "> {store.phone}</div>
+              {store.distance && <div className="text-gray-700 text-xs  mt-2 "> {store.distance}</div>}
+            </div>
           </div>
         </div>
       </div>

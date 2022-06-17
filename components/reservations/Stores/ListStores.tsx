@@ -1,42 +1,94 @@
-import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { CaretDownOutlined } from '@ant-design/icons'
-import { List } from 'antd'
-import React from 'react'
-import { IStores } from '../../../types/interfaces/Stores/stores.interface'
+import Selector from '@/components/Selector'
+import useReservation from '@/providers/ReservationContext'
+import { listStoresByGenereFn } from '@/services/stores'
+import { getKilometers } from '@/utils/utils'
+import { Form, FormInstance, List } from 'antd'
+import lodash from 'lodash'
+import React, { useEffect, useRef, useState } from 'react'
+import { IStores, storeFilter } from '../../../types/interfaces/Stores/stores.interface'
 import CardStore from './CardStore'
+import Map from './Map'
 
 const ListStores = () => {
-  const { stores, setSelectedStore } = useReservation()
+  const [stores, setStores] = useState<IStores[]>([])
+  const [currentStore, setCurrentStore] = useState<IStores>()
+  const [currentFilters, _] = useState({
+    department: null,
+    city: null,
+    zone: null
+  })
 
-  const { setStep } = useReservation()
+  const [filters, setFilters] = useState<storeFilter>({
+    department: [],
+    city: [],
+    zone: []
+  })
 
+  const { setSelectedStore } = useReservation()
+
+  const { genere } = useReservation()
+  const formRef = useRef<FormInstance>(null)
   const onClick = (store: IStores) => {
-    setStep(stepsPageReservation.Select)
+    // setStep(stepsPageReservation.Select)
     setSelectedStore(store)
+    setCurrentStore(store)
   }
+  useEffect(() => {
+    if (genere) {
+      getData()
+    }
+  }, [genere, currentFilters])
+
+  const getData = async () => {
+    navigator.geolocation.getCurrentPosition(
+      async position => {
+        const newStores = await listStoresByGenereFn(genere, currentFilters)
+        //@ts-ignore
+        const storeWithDistance: IStores[] = newStores.map(store => ({
+          ...stores,
+          distance: getKilometers(store.location.lat, store.location.lng, position.coords.latitude, position.coords.longitude)
+        }))
+        const sorted = storeWithDistance.sort((a, b) => (a.distance as number) - (b.distance as number))
+        setStores(sorted)
+        setCurrentStore(sorted[0])
+      },
+      async error => {
+        const newStores = await listStoresByGenereFn(genere, currentFilters)
+        setStores(newStores)
+        setCurrentStore(newStores[0])
+      }
+    )
+  }
+
+  useEffect(() => {
+    setFilters({
+      department: lodash.uniq(stores.map(e => e.department)),
+      city: lodash.uniq(stores.map(e => e.city)),
+      zone: lodash.uniq(stores.map(e => e.zone))
+    })
+  }, [stores])
+
   return (
     <div className="container_list_stores ">
-      <div className="Container_bar1 ">
-        <div className="Search_bar flex appearance-none   left-2 m-5 sm:max-w-screen-sm text-stone-900">
-          <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"></path>
-          </svg>
-          <input type="text" className="appearance-none bg-transparent px-4 py-2 w-64" placeholder="Buscar sede"></input>
-        </div>
-
-        <div className="Search_list1 flex appearance-none border-b  left-2 m-5 sm:max-w-screen-sm text-stone-900">
-          <input type="text" className="appearance-none bg-transparent px-4 py-2 w-64" placeholder="Buscar tipo de sede"></input>
-          <CaretDownOutlined />
-        </div>
-        <div className="Main_tittle1 ">
-          <p className="Title font-Gothic text-right "> </p>{' '}
-        </div>
+      <div className="Container_bar1 w-full ">
+        <Form>
+          <Selector
+            formRef={formRef}
+            name="department"
+            placeHolder="Seleccione un departamento"
+            values={filters.department.map(e => ({ value: e, label: e }))}
+          />
+          <Selector formRef={formRef} name="city" placeHolder="Seleccione una ciudad" values={filters.city.map(e => ({ value: e, label: e }))} />
+          <Selector
+            formRef={formRef}
+            name="zone"
+            placeHolder="Seleccione zona"
+            values={filters.zone.map(e => ({ value: e.toString(), label: e.toString() }))}
+          />
+        </Form>
       </div>
-      <div className="Container_select1  ">
-        <div className="Image_container">
-          {/* <div className="Image_background"></div> */}
-          <img src="/images/Maps.png" className="map1-img" alt="" />
-        </div>
+      <div className="Container_select1  w-full ">
+        {currentStore && <Map store={currentStore} />}
         <div className="Main_carousel1  m-2 ">
           <List
             dataSource={stores}

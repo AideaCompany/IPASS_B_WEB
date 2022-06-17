@@ -1,16 +1,13 @@
 import Layout from '@/components/Layout'
-import { stepsPageReservation } from '@/providers/ReservationContext'
 import ReservationsComponent from '@/components/reservations/ReservationsComponent'
-import { ReservationProvider } from '@/providers/ReservationContext'
-import { getAllStores } from '@/services/stores'
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
+import { ReservationProvider, stepsPageReservation } from '@/providers/ReservationContext'
 import { GetServerSidePropsContext } from 'next'
 import React from 'react'
 
-const Reservations = ({ stores, currentStep }: { stores: IStores[]; currentStep: stepsPageReservation }) => {
+const Reservations = ({ currentStep }: { currentStep: stepsPageReservation }) => {
   return (
     <Layout>
-      <ReservationProvider currentStep={currentStep} stores={stores}>
+      <ReservationProvider currentStep={currentStep}>
         <ReservationsComponent />
       </ReservationProvider>
     </Layout>
@@ -20,7 +17,6 @@ const Reservations = ({ stores, currentStep }: { stores: IStores[]; currentStep:
 export default Reservations
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const stores = await getAllStores()
-  const currentStep = ctx.query.step ?? stepsPageReservation.store
-  return { props: { stores, currentStep } }
+  const currentStep = ctx.query.step ?? stepsPageReservation.Genere
+  return { props: { currentStep } }
 }

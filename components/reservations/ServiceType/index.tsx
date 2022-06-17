@@ -1,30 +1,23 @@
-import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { listServiceByStaffAndStoreFn } from '@/services/services'
-import { IService } from '@/types/interfaces/services/Services.interface'
-import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
+import useCar from '@/providers/CarContext'
+import useReservation from '@/providers/ReservationContext'
+import { listServiceTypeByStoreFn } from '@/services/servicesType'
+import { IServiceType } from '@/types/interfaces/ServiceType/serviceType.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
-import CardServices from './Service/CardServices'
+import CardServicesType from './CardServicesType'
 
-const Services2 = ({ selectedStore, selectedStaff }: { selectedStore: IStores; selectedStaff: IStaff }) => {
-  const { setStep } = useReservation()
-
-  const onClick = () => {
-    setStep(stepsPageReservation.hair)
-  }
-  const [services, setServices] = useState<IService[]>([])
+const ServiceType = () => {
+  const [servicesType, setServicesType] = useState<IServiceType[]>([])
+  const { car } = useCar()
+  const { selectedStore } = useReservation()
 
   useEffect(() => {
     getData()
-  }, [])
+  }, [car])
 
   const getData = async () => {
-    const data = await listServiceByStaffAndStoreFn(selectedStore._id as string, selectedStaff._id as string)
-    setServices(data)
-    console.log(data)
+    setServicesType(await listServiceTypeByStoreFn(selectedStore?._id as string))
   }
-
   return (
     <div className="Main_Container">
       <div className="Container_bar ">
@@ -40,13 +33,13 @@ const Services2 = ({ selectedStore, selectedStaff }: { selectedStore: IStores; s
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          <p className="Title font-Gothic text-right "> Servicios2</p>{' '}
+          <p className="Title font-Gothic text-right "> Categorías de servicios</p>
         </div>
       </div>
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
-        {services.map((service, i) => (
+        {servicesType.map((service, i) => (
           <React.Fragment key={i}>
-            <CardServices service={service} onClick={onClick} />
+            <CardServicesType service={service} />
           </React.Fragment>
         ))}
       </div>
@@ -54,4 +47,4 @@ const Services2 = ({ selectedStore, selectedStaff }: { selectedStore: IStores; s
   )
 }
 
-export default Services2
+export default ServiceType

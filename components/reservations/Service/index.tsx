@@ -1,16 +1,15 @@
 import useCar from '@/providers/CarContext'
-import { listServiceByStoreFn } from '@/services/services'
+import useReservation from '@/providers/ReservationContext'
+import { listServiceByStoreAndTypeFn } from '@/services/services'
 import { IService } from '@/types/interfaces/services/Services.interface'
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { CaretDownOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
 import CardServices from './CardServices'
 
-const Services = ({ selectedStore, onChange }: { onChange: (value: IService) => void; selectedStore: IStores }) => {
+const Services = () => {
   const { car } = useCar()
-  const onClick = (value: IService) => {
-    onChange(value)
-  }
+  const { selectedStore, selectedServiceType } = useReservation()
+
   const [services, setServices] = useState<IService[]>([])
 
   useEffect(() => {
@@ -19,7 +18,9 @@ const Services = ({ selectedStore, onChange }: { onChange: (value: IService) => 
 
   const getData = async () => {
     setServices(
-      (await listServiceByStoreFn(selectedStore._id as string)).filter(e => !car?.services.map(l => (l.service as IService)._id).includes(e._id))
+      (await listServiceByStoreAndTypeFn(selectedStore?._id as string, selectedServiceType?._id as string)).filter(
+        e => !car?.services.map(l => (l.service as IService)._id).includes(e._id)
+      )
     )
   }
 
@@ -38,13 +39,13 @@ const Services = ({ selectedStore, onChange }: { onChange: (value: IService) => 
           <CaretDownOutlined />
         </div>
         <div className="Main_tittle ">
-          <p className="Title font-Gothic text-right "> Servicios</p>{' '}
+          <p className="Title font-Gothic text-right "> Servicios</p>
         </div>
       </div>
       <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
         {services.map((service, i) => (
           <React.Fragment key={i}>
-            <CardServices service={service} onClick={() => onClick(service)} />
+            <CardServices service={service} />
           </React.Fragment>
         ))}
       </div>

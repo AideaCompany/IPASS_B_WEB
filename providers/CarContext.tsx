@@ -5,7 +5,7 @@ import useAuth from './AuthContext'
 
 // import useData from './DataContext'
 type carContext = {
-  car: IShoppingCard
+  car: IShoppingCard | undefined
   setCar: (car: IShoppingCard) => void
   getData: () => Promise<void>
 }
@@ -16,7 +16,7 @@ export const CarProvider = (props: { children: JSX.Element }) => {
   const { children } = props
   const { user } = useAuth()
   //States
-  const [car, setCar] = useState<IShoppingCard>({} as IShoppingCard)
+  const [car, setCar] = useState<IShoppingCard>()
 
   useEffect(() => {
     if (user) {

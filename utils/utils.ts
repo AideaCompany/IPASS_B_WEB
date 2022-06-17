@@ -5,6 +5,11 @@ import { IUser } from '@/types/interfaces/user/User.interface'
 import { basicTable } from '@/types/typeTemplate'
 import { ModalProps } from 'antd'
 import moment, { MomentInput, Moment } from 'moment-timezone'
+import crypto from 'crypto'
+import jwt from 'jsonwebtoken'
+import { $security } from 'config'
+import { ICards } from '@/types/types'
+
 export const capitalize = (s: string | undefined): string => {
   if (typeof s !== 'string') {
     return ''
@@ -121,3 +126,70 @@ export const getSex = (sex: string): string => {
 }
 
 export const removeNullObjValues = (value: object) => Object.fromEntries(Object.entries(value).filter(([_, v]) => v != null))
+
+export const encryptValues = (data: object): string => {
+  const resizedIV = Buffer.allocUnsafe(16)
+  const iv = crypto.createHash('sha256').update('myHashedIV').digest()
+  iv.copy(resizedIV)
+  const stringedData = JSON.stringify(data)
+  const key = crypto
+    .createHash('sha256')
+    .update(process.env.NEXT_PUBLIC_CARD || 'test')
+    .digest()
+  const cipher = crypto.createCipheriv('aes256', key, resizedIV)
+  const msg = []
+  const myStringed = []
+  for (let k = 0; k < stringedData.length; k++) {
+    myStringed.push(stringedData[k])
+  }
+  myStringed.forEach(phrase => {
+    msg.push(cipher.update(phrase, 'binary', 'hex'))
+  })
+
+  msg.push(cipher.final('hex'))
+  const joinedMsg = msg.join('')
+  const base = Buffer.from(joinedMsg).toString('base64')
+  const createdJwt = jwt.sign({ data: base }, process.env.CARD_SECRET || $security.card, { expiresIn: '120s' })
+  return createdJwt
+}
+
+export const decodeValues = (data: string): ICards[] => {
+  //https://nodejs.org/en/knowledge/cryptography/how-to-use-crypto-module/
+  const resizedIV = Buffer.allocUnsafe(16)
+  const iv = crypto.createHash('sha256').update('myHashedIV').digest()
+  iv.copy(resizedIV)
+
+  const { data: decodedJwt } = jwt.verify(data, process.env.CARD_SECRET || $security.card) as { data: string[] }
+  const allValues = []
+  for (let k = 0; k < decodedJwt.length; k++) {
+    const decode = [Buffer.from(decodedJwt[k], 'base64').toString('utf-8')]
+
+    const key = crypto
+      .createHash('sha256')
+      .update(process.env.NEXT_PUBLIC_CARD || 'test')
+      .digest()
+    const decipher = crypto.createDecipheriv('aes256', key, resizedIV)
+    const msg = []
+    decode.forEach(function (phrase) {
+      msg.push(decipher.update(phrase, 'hex', 'binary'))
+    })
+    msg.push(decipher.final('binary'))
+    const joinedMsg = msg.join('')
+    allValues.push(JSON.parse(joinedMsg) as ICards)
+  }
+
+  return allValues
+}
+
+export const getKilometers = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+  const rad = function (x: number) {
+    return (x * Math.PI) / 180
+  }
+  var R = 6378.137 //Radio de la tierra en km
+  var dLat = rad(lat2 - lat1)
+  var dLong = rad(lon2 - lon1)
+  var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2)
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+  var d = R * c
+  return parseFloat(d.toFixed(3)) //Retorna tres decimales
+}
