@@ -3,7 +3,7 @@ import useReservation from '@/providers/ReservationContext'
 import { listStoresByGenereFn } from '@/services/stores'
 import { getKilometers } from '@/utils/utils'
 import { Form, FormInstance, List } from 'antd'
-import _ from 'lodash'
+import lodash from 'lodash'
 import React, { useEffect, useRef, useState } from 'react'
 import { IStores, storeFilter } from '../../../types/interfaces/Stores/stores.interface'
 import CardStore from './CardStore'
@@ -12,7 +12,7 @@ import Map from './Map'
 const ListStores = () => {
   const [stores, setStores] = useState<IStores[]>([])
   const [currentStore, setCurrentStore] = useState<IStores>()
-  const [currentFilters, setCurrentFilters] = useState({
+  const [currentFilters, _] = useState({
     department: null,
     city: null,
     zone: null
@@ -62,9 +62,9 @@ const ListStores = () => {
 
   useEffect(() => {
     setFilters({
-      department: _.uniq(stores.map(e => e.department)),
-      city: _.uniq(stores.map(e => e.city)),
-      zone: _.uniq(stores.map(e => e.zone))
+      department: lodash.uniq(stores.map(e => e.department)),
+      city: lodash.uniq(stores.map(e => e.city)),
+      zone: lodash.uniq(stores.map(e => e.zone))
     })
   }, [stores])
 
