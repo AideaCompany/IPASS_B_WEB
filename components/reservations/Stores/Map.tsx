@@ -16,7 +16,7 @@ const Map = ({ store }: { store: IStores }) => {
       console.error('Error con mapa', loadError)
     }
   }, [loadError])
-
+  console.log(isLoaded)
   return (
     <>
       {isLoaded && (

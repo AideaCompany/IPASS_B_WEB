@@ -22,3 +22,9 @@ export enum generes {
   WOMEN = 'WOMEN',
   CHILDREN = 'CHILDREN'
 }
+
+export type storeFilter = {
+  department: string[]
+  city: string[]
+  zone: number[]
+}

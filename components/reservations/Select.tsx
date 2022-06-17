@@ -1,13 +1,12 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { IShoppingCard, IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { IShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { Checkbox } from 'antd'
 import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 import moment from 'moment-timezone'
-import React from 'react'
 import Button from '../Button'
 
-const Select = ({ history }: { history: IShoppingCard }) => {
-  const firstService: IShoppingService = history?.services[0]
+const Select = ({ history }: { history: IShoppingCard | null }) => {
+  const firstService = history?.services[0]
   const { setStep } = useReservation()
   const onClick = () => {
     setStep(stepsPageReservation.staffers)

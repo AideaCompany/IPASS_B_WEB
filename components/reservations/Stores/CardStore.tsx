@@ -1,8 +1,5 @@
-import Button from '@/components/Button'
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { Rate } from 'antd'
-import numeral from 'numeral'
-import React from 'react'
 const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStores) => void }) => {
   return (
     <>
@@ -18,7 +15,8 @@ const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStore
               <Rate></Rate>
               <div className="text-gray-900 font-bold text-sm  mt-2"> {store.name}</div>
               <div className="text-gray-700 text-xs  mt-2"> {store.address}</div>
-              <div className="text-gray-700 text-xs  mt-2 "> 3152349905</div>
+              <div className="text-gray-700 text-xs  mt-2 "> {store.phone}</div>
+              {store.distance && <div className="text-gray-700 text-xs  mt-2 "> {store.distance}</div>}
             </div>
           </div>
         </div>
