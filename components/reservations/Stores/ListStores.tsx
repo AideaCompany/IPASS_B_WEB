@@ -24,13 +24,13 @@ const ListStores = () => {
     zone: []
   })
 
-  // const { setSelectedStore } = useReservation()
+  const { setSelectedStore } = useReservation()
 
   const { genere } = useReservation()
   const formRef = useRef<FormInstance>(null)
   const onClick = (store: IStores) => {
     // setStep(stepsPageReservation.Select)
-    // setSelectedStore(store)
+    setSelectedStore(store)
     setCurrentStore(store)
   }
   useEffect(() => {
