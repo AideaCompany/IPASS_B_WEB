@@ -1,15 +1,13 @@
+import Selector from '@/components/Selector'
 import useReservation from '@/providers/ReservationContext'
 import { listStoresByGenereFn } from '@/services/stores'
 import { getKilometers } from '@/utils/utils'
-import { CaretDownOutlined } from '@ant-design/icons'
 import { Form, FormInstance, List } from 'antd'
+import _ from 'lodash'
 import React, { useEffect, useRef, useState } from 'react'
 import { IStores, storeFilter } from '../../../types/interfaces/Stores/stores.interface'
 import CardStore from './CardStore'
 import Map from './Map'
-import _ from 'lodash'
-import Select from '../Select'
-import Selector from '@/components/Selector'
 
 const ListStores = () => {
   const [stores, setStores] = useState<IStores[]>([])
