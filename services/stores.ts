@@ -11,7 +11,14 @@ export const getAllStores = async (): Promise<IStores[]> => {
   return convertTotable<IStores>(await (await client.query({ query: gql(listStores) })).data.listStores)
 }
 
-export const listStoresByGenereFn = async (genere: string): Promise<IStores[]> => {
+export const listStoresByGenereFn = async (
+  genere: string,
+  filters: { department?: string | null; city?: string | null; zone?: number | null }
+): Promise<IStores[]> => {
   client.cache.reset()
-  return convertTotable<IStores>(await (await client.query({ query: gql(listStoresByGenere), variables: { genere } })).data.listStoresByGenere)
+  return convertTotable<IStores>(
+    await (
+      await client.query({ query: gql(listStoresByGenere), variables: { genere, filters } })
+    ).data.listStoresByGenere
+  )
 }

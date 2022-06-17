@@ -59,7 +59,7 @@ const ReservationsComponent = () => {
         <div className="Container_pages ">
           {step === stepsPageReservation.Genere && <Genere />}
           {step === stepsPageReservation.store && <ListStores />}
-          {step === stepsPageReservation.Select && <Select />}
+          {step === stepsPageReservation.Select && <Select history={null} />}
           {step === stepsPageReservation.staffers && selectedStore && <Staffers />}
           {/* {step === stepsPageReservation.hair && <Hair setStep={setStep} stores={props.stores} />} */}
           {step === stepsPageReservation.servicesType && selectedStore && <ServiceType />}

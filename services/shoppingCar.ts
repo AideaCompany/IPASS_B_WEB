@@ -55,6 +55,12 @@ export const validateShoppingCardFn = async (client_id: string): Promise<IShoppi
   return paginated
 }
 
+export const deleteShoppingCardServiceFn = async (client_id: string, service: string): Promise<IShoppingCard> => {
+  client.cache.reset()
+  return await (
+    await client.mutate({ mutation: gql(deleteShoppingCardService), variables: { client: client_id, service } })
+  ).data.deleteShoppingCardService
+}
 export const goPayShoppingCardFn = async (client_id: string): Promise<IShoppingCard> => {
   client.cache.reset()
   const paginated = await (await client.mutate({ mutation: gql(goPayShoppingCard), variables: { client: client_id } })).data.goPayShoppingCard
@@ -67,11 +73,4 @@ export const InvalidateShoppingCardFn = async (client_id: string): Promise<IShop
     await client.mutate({ mutation: gql(InvalidateShoppingCard), variables: { client: client_id } })
   ).data.InvalidateShoppingCard
   return paginated
-}
-
-export const deleteShoppingCardServiceFn = async (client_id: string, service: string): Promise<IShoppingCard> => {
-  client.cache.reset()
-  return await (
-    await client.mutate({ mutation: gql(deleteShoppingCardService), variables: { client: client_id, service } })
-  ).data.deleteShoppingCardService
 }

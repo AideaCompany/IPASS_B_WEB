@@ -1,6 +1,4 @@
 import useCar from '@/providers/CarContext'
-import { IService } from '@/types/interfaces/services/Services.interface'
-import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { Modal } from 'antd'
 import React from 'react'
 import Button from './Button'
@@ -18,7 +16,7 @@ const AskContinueOrAdd = ({
   goHours: () => void
 }) => {
   const { car } = useCar()
-  const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price)?.reduce((a, b) => a + b)
+  // const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price)?.reduce((a, b) => a + b)
 
   return (
     <Modal

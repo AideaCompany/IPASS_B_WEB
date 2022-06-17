@@ -1,7 +1,7 @@
 import useReservation from '@/providers/ReservationContext'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { HeartOutlined } from '@ant-design/icons'
-import React, { useState } from 'react'
+import React from 'react'
 import Button from './Button'
 
 const ModalService = ({ service, setVisible }: { service: IService; setVisible: React.Dispatch<React.SetStateAction<boolean>> }) => {
@@ -12,7 +12,7 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
     setVisibleAsk(true)
   }
   return (
-    <div>
+    <div style={{ zIndex: '99999999' }}>
       <div className="Main_Modal_Service m-0 w-72">
         <div className="Photo_Modal h-52 flex justify-center content-center  aling-center w-full">
           <img src="/images/Peinado.png" className="sec-img aling-center h-52 flex  content-center justify-center"></img>
