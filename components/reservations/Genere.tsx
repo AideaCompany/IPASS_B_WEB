@@ -28,7 +28,7 @@ const Genere = () => {
           <img src="/images/Niños.png" className="map-img h-60 relative"></img>
           <p className="Title font-Gothic text-right font-bold text-2xl text-white absolute bottom-0 left-32 top-24 "> Niños y Niñas</p>
         </div>
-        <div className="Container_children w-1/2 pl-20 cursor-pointer relative" onClick={() => onClick(generes.CHILDREN)}>
+        <div className="Container_children w-1/2 pl-20 cursor-pointer relative" onClick={() => onClick(generes.ALL)}>
           <img src="/images/Todos.png" className="map-img h-60 relative"></img>
           <p className="Title font-Gothic text-right font-bold text-2xl text-white absolute bottom-0 left-32 top-24"> Todos</p>
         </div>

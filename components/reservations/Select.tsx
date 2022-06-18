@@ -23,13 +23,13 @@ const Select = ({ history }: { history: IShoppingCard | null }) => {
           <p className=" font-Gothic font-bold text-2xl text-white absolute bottom-0 left-10 top-20"> Profesionales</p>
         </div>
 
-        <div className="Container_F_Text relative " onClick={() => setStep(stepsPageReservation.services)}>
+        <div className="Container_F_Text relative " onClick={() => setStep(stepsPageReservation.servicesType)}>
           <img src="/images/Servicios.png" className="mapS-img relative w-11/12 pl-2"></img>
           <p className="font-Gothic text-right font-bold text-2xl text-white absolute bottom-0 left-10 top-20"> Servicios</p>
         </div>
       </div>
       <div className="Sale font-Gothic text-left  font-bold pt-20 pl-4">
-        <Checkbox onChange={onChange}>Si es tu primera reserva, obtén un 5% de descuento</Checkbox>{' '}
+        <Checkbox onChange={onChange}>Si es tu primera reserva, obtén un 5% de descuento</Checkbox>
       </div>
       <div className="Container_reservation  flex flex-col space-y-2">
         <p className="Title font-Gothic text-center  font-bold border-b border-color-gray">Reserva màs reciente</p>
