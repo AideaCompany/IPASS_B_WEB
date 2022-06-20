@@ -1,7 +1,6 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { IShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { Checkbox } from 'antd'
-import { CheckboxChangeEvent } from 'antd/lib/checkbox'
 import moment from 'moment-timezone'
 import Button from '../Button'
 
@@ -10,9 +9,6 @@ const Select = ({ history }: { history: IShoppingCard | null }) => {
   const { setStep } = useReservation()
   const onClick = () => {
     setStep(stepsPageReservation.staffers)
-  }
-  const onChange = (e: CheckboxChangeEvent) => {
-    console.log(`checked = ${e.target.checked}`)
   }
 
   return (
@@ -29,7 +25,7 @@ const Select = ({ history }: { history: IShoppingCard | null }) => {
         </div>
       </div>
       <div className="Sale font-Gothic text-left  font-bold pt-20 pl-4">
-        <Checkbox onChange={onChange}>Si es tu primera reserva, obtén un 5% de descuento</Checkbox>
+        <Checkbox checked={true}>5% de descuento,por tu primera reserva</Checkbox>
       </div>
       <div className="Container_reservation  flex flex-col space-y-2">
         <p className="Title font-Gothic text-center  font-bold border-b border-color-gray">Reserva màs reciente</p>
