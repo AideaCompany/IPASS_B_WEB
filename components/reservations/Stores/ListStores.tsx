@@ -76,26 +76,29 @@ const ListStores = () => {
 
   return (
     <div className="container_list_stores ">
-      <Form className="Container_bar1  w-full">
-        <Selector
-          formRef={formRef}
-          name="department"
-          placeHolder="Seleccione un departamento"
-          values={filters.department.map(e => ({ value: e, label: e }))}
-        />
-        <Selector formRef={formRef} name="city" placeHolder="Seleccione una ciudad" values={filters.city.map(e => ({ value: e, label: e }))} />
-        <Selector
-          formRef={formRef}
-          name="zone"
-          placeHolder="Seleccione zona"
-          values={filters.zone.map(e => ({ value: e?.toString(), label: e?.toString() }))}
-        />
-      </Form>
-
+      <div className="Container_bar mt-6 ">
+        <Form className="Container_bar1 flex space-x-8 mt-6 pt-6 w-full">
+          <Selector
+            formRef={formRef}
+            name="department"
+            placeHolder="Seleccione un departamento"
+            values={filters.department.map(e => ({ value: e, label: e }))}
+          />
+          <Selector formRef={formRef} name="city" placeHolder="Seleccione una ciudad" values={filters.city.map(e => ({ value: e, label: e }))} />
+          <Selector
+            formRef={formRef}
+            name="zone"
+            placeHolder="Seleccione zona"
+            values={filters.zone.map(e => ({ value: e?.toString(), label: e?.toString() }))}
+          />
+        </Form>
+      </div>
       <div className="Container_select1  w-full ">
         {currentStore && <Map store={currentStore} />}
         <div className="Main_carousel1  m-2 ">
-          <Button title="Seleccionar" onClick={handleButton} />
+          <div className="Button_Select ml-1/6 w-2/3">
+            <Button title="Seleccionar" onClick={handleButton} />
+          </div>
           <List
             dataSource={stores}
             renderItem={item => (
