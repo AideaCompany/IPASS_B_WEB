@@ -47,17 +47,19 @@ const CarDrawer = () => {
                 <div className="flex space-x-4 pt-0">
                   <p>Valor de la reserva:</p>
                   <div className=" pt-0">
-                    <Tooltip title="Este valor se cobrará unicamante si no se asiste o no se reprograma la reserva">
+                    <Tooltip title="Este valor se cobrará unicamente si no se asiste o no se re programa la reserva">
                       <QuestionCircleOutlined style={{ fontSize: '15px' }} />
                     </Tooltip>
                   </div>
                 </div>
                 <p>Precio servicios:</p>
+                <p>Tiempo estimado:</p>
               </div>
               <div className="Container_Price divide-y text-right divide-blue-200 flex flex-col space-y-2">
                 <p>{`${car?.services?.length}`}</p>
                 <p>{`Q${numeral(price * 0.15).format('0,0')}`}</p>
                 <p>{`Q${numeral(price).format('0,0')}`}</p>
+                <p>{`${car?.services.map(e => (e.service as IService).serviceTime).reduce((a, b) => a + b)} min`}</p>
               </div>
             </div>
 

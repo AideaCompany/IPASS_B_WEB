@@ -20,7 +20,8 @@ export interface IStores extends basicTable {
 export enum generes {
   MEN = 'MEN',
   WOMEN = 'WOMEN',
-  CHILDREN = 'CHILDREN'
+  CHILDREN = 'CHILDREN',
+  ALL = 'ALL'
 }
 
 export type storeFilter = {

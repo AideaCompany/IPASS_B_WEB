@@ -22,7 +22,7 @@ const Genere = () => {
         </div>
         <div className="Container_women w-1/2 cursor-pointer  pl-24 relative " onClick={() => onClick(generes.WOMEN)}>
           <img src="/images/Damas.png" className="map-img h-60 relative"></img>
-          <p className="Title font-Gothic text-right font-bold text-2xl text-white absolute bottom-0 left-32 top-24 "> Damas</p>
+          <p className="Title font-Gothic text-right font-bold text-2xl text-white absolute bottom-0 left-32 top-24"> Damas</p>
         </div>
       </div>
       <div className="Container_fluid w-full  flex space-x-4 mt-16 h-72 ">
