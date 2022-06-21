@@ -54,14 +54,14 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
   return (
     <Form.Item name={name}>
       <div ref={selectorRef} className="relative">
-        <div className="bg-black h-10 text-white bg-black flex border border-gray-200 items-center">
+        <div className=" h-10 text-black  flex border border-gray-200 items-center">
           <input
             onClick={() => setOpen(true)}
             value={search}
             onChange={e => setSearch(e.target.value)}
             name="select"
             placeholder={placeHolder}
-            className="bg-black px-4 appearance-none outline-none text-gray-800 w-full"
+            className=" px-4 appearance-none outline-none text-gray-800 w-full"
           />
 
           <button
@@ -84,7 +84,7 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
         </div>
 
         <div
-          className={`absolute z-50 shadow bg-black text-white overflow-y-scroll   ${
+          className={`absolute z-50 shadow bg-white text-black overflow-y-scroll   ${
             !open ? 'flex hidden' : ''
           } ${calculateHeight()} flex-col w-full mt-1 border border-gray-200`}
         >
@@ -101,7 +101,7 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
                   }}
                   className="cursor-pointer group"
                 >
-                  <a className="block text-white p-2 border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100 hover:text-gold">
+                  <a className="block text-black p-2 border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100 hover:text-gold">
                     <span className="pr-5">{value.icon}</span>
                     {value.label}
                   </a>

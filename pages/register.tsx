@@ -32,9 +32,10 @@ const Register: NextPage = () => {
   }
   const onConfirmSignUp = async () => {
     const values = (await formRefConfirm.current?.validateFields()) as registerConfirm
-    message.success('Registro exitoso')
+    console.log(values)
     try {
       const res = await confirmClientFn(values.token)
+      message.success('Registro exitoso')
       console.log(res)
       if (res.response === '200') {
         login(res.token)
@@ -46,8 +47,8 @@ const Register: NextPage = () => {
   }
   return (
     <Layout>
-      <div className="main_container_register">
-        <p className="font-Butler font-medium text-2xl">Registro</p>
+      <div className="main_container_register ">
+        <p className="font-Butler font-medium mt-10 text-2xl">Registro</p>
         {isConfirm ? (
           <Confirm formRef={formRefConfirm} onConfirmSignUp={onConfirmSignUp} data={data as registerClient} />
         ) : (

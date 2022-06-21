@@ -54,7 +54,7 @@ export const AuthProvider = (props: { children: JSX.Element }) => {
       setSpinning(false)
       setLoading(false)
       setToken(token)
-      router.push({ pathname: '/welcome' })
+      router.push({ pathname: '/reservations' })
     }
   }
 

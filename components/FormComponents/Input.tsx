@@ -12,7 +12,7 @@ const Input = ({ item }: { item: { label: string; name: string; required: boolea
 
     return (
       <div className="mb-1">
-        <label className="font-Helvetica block flex items-center	 mb-2 text-base font-normal text-black">
+        <label className="font-Gothic block flex items-center	bg-white mb-2 text-base font-normal text-black">
           {`${item.label} `}
           &nbsp;
           <p style={{ color: 'gray' }} className="font-Helvetica text-xs">{`${item.required ? '' : '(Opcional)'}`}</p>

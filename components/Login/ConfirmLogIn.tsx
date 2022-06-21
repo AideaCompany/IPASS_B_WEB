@@ -3,7 +3,7 @@ import { Form, FormInstance, message } from 'antd'
 import React, { FC, useRef } from 'react'
 import { registerClient, registerConfirm } from '../../types/types'
 import Button from '../Button'
-import Input from '../Input'
+import InputNumber from '../FormComponents/InputNumber'
 import useAuth from '../../providers/AuthContext'
 
 const Confirm: FC<{ data: registerClient }> = ({ data }) => {
@@ -19,13 +19,30 @@ const Confirm: FC<{ data: registerClient }> = ({ data }) => {
       message.error('Ha ocurrido un error')
     }
   }
-
+  const formItems = [
+    {
+      type: 'number',
+      label: '',
+      name: 'token',
+      required: true
+    }
+  ]
   return (
     <>
       <div className="container_form">
         <Form ref={formRef}>
           <p>{`Ingresa el código que hemos enviado a +${data.phone1}`}</p>
-          <Input name="token" type={'number'} />
+          <>
+            {formItems.map((item, i) => {
+              let element = <></>
+
+              if (item.type === 'number') {
+                element = <InputNumber item={item} />
+              }
+
+              return <React.Fragment key={i}>{element}</React.Fragment>
+            })}
+          </>
         </Form>
       </div>
       <div className="container_buttons">

@@ -19,7 +19,7 @@ const Login: NextPage = () => {
           Si no tienes una cuenta puedes
           <br />
           <Link href="/register">
-            <a className="text-gold hover:underline">¡Registrarte acá!</a>
+            <a className="text-gold m-14 w-full  hover:underline">¡Registrarte acá!</a>
           </Link>
         </p>
         {isConfirm ? <ConfirmLogIn data={data} /> : <LoginComponent setIsConfirm={setIsConfirm} setData={setData} />}
