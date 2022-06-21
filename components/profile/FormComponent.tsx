@@ -1,6 +1,8 @@
 import useAuth from '@/providers/AuthContext'
 import useLoading from '@/providers/LoadingContext'
 import { updateClientFn } from '@/services/clients'
+import { IOccupation } from '@/types/interfaces/Occupation/occupation.interface'
+import { generes } from '@/types/interfaces/Stores/stores.interface'
 import { removeNullObjValues } from '@/utils/utils'
 import { Form, FormInstance, message } from 'antd'
 import countries from 'country-data'
@@ -10,8 +12,11 @@ import DatePicker from '../FormComponents/DatePicker'
 import Input from '../FormComponents/Input'
 import InputNumber from '../FormComponents/InputNumber'
 import Selector from '../FormComponents/Selector'
-const FormComponent = () => {
+const FormComponent = ({ occupation }: { occupation: IOccupation[] }) => {
   const formRef = useRef<FormInstance>(null)
+
+  const { user } = useAuth()
+  const { setLoading } = useLoading()
   const formItems = [
     {
       type: 'input',
@@ -71,10 +76,9 @@ const FormComponent = () => {
       label: 'Ocupación',
       name: 'occupation',
       required: false,
-      values: ['Ingeniero', 'Periodista', 'Abogado'].map(e => ({
-        value: e,
-        label: e,
-        icon: <></>
+      values: occupation.map(e => ({
+        value: e._id,
+        label: e.name
       }))
     },
     {
@@ -88,10 +92,9 @@ const FormComponent = () => {
       label: 'Género',
       required: false,
       name: 'sex',
-      values: ['Masculino', 'Femenino'].map(e => ({
+      values: Object.values(generes).map(e => ({
         value: e,
-        label: e,
-        icon: <></>
+        label: e
       }))
     },
     {
@@ -101,9 +104,6 @@ const FormComponent = () => {
       required: true
     }
   ]
-  const { user } = useAuth()
-  const { setLoading } = useLoading()
-
   const updateUser = async () => {
     const values = await formRef.current?.validateFields()
     setLoading(true)

@@ -22,7 +22,7 @@ const Selector: FC<{
       const totals = values.filter(value => (search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
       switch (totals.length) {
         case 3:
-          return 'h-40'
+          return 'h-30'
         case 2:
           return 'h-30'
         case 1:
