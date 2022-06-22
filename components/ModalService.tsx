@@ -1,25 +1,35 @@
+import useAuth from '@/providers/AuthContext'
+import useCar from '@/providers/CarContext'
 import useReservation from '@/providers/ReservationContext'
+import { addShoppingCardFn } from '@/services/shoppingCar'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { HeartOutlined } from '@ant-design/icons'
 import React from 'react'
 import Button from './Button'
 
 const ModalService = ({ service, setVisible }: { service: IService; setVisible: React.Dispatch<React.SetStateAction<boolean>> }) => {
-  const { setSelectedService, setVisibleAsk } = useReservation()
-  const onClick = (value: IService) => {
-    setSelectedService(value)
+  const { setSelectedService, setVisibleAsk, selectedStore, selectedStaff } = useReservation()
+  const { getData } = useCar()
+  const { user } = useAuth()
+  const onClick = async (value: IService) => {
+    await addShoppingCardFn(user?._id as string, {
+      service: value?._id as string,
+      store: selectedStore?._id as string,
+      staff: selectedStaff?._id as string
+    })
+    await getData()
     setVisible(false)
     setVisibleAsk(true)
+    setSelectedService(value)
   }
   return (
     <div style={{ zIndex: '99999999' }}>
       <div className="Main_Modal_Service m-0 w-72">
         <div className="Photo_Modal h-52 flex justify-center content-center  aling-center w-full">
-          <img src="/images/Peinado.png" className="sec-img aling-center h-52 flex  content-center justify-center"></img>
+          <img src={service?.photo?.key} className="sec-img aling-center h-52 flex  content-center justify-center"></img>
         </div>
         <div className="Question_Information w-full  mt-2 text-center text-xs">
           <p>
-            {' '}
             <HeartOutlined style={{ fontSize: '20px' }} /> Agregar a favoritos
           </p>
         </div>
