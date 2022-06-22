@@ -1,5 +1,5 @@
 import Button from '@/components/Button'
-import Selector from '@/components/Selector'
+import SelectorStores from '@/components/SelectorStores'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { listStoresByGenereFn } from '@/services/stores'
 import { getKilometers } from '@/utils/utils'
@@ -77,15 +77,20 @@ const ListStores = () => {
   return (
     <div className="container_list_stores ">
       <div className="Container_bar mt-6 ">
-        <Form className="Container_bar1 flex space-x-8 mt-6 pt-6 w-full">
-          <Selector
+        <Form className="Container_bar1 flex space-x-10  mt-6 pt-6 w-full">
+          <SelectorStores
             formRef={formRef}
             name="department"
             placeHolder="Seleccione un departamento"
             values={filters.department.map(e => ({ value: e, label: e }))}
           />
-          <Selector formRef={formRef} name="city" placeHolder="Seleccione una ciudad" values={filters.city.map(e => ({ value: e, label: e }))} />
-          <Selector
+          <SelectorStores
+            formRef={formRef}
+            name="city"
+            placeHolder="Seleccione una ciudad"
+            values={filters.city.map(e => ({ value: e, label: e }))}
+          />
+          <SelectorStores
             formRef={formRef}
             name="zone"
             placeHolder="Seleccione zona"
@@ -103,7 +108,7 @@ const ListStores = () => {
             dataSource={stores}
             renderItem={item => (
               <React.Fragment key={item.name}>
-                <CardStore store={item} onClick={onClick} />
+                <CardStore store={item} onClick={handleButton} />
               </React.Fragment>
             )}
           ></List>

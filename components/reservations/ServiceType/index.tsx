@@ -36,7 +36,7 @@ const ServiceType = () => {
           <p className="Title font-Gothic text-right "> Categorías de servicios</p>
         </div>
       </div>
-      <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
+      <div className="Container_personal  p-8 grid h-auto place-items-center grid-cols-3 gap-x-8 gap-y-8">
         {servicesType.map((service, i) => (
           <React.Fragment key={i}>
             <CardServicesType service={service} />
