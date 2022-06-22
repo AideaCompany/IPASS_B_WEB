@@ -33,7 +33,7 @@ const Staffers = () => {
           <CaretDownOutlined />
         </div>
       </div>
-      <div className="Container_personal  grid grid-cols-3 gap-x-8 pt-4 gap-y-0">
+      <div className="Container_personal  p-8 grid h-auto place-items-center grid-cols-3 gap-x-8 gap-y-8">
         {staffers.map((staffer, i) => (
           <React.Fragment key={i}>
             <CardStaffers staffer={staffer} />
