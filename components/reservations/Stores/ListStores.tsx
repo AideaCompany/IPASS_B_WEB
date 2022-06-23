@@ -101,7 +101,7 @@ const ListStores = () => {
       <div className="Container_select1  w-full ">
         {currentStore && <Map store={currentStore} />}
         <div className="Main_carousel1  m-2 ">
-          <div style={{ display: 'flex', justifyContent: 'center' }} className="Button_Select ml-1/6 w-2/3">
+          <div style={{ display: 'flex', justifyContent: 'center' }} className="Button_Select  w-full">
             <Button title="Seleccionar" onClick={onClick} />
           </div>
           <List

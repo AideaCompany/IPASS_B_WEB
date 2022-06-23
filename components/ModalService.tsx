@@ -41,7 +41,7 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
             <p> Tiempo de duración</p>
           </div>
           <div className="Container_Rate w-1/2 mt-2 text-right ">
-            <p> 1250 horas</p>
+            <p> 60 minutos</p>
           </div>
         </div>
         <div className="Information_Modal flex w-full">
@@ -56,18 +56,18 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
           </div>
           <div className="Container_Rate w-1/2  mt-4 divide-y text-right divide-slate-200">Q 200</div>
         </div>
-        <div className="Information_Modal font-bold  w-full">
+        <div style={{ marginTop: '8px' }} className="Information_Modal font-bold  w-full">
           <p> Descripción</p>
         </div>
         <div className="Information_Modal border h-10 p-2 w-full divide-y divide-slate-200">
-          <p> Loream ...... </p>
+          <p> Servicio de bla bla</p>
         </div>
-        <div className="Information_Modal font-bold w-full divide-y divide-slate-200">
+        {/* <div style={{ marginTop: '8px' }} className="Information_Modal font-bold w-full divide-y divide-slate-200">
           <p> Quienes lo realizan:</p>
         </div>
         <div className="Information_Modal border p-2 h-10 w-full divide-y divide-slate-200">
           <p> Pedro, Juan ...... </p>
-        </div>
+        </div> */}
 
         <div className="Container_Comments  mt-8  w-full ">
           <Button title="Seleccionar" onClick={() => onClick(service)} customClassName="w-full"></Button>
