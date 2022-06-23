@@ -1,10 +1,10 @@
 import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { Rate } from 'antd'
 import numeral from 'numeral'
-const CardStore = ({ onClick, store }: { store: IStores; onClick: (value: IStores) => void }) => {
+const CardStore = ({ onClick, store, isSelect }: { store: IStores; onClick: () => void; isSelect: boolean }) => {
   return (
     <>
-      <div className="Container_Sto cursor-pointer ">
+      <div onClick={onClick} className="Container_Sto cursor-pointer " style={{ border: isSelect ? '2px solid #d2b782' : '0px' }}>
         <div className="Image_containerS ">
           <img alt="" src="/images/Store.png" className="map1-img" />
         </div>

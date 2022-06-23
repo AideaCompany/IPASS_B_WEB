@@ -108,7 +108,7 @@ const ListStores = () => {
             dataSource={stores}
             renderItem={item => (
               <React.Fragment key={item.name}>
-                <CardStore store={item} onClick={handleButton} />
+                <CardStore isSelect={currentStore === item} store={item} onClick={() => onClick(item)} />
               </React.Fragment>
             )}
           ></List>
