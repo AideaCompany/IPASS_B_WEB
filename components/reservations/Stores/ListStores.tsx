@@ -77,7 +77,7 @@ const ListStores = () => {
   return (
     <div className="container_list_stores ">
       <div className="Container_bar mt-6 ">
-        <Form className="Container_bar1 flex space-x-10  mt-6 pt-6 w-full">
+        <Form className="Container_bar1 flex grid-cols-3 gap-x-28  mt-6 pt-6 w-full">
           <SelectorStores
             formRef={formRef}
             name="department"
@@ -101,7 +101,7 @@ const ListStores = () => {
       <div className="Container_select1  w-full ">
         {currentStore && <Map store={currentStore} />}
         <div className="Main_carousel1  m-2 ">
-          <div className="Button_Select ml-1/6 w-2/3">
+          <div style={{ display: 'flex', justifyContent: 'center' }} className="Button_Select ml-1/6 w-2/3">
             <Button title="Seleccionar" onClick={onClick} />
           </div>
           <List
