@@ -12,6 +12,8 @@ import { IService } from '@/types/interfaces/services/Services.interface'
 import { IShoppingCard, IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { ICards, IClient } from '@/types/types'
 import { decodeValues } from '@/utils/utils'
+import { InfoCircleOutlined } from '@ant-design/icons'
+import { Tooltip } from 'antd'
 import { $security } from 'config'
 import * as cookie from 'cookie'
 import jwt from 'jsonwebtoken'
@@ -110,27 +112,35 @@ const Register = ({ cards }: { cards: ICards[] }) => {
           <div className="Container_Info_Card ">
             <CardTable cards={currentCards} onComplete={updateCards} />
             <ModalCard onComplete={updateCards} />
-            <div className="Container_Offerts  pt-4 font-semibold ">
+            <div style={{ marginBottom: '20px' }} className="Container_Offerts  pt-4 font-semibold ">
               <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
             </div>
-            <div className="Container_OffertsC  flex pt-4 font-semibold ">
+            {/* <div className="Container_OffertsC  flex pt-4 font-semibold ">
               <div className="Medium w-2/3  h-12 aling-botton">
                 <input type="text" className="appearance-none bg-transparent w-full h-12  " placeholder="Ingresar código de descuento"></input>
               </div>
               <div className="Medium2 w-1/3  m-0 h-8 aling-botton">
                 <Button title="Aceptar" onClick={onClick} customClassName="b1 h-8 m-0 text-xs "></Button>
               </div>
-            </div>
+            </div> */}
             <div className="Container_Info_Buy ">
               <div className="Titles_Buy font-helvetica text-left">
-                <p> Valor de la reserva:</p>
-                <p>Precio Total:</p>
-                <p>Subtotal:</p>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  <p style={{ margin: 0, padding: 0, marginRight: 5 }}> Valor de la reserva:</p>
+                  <div style={{ display: 'flex', alignItems: 'center' }} className="pt-0">
+                    <Tooltip title="Este valor se cobrará unicamente si no se asiste o no se re programa la reserva">
+                      <InfoCircleOutlined style={{ fontSize: '15px' }} />
+                    </Tooltip>
+                  </div>
+                </div>
+
+                <p>Precio servicios:</p>
+                <p>Tiempo de reserva:</p>
               </div>
               <div className="Container_Price text-right font-bold ">
                 <p>{`Q${numeral(price * 0.15).format('0,0')}`}</p>
-                <p>{`Q${numeral(price * 1.15).format('0,0')}`}</p>
-                <p>{`Q${numeral(price).format('0,0')}`}</p>
+                <p>{`Q${numeral(price * 1).format('0,0')}`}</p>
+                <p>{`20`}</p>
               </div>
             </div>
             <div className="Titles_Buy font-helvetica text-center font-bold m-6">

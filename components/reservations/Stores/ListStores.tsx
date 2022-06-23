@@ -29,13 +29,13 @@ const ListStores = () => {
 
   const { genere } = useReservation()
   const formRef = useRef<FormInstance>(null)
-  const onClick = (store: IStores) => {
-    setCurrentStore(store)
-  }
-
-  const handleButton = () => {
+  const onClick = () => {
     setStep(stepsPageReservation.Select)
     setSelectedStore(currentStore)
+  }
+
+  const handleButton = (item: IStores) => {
+    setCurrentStore(item)
   }
 
   useEffect(() => {
@@ -101,14 +101,14 @@ const ListStores = () => {
       <div className="Container_select1  w-full ">
         {currentStore && <Map store={currentStore} />}
         <div className="Main_carousel1  m-2 ">
-          <div className="Button_Select w-full">
-            <Button title="Seleccionar" onClick={handleButton} />
+          <div style={{ display: 'flex', justifyContent: 'center' }} className="Button_Select  w-full">
+            <Button title="Seleccionar" onClick={onClick} />
           </div>
           <List
             dataSource={stores}
             renderItem={item => (
               <React.Fragment key={item.name}>
-                <CardStore store={item} onClick={handleButton} />
+                <CardStore isSelect={currentStore === item} store={item} onClick={() => handleButton(item)} />
               </React.Fragment>
             )}
           ></List>

@@ -15,13 +15,15 @@ const Login: NextPage = () => {
     <Layout>
       <div className="main_container_login">
         <p className="font-Butler font-medium text-2xl">Iniciar Sesión</p>
-        <p className="font-Gothic">
-          Si no tienes una cuenta puedes
-          <br />
-          <Link href="/register">
-            <a className="text-gold m-14 w-full  hover:underline">¡Registrarte acá!</a>
-          </Link>
-        </p>
+        {!isConfirm && (
+          <p className="font-Gothic">
+            Si no tienes una cuenta puedes
+            <br />
+            <Link href="/register">
+              <a className="text-gold m-14 w-full  hover:underline">¡Registrarte acá!</a>
+            </Link>
+          </p>
+        )}
         {isConfirm ? <ConfirmLogIn data={data} /> : <LoginComponent setIsConfirm={setIsConfirm} setData={setData} />}
       </div>
     </Layout>

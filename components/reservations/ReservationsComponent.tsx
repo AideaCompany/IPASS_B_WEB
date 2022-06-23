@@ -32,12 +32,12 @@ const ReservationsComponent = () => {
   }
 
   const goHours = async () => {
-    await addToCar()
+    // await addToCar()
     setStep(stepsPageReservation.selectDate)
   }
 
   const goStart = async () => {
-    await addToCar()
+    // await addToCar()
     setStep(stepsPageReservation.Select)
   }
 
@@ -67,7 +67,13 @@ const ReservationsComponent = () => {
           {step === stepsPageReservation.servicesByStaffer && selectedStore && selectedStaff && <ServicesByStaff />}
           {step === stepsPageReservation.selectDate && <SelectDate />}
           {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
-          <AskContinueOrAdd goHours={goHours} goStart={goStart} visible={visibleAsk} onCancel={() => setVisibleAsk(false)} />
+          <AskContinueOrAdd
+            setVisible={setVisibleAsk}
+            goHours={goHours}
+            goStart={goStart}
+            visible={visibleAsk}
+            onCancel={() => setVisibleAsk(false)}
+          />
         </div>
       </div>
 

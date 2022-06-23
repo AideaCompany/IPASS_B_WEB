@@ -8,7 +8,7 @@ const Select = ({ history }: { history: IShoppingCard | null }) => {
   const firstService = history?.services[0]
   const { setStep } = useReservation()
   const onClick = () => {
-    setStep(stepsPageReservation.staffers)
+    // setStep(stepsPageReservation.staffers)
   }
 
   return (
@@ -29,23 +29,29 @@ const Select = ({ history }: { history: IShoppingCard | null }) => {
         <Checkbox checked={true}>5% de descuento,por tu primera reserva</Checkbox>
       </div>
       <div className="Container_reservation  flex flex-col space-y-2">
-        <p className="Title font-Gothic text-center  font-bold border-b border-color-gray">Reserva màs reciente</p>
-        <p className="text-left text-black font-Gothic  ">{`Cantidad de servicios: ${history?.services?.length}`}</p>
-        <p className="text-left text-black font-Gothic ">{`Dia de servicios: ${moment
-          .tz(firstService?.day as string, 'America/Guatemala')
-          .set({ hour: parseInt((firstService?.hour as string)?.split(':')[0]), minute: parseInt((firstService?.hour as string)?.split(':')[1]) })
-          .format('DD/MM/YYYY hh:mm a')}`}</p>
-        <p className="text-left text-black font-Gothic ">{`Status ${history?.status}`}</p>
+        <p className="Title font-Gothic text-center  font-bold border-b border-color-gray">Reserva más reciente</p>
+        {history ? (
+          <>
+            <p className="text-left text-black font-Gothic  ">{`Cantidad de servicios: ${history?.services?.length}`}</p>
+            <p className="text-left text-black font-Gothic ">{`Dia de servicios: ${moment
+              .tz(firstService?.day as string, 'America/Guatemala')
+              .set({ hour: parseInt((firstService?.hour as string)?.split(':')[0]), minute: parseInt((firstService?.hour as string)?.split(':')[1]) })
+              .format('DD/MM/YYYY hh:mm a')}`}</p>
+            <p className="text-left text-black font-Gothic ">{`Status ${history?.status}`}</p>
 
-        <div className="container_buttons">
-          <div className="line  divide-y divide-slate-200"></div>
-          <div className="change  ">
-            <Button title="Modificar " onClick={onClick} customClassName="button  text-xs" />
-          </div>
-          <div className="cancel ">
-            <Button title="Cancelar" onClick={onClick} customClassName="button  text-xs" />
-          </div>
-        </div>
+            <div className="container_buttons">
+              <div className="line  divide-y divide-slate-200"></div>
+              <div className="change  ">
+                <Button title="Modificar " onClick={onClick} customClassName="button  text-xs" />
+              </div>
+              <div className="cancel ">
+                <Button title="Cancelar" onClick={onClick} customClassName="button  text-xs" />
+              </div>
+            </div>
+          </>
+        ) : (
+          <p className="text-left text-black font-Gothic ">No hay reservas</p>
+        )}
       </div>
     </div>
   )
