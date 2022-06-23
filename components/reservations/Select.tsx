@@ -14,15 +14,13 @@ const Select = ({ history }: { history: IShoppingCard | null }) => {
   return (
     <div className="Container_select ">
       <div className="Container_fluid ">
-        <div className="Container_F_Text relative  " onClick={onClick}>
-          <img src="/images/Profesional.png" className="mapF-img relative w-11/12 pl-2"></img>
-          <div className="Gradient"></div>
+        <div className="Container_F_Text relative bg-gradient-to-r from-purple-500 to-pink-500 " onClick={onClick}>
+          <img src="/images/Profesional.png" className="mapS-img relative w-11/12 pl-2"></img>
           <p className=" font-Gothic font-bold text-2xl text-white absolute bottom-0 left-10 top-20"> Profesionales</p>
         </div>
 
         <div className="Container_F_Text relative " onClick={() => setStep(stepsPageReservation.servicesType)}>
-          <img src="/images/Servicios.png" className="mapF-img relative w-11/12 pl-2"></img>
-          <div className="Gradient"></div>
+          <img src="/images/Servicios.png" className="mapS-img relative w-11/12 pl-2"></img>
           <p className="font-Gothic text-right font-bold text-2xl text-white absolute bottom-0 left-10 top-20"> Servicios</p>
         </div>
       </div>
