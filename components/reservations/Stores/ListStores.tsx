@@ -101,7 +101,7 @@ const ListStores = () => {
       <div className="Container_select1  w-full ">
         {currentStore && <Map store={currentStore} />}
         <div className="Main_carousel1  m-2 ">
-          <div className="Button_Select pl-14 w-4/5">
+          <div className="Button_Select w-full">
             <Button title="Seleccionar" onClick={handleButton} />
           </div>
           <List

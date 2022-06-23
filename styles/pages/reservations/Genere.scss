@@ -1,10 +1,30 @@
-.Container_Men {
-  display: inline-block;
-  position: absolute;
-  z-index: -1;
-  .mapMen-img {
+.Container_Tar {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  .Container_GEN {
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+  }
+  .mapG-img {
+    height: 100%;
     object-fit: cover;
     display: block;
     z-index: -10;
+  }
+  .Container_GEN:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background: linear-gradient(90.25deg, #000000 -1.19%, rgba(0, 0, 0, 0) 60.88%);
+    z-index: -1;
   }
 }
