@@ -34,11 +34,13 @@ const ReservationsComponent = () => {
   const goHours = async () => {
     // await addToCar()
     setStep(stepsPageReservation.selectDate)
+    setVisibleAsk(false)
   }
 
   const goStart = async () => {
     // await addToCar()
     setStep(stepsPageReservation.Select)
+    setVisibleAsk(false)
   }
 
   const mySteps = [
