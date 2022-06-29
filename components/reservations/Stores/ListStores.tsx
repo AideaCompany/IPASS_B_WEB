@@ -76,6 +76,7 @@ const ListStores = () => {
 
   return (
     <div className="container_list_stores ">
+      <p className="Title font-Gothic text-right pt-4 ">Selección de establecimiento</p>
       <div className="Container_bar mt-6 ">
         <Form className="Container_bar1 flex grid-cols-3 gap-x-28  mt-6 pt-6 w-full">
           <SelectorStores
@@ -99,8 +100,8 @@ const ListStores = () => {
         </Form>
       </div>
       <div className="Container_select1  w-full ">
-        {currentStore && <Map store={currentStore} />}
-        <div className="Main_carousel1  m-2 ">
+        <div className="Image_container ">{currentStore && <Map store={currentStore} />}</div>
+        <div className="Main_carousel1  m-2  ">
           <div style={{ display: 'flex', justifyContent: 'center' }} className="Button_Select  w-full">
             <Button title="Seleccionar" onClick={onClick} />
           </div>

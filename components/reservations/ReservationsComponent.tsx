@@ -44,6 +44,8 @@ const ReservationsComponent = () => {
   const mySteps = [
     stepsPageReservation.Genere,
     stepsPageReservation.store,
+    stepsPageReservation.Select,
+    stepsPageReservation.servicesType,
     stepsPageReservation.services,
     stepsPageReservation.selectDate,
     stepsPageReservation.payment
@@ -52,7 +54,7 @@ const ReservationsComponent = () => {
   return (
     <>
       <div className="Container_Reservation ">
-        <p className="Title font-Gothic text-right pt-4 ">Mis reservas </p>
+        <p className="Title font-Gothic text-right pt-4 ">Proceso de reservación</p>
         <div className="Container_Steps w-full pt-4">
           <Steps current={mySteps.findIndex(e => e === step)} />
         </div>

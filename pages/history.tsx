@@ -1,6 +1,5 @@
 import Layout from '@/components/Layout'
 import CardHistory from '@/components/history/CardHistory'
-
 import useAuth from '@/providers/AuthContext'
 import { getClientShoppingCardsFn } from '@/services/shoppingCar'
 import { IShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
@@ -27,7 +26,7 @@ const History = () => {
         <div className="Tittle">
           <p className="text-left text-black font-Gothic font-bold text-xl">Consulta el historial de tus servicios</p>
         </div>
-        <div className="CardH">
+        <div className="CardH ">
           <List
             itemLayout="vertical"
             size="large"

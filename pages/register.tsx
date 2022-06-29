@@ -22,6 +22,7 @@ const Register: NextPage = () => {
         await SignUpClientFn(values)
         setData(values)
         setIsConfirm(true)
+        message.info('Hemos enviado un código a tu correo electrónico')
       } else {
         message.error('Debes aceptar los términos y condiciones para continuar')
       }

@@ -6,7 +6,8 @@ const StepsEncuesta = ({ current }: { current: number }) => {
     <Steps size="small" current={current}>
       {<Steps.Step title={'Genero'} />}
       <Steps.Step title={'Sede'} />
-      {/* <Steps.Step title={'Profesionales'} /> */}
+      <Steps.Step title={'Categoria'} />
+      <Steps.Step title={'tipo de servicio'} />
       <Steps.Step title={'Servicio'} />
       <Steps.Step title={'Horario'} />
       <Steps.Step title={'Pago'} />

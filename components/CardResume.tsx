@@ -16,21 +16,25 @@ const CardResume = ({ service }: { service: IShoppingService }) => {
   }
 
   return (
-    <div className="Main_C_Resume  w-full h-30">
-      <div className="Main_Photo_Resu w-20  h-30">
-        <img src={(service.service as IService)?.photo?.key} className="sec-img"></img>
+    <div className="Main_C_Resume  w-full h-32">
+      <div className="Main_Photo_Resu w-20  h-32">
+        <img src={(service.service as IService)?.photo?.key} className="sec-img w-20 h-32"></img>
       </div>
-      <div className="Main_Info_Resu p-4  h-30">
-        <div className="Container_PR  h-1/4 font-helvetica text-left divide-y divide-slate-200">{(service?.service as IService)?.name}</div>
-        <div className="Container_TP    text-left h-1/4  divide-y divide-slate-200">
+      <div className="Main_Info_Resu p-4  h-32">
+        <div className="Container_PR  h-1/4 font-helvetica text-left divide-y divide-slate-200 w-full text-ellipsis overflow-hidden">
+          {(service?.service as IService)?.name}
+        </div>
+        <div className="Container_TP    text-left h-1/4  divide-y divide-slate-200 w-full">
           {`Staffer: ${service.staff ? (service.staff as IStaff)?.name : 'No asignado '}`}
         </div>
-        <div className="Container_PR  font-helvetica h-1/4  text-left divide-y divide-slate-200">{`Hora: ${service.hour ?? 'No asignado '}`}</div>
-        <div className="Container_TP    text-left h-1/4 divide-y divide-slate-200">
+        <div className="Container_PR  font-helvetica h-1/4  text-left divide-y divide-slate-200 w-full text-ellipsis overflow-hidden">{`Hora: ${
+          service.hour ?? 'No asignado '
+        }`}</div>
+        <div className="Container_TP    text-left h-1/4 divide-y divide-slate-200 w-full text-ellipsis overflow-hidden">
           {`Precio: Q${numeral((service?.service as IService)?.price).format('0,0')} `}
         </div>
       </div>
-      <div className="Main_Icons_Resu justify-center p-4 h-30">
+      <div className="Main_Icons_Resu justify-center p-4 h-32">
         <div className="Main_I_Heart w-20 justify-center h-1/3 cursor-pointer">
           <img src="/images/Heart.png" className="sec-img"></img>
         </div>

@@ -1,4 +1,5 @@
 import useCar from '@/providers/CarContext'
+import { IService } from '@/types/interfaces/services/Services.interface'
 import { Modal } from 'antd'
 import React, { useState } from 'react'
 import Button from './Button'
@@ -51,7 +52,9 @@ const AskContinueOrAdd = ({
               </React.Fragment>
             ))}
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>Tiempo estimado : 2 horas</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>{`Tiempo estimado:${car?.services
+            .map(e => (e.service as IService).serviceTime)
+            .reduce((a, b) => a + b)} min`}</div>
         </div>
       </Modal>
       <Modal
