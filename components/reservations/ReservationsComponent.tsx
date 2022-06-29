@@ -6,57 +6,42 @@ import ServicesByStaff from '@/components/reservations/ServicesByStaff'
 import Staffers from '@/components/reservations/Staffers'
 import Steps from '@/components/reservations/Steps'
 import ListStores from '@/components/reservations/Stores/ListStores'
-import useAuth from '@/providers/AuthContext'
-import useCar from '@/providers/CarContext'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { addShoppingCardFn } from '@/services/shoppingCar'
-import React from 'react'
 import Genere from './Genere'
 import ServiceType from './ServiceType'
 
 const ReservationsComponent = () => {
   //#region  states
-  const { selectedStore, step, setStep, selectedStaff, selectedService, selectedServiceType, visibleAsk, setVisibleAsk } = useReservation()
+  const { selectedStore, step, setStep, selectedStaff, selectedServiceType, visibleAsk, setVisibleAsk } = useReservation()
   //#region ref
-  const { user } = useAuth()
-  const { getData } = useCar()
-
-  const addToCar = async () => {
-    await addShoppingCardFn(user?._id as string, {
-      service: selectedService?._id as string,
-      store: selectedStore?._id as string,
-      staff: selectedStaff?._id as string
-    })
-    await getData()
-    setVisibleAsk(false)
-  }
 
   const goHours = async () => {
-    // await addToCar()
     setStep(stepsPageReservation.selectDate)
     setVisibleAsk(false)
   }
 
   const goStart = async () => {
-    // await addToCar()
     setStep(stepsPageReservation.Select)
     setVisibleAsk(false)
   }
 
   const mySteps = [
-    stepsPageReservation.Genere,
-    stepsPageReservation.store,
-    stepsPageReservation.services,
-    stepsPageReservation.selectDate,
-    stepsPageReservation.payment
+    { step: stepsPageReservation.Genere, selectedStep: 0, title: 'Genero' },
+    { step: stepsPageReservation.store, selectedStep: 1, title: 'Sede' },
+    { step: stepsPageReservation.Select, selectedStep: 2, title: 'Staffer o servicio' },
+    { step: stepsPageReservation.servicesType, selectedStep: 3, title: 'Tipo de servicio' },
+    { step: stepsPageReservation.services, selectedStep: 4, title: 'Servicio' },
+    { step: stepsPageReservation.staffers, selectedStep: 2, title: 'Staffers' },
+    { step: stepsPageReservation.selectDate, selectedStep: 5, title: 'Horarios' },
+    { step: stepsPageReservation.payment, selectedStep: 6, title: 'Pago' }
   ]
 
   return (
     <>
       <div className="Container_Reservation ">
-        <p className="Title font-Gothic text-right pt-4 ">Mis reservas </p>
+        <p className="Title font-Gothic text-right pt-4 ">{mySteps.find(e => e.step === step)?.title ?? 'Proceso de reserva'}</p>
         <div className="Container_Steps w-full pt-4">
-          <Steps current={mySteps.findIndex(e => e === step)} />
+          <Steps current={mySteps.find(e => e.step === step)?.selectedStep ?? 0} />
         </div>
         <div className="Container_pages ">
           {step === stepsPageReservation.Genere && <Genere />}
@@ -68,7 +53,6 @@ const ReservationsComponent = () => {
           {step === stepsPageReservation.services && selectedStore && selectedServiceType && <Services />}
           {step === stepsPageReservation.servicesByStaffer && selectedStore && selectedStaff && <ServicesByStaff />}
           {step === stepsPageReservation.selectDate && <SelectDate />}
-          {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
           <AskContinueOrAdd
             setVisible={setVisibleAsk}
             goHours={goHours}
@@ -78,8 +62,6 @@ const ReservationsComponent = () => {
           />
         </div>
       </div>
-
-      {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { sendCodeFn } from '../../services/clients'
-import { Form, FormInstance } from 'antd'
+import { Form, FormInstance, message } from 'antd'
 import React, { Dispatch, SetStateAction, useRef } from 'react'
 import Selector from '../Selector'
 import countries from 'country-data'
@@ -16,6 +16,7 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
     if (data) {
       setData({ phone1 })
       setIsConfirm(true)
+      message.info('Hemos enviado un código a tu correo electrónico')
     } else {
       console.log('El número de teléfono no es válido')
     }

@@ -4,9 +4,10 @@ import React from 'react'
 const StepsEncuesta = ({ current }: { current: number }) => {
   return (
     <Steps size="small" current={current}>
-      {<Steps.Step title={'Genero'} />}
+      <Steps.Step title={'Genero'} />
       <Steps.Step title={'Sede'} />
-      {/* <Steps.Step title={'Profesionales'} /> */}
+      <Steps.Step title={'Categoría'} />
+      <Steps.Step title={'tipo de servicio'} />
       <Steps.Step title={'Servicio'} />
       <Steps.Step title={'Horario'} />
       <Steps.Step title={'Pago'} />

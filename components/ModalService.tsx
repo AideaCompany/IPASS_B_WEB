@@ -25,9 +25,6 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
   return (
     <div style={{ zIndex: '99999999' }}>
       <div className="Main_Modal_Service m-0 w-72">
-        <div className="Photo_Modal h-52 flex justify-center content-center  aling-center w-full">
-          <img src={service?.photo?.key} className="sec-img aling-center h-52 flex  content-center justify-center"></img>
-        </div>
         <div className="Question_Information w-full  mt-2 text-center text-xs">
           <p>
             <HeartOutlined style={{ fontSize: '20px' }} /> Agregar a favoritos
@@ -41,7 +38,7 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
             <p> Tiempo de duración</p>
           </div>
           <div className="Container_Rate w-1/2 mt-2 text-right ">
-            <p> 60 minutos</p>
+            <p> {service?.returnTime}</p>
           </div>
         </div>
         <div className="Information_Modal flex w-full">

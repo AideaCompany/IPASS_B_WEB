@@ -19,6 +19,7 @@ const ServiceType = () => {
   }
   return (
     <div className="Main_Container">
+      <p className="Title font-Gothic text-right pt-4 ">Tipo de servicio</p>
       {/* <div className="Container_bar ">
         <div className="Search_bar flex appearance-none   left-2 m-5 sm:max-w-screen-sm text-stone-900">
           <svg className="w-6 h-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
