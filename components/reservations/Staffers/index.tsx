@@ -1,7 +1,6 @@
 import useReservation from '@/providers/ReservationContext'
 import { listStaffByStoreFn } from '@/services/staff'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import { CaretDownOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
 import CardStaffers from './CardStaffers'
 

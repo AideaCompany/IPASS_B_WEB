@@ -1,8 +1,5 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { IServiceType } from '@/types/interfaces/ServiceType/serviceType.interface'
-import { Popover } from 'antd'
-import React from 'react'
-import ModalServiceType from './ModalServiceType'
 const CardServicesType = ({ service }: { service: IServiceType }) => {
   const { setSelectedServiceType, setStep } = useReservation()
   const onClick = (value: IServiceType) => {

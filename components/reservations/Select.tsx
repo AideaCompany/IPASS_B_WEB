@@ -1,7 +1,4 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { IService } from '@/types/interfaces/services/Services.interface'
-import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
 
 const Select = ({}: {}) => {
   const { setStep, setSelected, selectedStore, genere } = useReservation()

@@ -1,9 +1,7 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import { fileType } from '@/types/typeTemplate'
 import { HeartOutlined } from '@ant-design/icons'
 import { Rate } from 'antd'
-import React from 'react'
 import Button from './Button'
 
 const ModalStaffer = ({ staffer }: { staffer: IStaff }) => {
