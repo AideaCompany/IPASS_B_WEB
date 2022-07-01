@@ -1,0 +1,15 @@
+.Container_Ser {
+  position: relative;
+}
+.Container_Ser:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  background: linear-gradient(180deg, rgba(34, 34, 34, 0) 42.15%, #222222 105.05%);
+  filter: blur(1.10538px);
+  z-index: -1;
+}
