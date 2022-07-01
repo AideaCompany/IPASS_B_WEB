@@ -22,8 +22,8 @@ const CardServices = ({ service }: { service: IService }) => {
           {/* <div className="Image_background"></div> */}
           <img src={service.photo.key} className="sec-img"></img>
         </div>
-        <div className="flex flex-col items-center justify-center text-white p-0  border shadow rounded-lg">
-          <h2 className="mt-4 font-bold text-xl text-white border text-right">{service?.name}</h2>
+        <div className="flex flex-col items-center justify-center text-white p-0 shadow rounded-lg">
+          <h2 className="mt-4 font-bold text-xl text-white  text-right">{service?.name}</h2>
           <p className="text-xs text-gray-500 text-center mt-48">Lorem ipsum dolor sit amet, consectetur adipisicing eli</p>
         </div>
       </div>
