@@ -1,16 +1,16 @@
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { Steps } from 'antd'
 import React from 'react'
 
 const StepsEncuesta = ({ current }: { current: number }) => {
+  const { selected } = useReservation()
   return (
     <Steps size="small" current={current}>
       <Steps.Step title={'Genero'} />
       <Steps.Step title={'Sede'} />
-      <Steps.Step title={'Categoría'} />
-      <Steps.Step title={'tipo de servicio'} />
+      <Steps.Step title={selected === stepsPageReservation.services ? 'tipo de servicio' : 'Staffers'} />
       <Steps.Step title={'Servicio'} />
       <Steps.Step title={'Horario'} />
-      <Steps.Step title={'Pago'} />
     </Steps>
   )
 }

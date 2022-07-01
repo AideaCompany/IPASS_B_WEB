@@ -86,7 +86,7 @@ const ListStores = () => {
     <>
       <Spin loading={loading}>
         <div className="container_list_stores ">
-          <p className="Title font-Gothic text-right pt-4 ">Selección de establecimiento</p>
+          {/* <p className="Title font-Gothic text-right pt-4 ">Selección de establecimiento</p> */}
           <div className="Container_bar mt-6 ">
             <div className="Container_bar1 flex grid-cols-3 gap-x-28  mt-6 pt-6 w-full">
               <SelectorStores
@@ -125,7 +125,7 @@ const ListStores = () => {
                     <CardStore isSelect={currentStore === item} store={item} onClick={() => handleButton(item)} />
                   </React.Fragment>
                 )}
-              ></List>
+              />
             </div>
           </div>
         </div>

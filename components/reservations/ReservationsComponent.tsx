@@ -28,12 +28,11 @@ const ReservationsComponent = () => {
   const mySteps = [
     { step: stepsPageReservation.Genere, selectedStep: 0, title: 'Genero' },
     { step: stepsPageReservation.store, selectedStep: 1, title: 'Sede' },
-    { step: stepsPageReservation.Select, selectedStep: 2, title: 'Staffer o servicio' },
-    { step: stepsPageReservation.servicesType, selectedStep: 3, title: 'Tipo de servicio' },
-    { step: stepsPageReservation.services, selectedStep: 4, title: 'Servicio' },
+    { step: stepsPageReservation.Select, selectedStep: 1, title: 'Staffer o servicio' },
+    { step: stepsPageReservation.servicesType, selectedStep: 2, title: 'Tipo de servicio' },
+    { step: stepsPageReservation.services, selectedStep: 3, title: 'Servicio' },
     { step: stepsPageReservation.staffers, selectedStep: 2, title: 'Staffers' },
-    { step: stepsPageReservation.selectDate, selectedStep: 5, title: 'Horarios' },
-    { step: stepsPageReservation.payment, selectedStep: 6, title: 'Pago' }
+    { step: stepsPageReservation.selectDate, selectedStep: 4, title: 'Horarios' }
   ]
 
   return (
@@ -46,7 +45,7 @@ const ReservationsComponent = () => {
         <div className="Container_pages ">
           {step === stepsPageReservation.Genere && <Genere />}
           {step === stepsPageReservation.store && <ListStores />}
-          {step === stepsPageReservation.Select && <Select history={null} />}
+          {step === stepsPageReservation.Select && <Select />}
           {step === stepsPageReservation.staffers && selectedStore && <Staffers />}
           {/* {step === stepsPageReservation.hair && <Hair setStep={setStep} stores={props.stores} />} */}
           {step === stepsPageReservation.servicesType && selectedStore && <ServiceType />}
