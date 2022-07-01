@@ -3,7 +3,9 @@ import useCar from '@/providers/CarContext'
 import useReservation from '@/providers/ReservationContext'
 import { addShoppingCardFn } from '@/services/shoppingCar'
 import { IService } from '@/types/interfaces/services/Services.interface'
+import { IServiceType } from '@/types/interfaces/ServiceType/serviceType.interface'
 import { HeartOutlined } from '@ant-design/icons'
+import numeral from 'numeral'
 import React from 'react'
 import Button from './Button'
 
@@ -45,13 +47,17 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
           <div className="Question_Information font-bold w-1/2 font-helvetica content-center pt-2  mt-2 text-left text-sm divide-y divide-slate-200">
             <p> Tipo de servicio</p>
           </div>
-          <div className="Container_Rate w-1/2  mt-2 divide-y mt-4 text-right divide-slate-200">Peinado</div>
+          <div className="Container_Rate w-1/2  mt-2 divide-y text-right divide-slate-200">
+            <p>{(service?.type as IServiceType).name}</p>
+          </div>
         </div>
         <div className="Information_Modal flex w-full ">
           <div className="Question_Information font-bold w-1/2 font-helvetica content-center pt-2  mt-2 text-left text-sm divide-y divide-slate-200">
             <p> Precio</p>
           </div>
-          <div className="Container_Rate w-1/2  mt-4 divide-y text-right divide-slate-200">Q 200</div>
+          <div className="Container_Rate w-1/2  mt-4 divide-y text-right divide-slate-200">
+            <p>{`Q${numeral(service?.price).format('0,0')}`}</p>
+          </div>
         </div>
         <div style={{ marginTop: '8px' }} className="Information_Modal font-bold  w-full">
           <p> Descripción</p>
