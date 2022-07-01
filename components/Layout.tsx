@@ -3,12 +3,14 @@ import { UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import CarDrawer from './ShoppingCar/CarDrawer'
-
+import dynamic from 'next/dynamic'
+const VerifyDeviceDynamic = dynamic(() => import('./VerifyDevice'), { ssr: false })
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuth()
   return (
     <>
       <div className="header mt-6">
+        <VerifyDeviceDynamic></VerifyDeviceDynamic>
         <Link href={'reservations'}>
           <div className="title  font-Butler font-bold text-6xl">
             <svg width="125" height="35" viewBox="0 0 125 35" fill="none" xmlns="http://www.w3.org/2000/svg">
