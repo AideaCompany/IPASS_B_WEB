@@ -6,7 +6,7 @@ const CardStore = ({ onClick, store, isSelect }: { store: IStores; onClick: () =
     <>
       <div onClick={onClick} className="Container_Sto cursor-pointer w-full" style={{ border: isSelect ? '2px solid #d2b782' : '0px' }}>
         <div className="Container_Information w-full p-2">
-          <div className="mb-8 h-full w-full ">
+          <div className="mb-2 h-full w-full ">
             <p className="text-sm text-gray-600 flex items-center"></p>
 
             <div className="w-full flex ">
