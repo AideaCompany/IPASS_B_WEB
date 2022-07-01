@@ -39,6 +39,7 @@ export const AuthProvider = (props: { children: JSX.Element }) => {
         const currentUser = await getClientFn(data.data._id as string)
         setUser(currentUser)
       }
+      setLoading(false)
     })()
   }, [])
 

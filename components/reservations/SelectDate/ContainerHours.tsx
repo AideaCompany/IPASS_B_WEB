@@ -35,10 +35,9 @@ const ContainerHours = ({ day }: { day: Moment }) => {
 
   const getData = async () => {
     setLoading(true)
-    console.log(car)
     const hours = (
       await listAvailableHourFn(
-        (car?.services[0].store as IStores)._id as string,
+        (car?.services[0].store as IStores)?._id as string,
         (car?.services as IShoppingService[]).filter(e => !e.staff).map(service => (service.service as IService)._id) as string[],
         (car?.services as IShoppingService[])
           .filter(e => e.staff)

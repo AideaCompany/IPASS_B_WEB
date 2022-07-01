@@ -90,7 +90,7 @@ const Register = ({ cards }: { cards: ICards[] }) => {
   return (
     <Layout>
       <div className="main_container_payment ">
-        <p className="container_description text-left  font-semibold text-base">Juan Perez tu número de reserva es #123345</p>
+        <p className="container_description text-left  font-semibold text-base">{`${user?.name1} tu reserva`}</p>
         <div className="Main_Payment ">
           <div className="Container_CardResume ">
             <div className="Container_cardsB h-3/4  ">
@@ -112,9 +112,9 @@ const Register = ({ cards }: { cards: ICards[] }) => {
           <div className="Container_Info_Card ">
             <CardTable cards={currentCards} onComplete={updateCards} />
             <ModalCard onComplete={updateCards} />
-            <div style={{ marginBottom: '20px' }} className="Container_Offerts  pt-4 font-semibold ">
+            {/* <div style={{ marginBottom: '20px' }} className="Container_Offerts  pt-4 font-semibold ">
               <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
-            </div>
+            </div> */}
             {/* <div className="Container_OffertsC  flex pt-4 font-semibold ">
               <div className="Medium w-2/3  h-12 aling-botton">
                 <input type="text" className="appearance-none bg-transparent w-full h-12  " placeholder="Ingresar código de descuento"></input>
@@ -144,7 +144,9 @@ const Register = ({ cards }: { cards: ICards[] }) => {
               </div>
             </div>
             <div className="Titles_Buy font-helvetica text-center font-bold m-6">
-              <p>{`Tienes ${minutes ?? '00:00'} minutos para realizar el pago`}</p>
+              <p>
+                {`Tienes `} <b className="underline">{`${minutes ?? '00:00'}`}</b> {`minutos para realizar el pago`}
+              </p>
             </div>
             <Button title="PAGAR EN LA SEDE" onClick={onClick} customClassName="button  bg-indigo-500 w-20 text-xs"></Button>
             <Button title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>

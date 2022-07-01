@@ -1,7 +1,7 @@
 import useCar from '@/providers/CarContext'
 import { stepsPageReservation } from '@/providers/ReservationContext'
 import { IService } from '@/types/interfaces/services/Services.interface'
-import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { IShoppingService, statusShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import { Badge, Drawer, Tooltip } from 'antd'
 import { ShoppingCard } from 'icons/personalIcons'
@@ -13,14 +13,14 @@ import CardResume from '../CardResume'
 
 const CarDrawer = () => {
   const [visible, setVisible] = useState(false)
+  const { car } = useCar()
+  const router = useRouter()
   const onClose = () => {
     setVisible(false)
   }
   const onClick = () => {
-    router.push(`/reservations?step=${stepsPageReservation.selectDate}`)
+    router.push(car?.status === statusShoppingCard.WAITING_PAYMENT ? `/payment` : `/reservations?step=${stepsPageReservation.selectDate}`)
   }
-  const { car } = useCar()
-  const router = useRouter()
 
   const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price)?.reduce((a, b) => a + b)
 
@@ -31,7 +31,7 @@ const CarDrawer = () => {
           <ShoppingCard style={{ fontSize: '30px' }} onClick={() => setVisible(true)} />
         </Badge>
       </div>
-      <Drawer title={car ? 'Contenido de la reserva XXXXXXXXX' : 'Carrito vació'} placement="right" onClose={onClose} visible={visible}>
+      <Drawer title={car ? 'Contenido de la reserva ' : 'Carrito vació'} placement="right" onClose={onClose} visible={visible}>
         {car && (
           <>
             <div className="Container_cardsB h-1/2  ">
@@ -64,7 +64,11 @@ const CarDrawer = () => {
             </div>
 
             <div className="Container_Info_Button h-1/6 ">
-              <Button title="Confirmar reserva" onClick={onClick} customClassName="button  text-xs" />
+              <Button
+                title={car.status === statusShoppingCard.WAITING_PAYMENT ? 'Ir a pagar' : 'Confirmar reserva'}
+                onClick={onClick}
+                customClassName="button  text-xs"
+              />
             </div>
           </>
         )}

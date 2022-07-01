@@ -1,11 +1,10 @@
-import { sendCodeFn } from '../../services/clients'
 import { Form, FormInstance, message } from 'antd'
-import React, { Dispatch, SetStateAction, useRef } from 'react'
-import Selector from '../Selector'
 import countries from 'country-data'
+import React, { Dispatch, SetStateAction, useRef } from 'react'
 import Button from '../../components/Button'
-import Input from '../FormComponents/Input'
+import { sendCodeFn } from '../../services/clients'
 import InputNumber from '../FormComponents/InputNumber'
+import Selector from '../Selector'
 
 const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetStateAction<boolean>>; setData: Dispatch<SetStateAction<any>> }) => {
   const formRef = useRef<FormInstance>(null)
