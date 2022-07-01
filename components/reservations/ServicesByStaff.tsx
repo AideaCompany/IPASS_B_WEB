@@ -2,7 +2,6 @@ import useCar from '@/providers/CarContext'
 import useReservation from '@/providers/ReservationContext'
 import { listServiceByStaffAndStoreFn } from '@/services/services'
 import { IService } from '@/types/interfaces/services/Services.interface'
-import { CaretDownOutlined } from '@ant-design/icons'
 import React, { useEffect, useState } from 'react'
 import CardServices from './Service/CardServices'
 
