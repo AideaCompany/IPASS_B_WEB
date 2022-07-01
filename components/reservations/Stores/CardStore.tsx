@@ -19,7 +19,7 @@ const CardStore = ({ onClick, store, isSelect }: { store: IStores; onClick: () =
             </div>
             <div className="w-full ">
               <div className="text-gray-700 text-xs  mt-1 w-full text-left"> Contacto: {store.contact}</div>
-              <div className="text-gray-700 text-xs w-full text-left mt-1 text-ellipsis overflow-hidden"> Dir: {store.address}</div>
+              <div className="text-gray-700 text-xs w-full text-left mt-1 text-ellipsis overflow-hidden">Dir: {store.address}</div>
               <div className="text-gray-700 text-xs w-full text-left mt-1 "> Tel: {store.phone}</div>
               {store.distance && <div className="text-gray-700 text-xs  text-left mt-1 "> {numeral(store.distance).format('00.00')} km de ti</div>}
             </div>
