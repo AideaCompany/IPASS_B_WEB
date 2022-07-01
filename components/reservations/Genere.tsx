@@ -53,12 +53,14 @@ const Genere = () => {
   return (
     <div className="Container_Genere  w-full pt-4">
       <p className="Title font-Gothic text-center text-sm font-bold mt-4">Selecciona para quien es el servicio </p>
-      <div className="Container_Tar w-full grid grid-cols-2 gap-x-6 gap-y-6 mt-10 h-auto">
-        {validGeneres.map(genere => (
-          <div className="Container_GEN  cursor-pointer  relative  justify-self-center  ml-12" onClick={() => onClick(genere.click)}>
-            <img src={genere.imagen} className="mapG-img w-full relative justify-self-center "></img>
-            <div className="Gradient justify-self-center"></div>
-            <p className="Title font-Gothic  font-bold text-2xl text-white absolute bottom-0 left-24 top-24 "> {genere.title}</p>
+      <div className="Container_Tar w-full grid grid-cols-2 gap-y-6  gap-x-6 mt-10 h-auto">
+        {validGeneres.map((genere, key) => (
+          <div className="container_genere">
+            <div key={key} className="Container_GEN  cursor-pointer " onClick={() => onClick(genere.click)}>
+              <img src={genere.imagen} className="mapG-img  w-full"></img>
+              <div className="Gradient justify-self-center"></div>
+              <p className="Title font-Gothic  font-bold text-2xl text-white absolute bottom-0 left-24 top-24 "> {genere.title}</p>
+            </div>
           </div>
         ))}
       </div>
