@@ -114,18 +114,20 @@ const ListStores = () => {
           </div>
           <div className="Container_select1  w-full ">
             <div className="Image_container ">{currentStore && <Map store={currentStore} />}</div>
-            <div className="Main_carousel1  m-2  ">
+            <div className="Main_carousel1  m-2">
               <div style={{ display: 'flex', justifyContent: 'center' }} className="Button_Select  w-full">
                 <Button title="Seleccionar" onClick={onClick} />
               </div>
-              <List
-                dataSource={stores}
-                renderItem={item => (
-                  <React.Fragment key={item.name}>
-                    <CardStore isSelect={currentStore === item} store={item} onClick={() => handleButton(item)} />
-                  </React.Fragment>
-                )}
-              />
+              <div className="List">
+                <List
+                  dataSource={stores}
+                  renderItem={item => (
+                    <React.Fragment key={item.name}>
+                      <CardStore isSelect={currentStore === item} store={item} onClick={() => handleButton(item)} />
+                    </React.Fragment>
+                  )}
+                />
+              </div>
             </div>
           </div>
         </div>

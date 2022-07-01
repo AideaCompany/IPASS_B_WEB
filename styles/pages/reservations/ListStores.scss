@@ -52,8 +52,22 @@
       justify-content: right;
       display: flex;
       flex-direction: column;
-      overflow-y: scroll;
-      scroll-behavior: smooth;
+
+      .List {
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+
+        &::-webkit-scrollbar {
+          width: 10px;
+          background-color: #ffff;
+          border-radius: 5px;
+          height: 100%;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #000000;
+          border-radius: 5px;
+        }
+      }
     }
   }
 }
