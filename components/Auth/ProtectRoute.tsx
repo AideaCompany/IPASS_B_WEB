@@ -15,8 +15,6 @@ function ProtectRoute(props: { children: JSX.Element; router: NextRouter }): JSX
   const { children, router } = props
   useEffect(() => {
     if (!loading) {
-      console.log(loading)
-      console.log(router.pathname)
       if (!noLoggedPages.includes(router.pathname) && !isAuthenticated) {
         router.push(`/`)
       }
