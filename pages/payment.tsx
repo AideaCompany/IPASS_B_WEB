@@ -148,7 +148,6 @@ const Register = ({ cards }: { cards: ICards[] }) => {
                 {`Tienes `} <b className="underline">{`${minutes ?? '00:00'}`}</b> {`minutos para realizar el pago`}
               </p>
             </div>
-            <Button title="PAGAR EN LA SEDE" onClick={onClick} customClassName="button  bg-indigo-500 w-20 text-xs"></Button>
             <Button title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>
           </div>
         </div>

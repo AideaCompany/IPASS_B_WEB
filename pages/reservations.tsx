@@ -6,11 +6,11 @@ import React from 'react'
 
 const Reservations = ({ currentStep }: { currentStep: stepsPageReservation }) => {
   return (
-    <Layout>
-      <ReservationProvider currentStep={currentStep}>
+    <ReservationProvider currentStep={currentStep}>
+      <Layout>
         <ReservationsComponent />
-      </ReservationProvider>
-    </Layout>
+      </Layout>
+    </ReservationProvider>
   )
 }
 

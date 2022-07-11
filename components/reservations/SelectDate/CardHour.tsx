@@ -11,7 +11,10 @@ const CardHour = ({ onClick, hour }: { onClick: () => void; hour: string }) => {
       value = `${value}:00`
     } else {
       if (parseInt(value.split(':')[0]) < 10) {
-        value = `0${value.split(':')[0]}:${value.split(':')[1] === '0' ? `00` : value.split(':')[1]}`
+        value = `0${value.split(':')[0]}:${value.split(':')[1]}`
+      }
+      if (parseInt(value.split(':')[1]) < 10) {
+        value = `${value.split(':')[0]}:0${value.split(':')[1]}`
       }
     }
     return value

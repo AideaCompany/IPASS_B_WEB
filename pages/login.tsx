@@ -6,7 +6,6 @@ import ConfirmLogIn from '../components/Login/ConfirmLogIn'
 import LoginComponent from '../components/Login/LoginComponent'
 
 const Login: NextPage = () => {
-  // const [loginTrigger] = useMutation(gql(mutation.loginApp))
   const [data, setData] = useState({} as any)
 
   const [isConfirm, setIsConfirm] = useState(false)

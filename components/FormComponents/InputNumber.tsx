@@ -4,11 +4,11 @@ import React, { useEffect, useState } from 'react'
 const InputNumber = ({ item }: { item: { label: string; name: string; required: boolean; type: string } }) => {
   const MyNumberInput = ({ value, onChange }: { onChange: (value: string) => void; value: string }) => {
     const [myValue, setMyValue] = useState(value ? parseInt(value) : '')
-    useEffect(() => {
-      if (!value) {
-        onChange('')
-      }
-    }, [])
+    // useEffect(() => {
+    //   if (!value) {
+    //     onChange('')
+    //   }
+    // }, [])
     return (
       <div className="mb-1">
         <label className="font-Gothic block flex items-center	 mb-2 text-base font-normal text-black">

@@ -1,5 +1,5 @@
 import useCar from '@/providers/CarContext'
-import { stepsPageReservation } from '@/providers/ReservationContext'
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IShoppingService, statusShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { QuestionCircleOutlined } from '@ant-design/icons'
@@ -15,10 +15,16 @@ const CarDrawer = () => {
   const [visible, setVisible] = useState(false)
   const { car } = useCar()
   const router = useRouter()
+  const reservation = useReservation()
+
   const onClose = () => {
     setVisible(false)
   }
   const onClick = () => {
+    if (car?.status !== statusShoppingCard.WAITING_PAYMENT && reservation.setStep) {
+      reservation.setStep(stepsPageReservation.selectDate)
+      setVisible(false)
+    }
     router.push(car?.status === statusShoppingCard.WAITING_PAYMENT ? `/payment` : `/reservations?step=${stepsPageReservation.selectDate}`)
   }
 
