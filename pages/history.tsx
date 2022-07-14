@@ -22,7 +22,7 @@ const History = () => {
 
   return (
     <Layout>
-      <div className="Container_MainH ">
+      <div className="Container_MainH">
         <div className="Tittle">
           <p className="text-left text-black font-Gothic font-bold text-xl">Consulta el historial de tus servicios</p>
         </div>

@@ -31,7 +31,7 @@ const Confirm: FC<{ data: registerClient }> = ({ data }) => {
     <>
       <div className="container_form">
         <Form ref={formRef}>
-          <p>{`Ingresa el código que hemos enviado a +${data.phone1}`}</p>
+          <p>{`Ingresa el código que hemos enviado a ${data.country} ${data.phone1}`}</p>
           <>
             {formItems.map((item, i) => {
               let element = <></>

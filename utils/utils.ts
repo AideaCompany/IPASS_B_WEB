@@ -9,6 +9,7 @@ import crypto from 'crypto'
 import jwt from 'jsonwebtoken'
 import { $security } from 'config'
 import { ICards } from '@/types/types'
+import { statusShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 
 export const capitalize = (s: string | undefined): string => {
   if (typeof s !== 'string') {
@@ -193,3 +194,12 @@ export const getKilometers = (lat1: number, lon1: number, lat2: number, lon2: nu
   var d = R * c
   return parseFloat(d.toFixed(3)) //Retorna tres decimales
 }
+
+export const validateShoppingStatus = (value: statusShoppingCard) =>
+  ({
+    [statusShoppingCard.CURRENT]: 'Sin finalizar',
+    [statusShoppingCard.PAYED]: 'Pagado',
+    [statusShoppingCard.FINISHED]: 'Finalizado',
+    [statusShoppingCard.WAITING_PAYMENT]: 'Esperando pago',
+    [statusShoppingCard.DELETED]: 'Eliminado'
+  }[value])

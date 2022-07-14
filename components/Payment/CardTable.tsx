@@ -5,13 +5,25 @@ import { encryptValues } from '@/utils/utils'
 import { CheckCircleOutlined, CreditCardOutlined, DeleteOutlined } from '@ant-design/icons'
 import { message } from 'antd'
 import React from 'react'
-const CardTable = ({ cards = [], onComplete }: { cards: ICards[]; onComplete: () => Promise<void> }) => {
+const CardTable = ({
+  cards = [],
+  onComplete,
+  setSelectedCard,
+  selectedCard
+}: {
+  cards: ICards[]
+  onComplete: () => Promise<void>
+  setSelectedCard: React.Dispatch<React.SetStateAction<ICards | null>>
+  selectedCard: ICards | null
+}) => {
   const { user } = useAuth()
   const deleteCard = async (card: object) => {
     await deleteCardFn(user?._id as string, encryptValues(card))
     await onComplete()
+    setSelectedCard(null)
     message.success('Tarjeta eliminada con éxito')
   }
+
   return (
     <>
       <div className="title flex space-x-2 p-1">
@@ -35,8 +47,12 @@ const CardTable = ({ cards = [], onComplete }: { cards: ICards[]; onComplete: ()
       </div>
 
       {cards?.map((card, i) => (
-        <div key={i} className="Info_T_Cards_preview flex w-full text-center space-x-8 p-1 font-semibold ">
-          <CheckCircleOutlined style={{ fontSize: '15px', color: '#1BB66E' }} />
+        <div
+          key={i}
+          onClick={() => setSelectedCard(card)}
+          className="Info_T_Cards_preview 	cursor-pointer flex w-full text-center space-x-8 p-1 font-semibold "
+        >
+          {card.ID === selectedCard?.ID && <CheckCircleOutlined style={{ fontSize: '15px', color: '#1BB66E' }} />}
           <div className="w-1/4">
             <p>{card.lastName1}</p>
           </div>
@@ -57,4 +73,4 @@ const CardTable = ({ cards = [], onComplete }: { cards: ICards[]; onComplete: ()
   )
 }
 
-export default CardTable
+export default React.memo(CardTable)
