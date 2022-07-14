@@ -5,7 +5,7 @@ import ModalCard from '@/components/ModalCard'
 import CardTable from '@/components/Payment/CardTable'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
-import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import { stepsPageReservation } from '@/providers/ReservationContext'
 import { listClientCardsFn } from '@/services/clients'
 import { getClientCurrentShoppingCardToPayFn, InvalidateShoppingCardFn, makePaymentShoppingCardFn } from '@/services/shoppingCar'
 import { StatusPayment } from '@/types/interfaces/Payments/Payment.interface'
@@ -26,7 +26,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import Layout from '../components/Layout'
 let myInterval: any
 const Register = ({ cards }: { cards: ICards[] }) => {
-  const { setStep } = useReservation()
   const [currentCards, setCurrentCards] = useState(cards)
   const { user } = useAuth()
   const [car, setCar] = useState<IShoppingCard>()
