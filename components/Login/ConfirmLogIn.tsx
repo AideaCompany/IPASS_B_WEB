@@ -14,9 +14,21 @@ const Confirm: FC<{ data: registerClient }> = ({ data }) => {
     try {
       const res = await loginClientFn(values.token)
       login(res.token)
-      message.success('Inició de sesión exitoso')
+      message.success({
+        content: 'Inició de sesión exitoso',
+        duration: 10,
+        style: {
+          marginTop: '20vh'
+        }
+      })
     } catch (error) {
-      message.error('Ha ocurrido un error')
+      message.error({
+        content: 'Ha ocurrido un error',
+        duration: 10,
+        style: {
+          marginTop: '20vh'
+        }
+      })
     }
   }
   const formItems = [

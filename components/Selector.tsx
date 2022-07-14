@@ -7,11 +7,12 @@ type valueSelector = {
   icon?: React.ReactNode
 }
 
-const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]; formRef: React.RefObject<FormInstance<any>> }> = ({
+const Selector: FC<{ label: string; name: string; placeHolder?: string; values: valueSelector[]; formRef: React.RefObject<FormInstance<any>> }> = ({
   name,
   placeHolder = '',
   values,
-  formRef
+  formRef,
+  label
 }) => {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
@@ -54,6 +55,7 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
   return (
     <Form.Item name={name}>
       <div ref={selectorRef} className="relative">
+        <label className="font-Gothic block flex items-center	 mb-2 text-base font-normal text-black">{`${label} `}</label>
         <div className=" h-10 text-black  flex border border-gray-200 items-center">
           <input
             onClick={() => setOpen(true)}

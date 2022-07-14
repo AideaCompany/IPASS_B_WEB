@@ -22,9 +22,21 @@ const Register: NextPage = () => {
         await SignUpClientFn(values)
         setData(values)
         setIsConfirm(true)
-        message.info('Hemos enviado un código a tu correo electrónico')
+        message.info({
+          content: 'Hemos enviado un código a tu correo',
+          duration: 10,
+          style: {
+            marginTop: '15vh'
+          }
+        })
       } else {
-        message.error('Debes aceptar los términos y condiciones para continuar')
+        message.error({
+          content: 'Debes aceptar los términos y condiciones para continuar',
+          duration: 10,
+          style: {
+            marginTop: '20vh'
+          }
+        })
       }
     } catch (error) {
       console.log(error)
@@ -36,7 +48,13 @@ const Register: NextPage = () => {
     console.log(values)
     try {
       const res = await confirmClientFn(values.token)
-      message.success('Registro exitoso')
+      message.success({
+        content: 'Inició de sesión exitoso',
+        duration: 10,
+        style: {
+          marginTop: '20vh'
+        }
+      })
       console.log(res)
       if (res.response === '200') {
         login(res.token)
