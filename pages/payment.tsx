@@ -5,15 +5,16 @@ import ModalCard from '@/components/ModalCard'
 import CardTable from '@/components/Payment/CardTable'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
-import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import { stepsPageReservation } from '@/providers/ReservationContext'
 import { listClientCardsFn } from '@/services/clients'
-import { getClientCurrentShoppingCardToPayFn, InvalidateShoppingCardFn } from '@/services/shoppingCar'
+import { getClientCurrentShoppingCardToPayFn, InvalidateShoppingCardFn, makePaymentShoppingCardFn } from '@/services/shoppingCar'
+import { StatusPayment } from '@/types/interfaces/Payments/Payment.interface'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IShoppingCard, IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { ICards, IClient } from '@/types/types'
-import { decodeValues } from '@/utils/utils'
+import { decodeValues, encryptValues } from '@/utils/utils'
 import { InfoCircleOutlined } from '@ant-design/icons'
-import { Tooltip } from 'antd'
+import { Form, FormInstance, message, Tooltip } from 'antd'
 import { $security } from 'config'
 import * as cookie from 'cookie'
 import jwt from 'jsonwebtoken'
@@ -21,17 +22,19 @@ import moment from 'moment-timezone'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import numeral from 'numeral'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Layout from '../components/Layout'
 let myInterval: any
 const Register = ({ cards }: { cards: ICards[] }) => {
-  const { setStep } = useReservation()
   const [currentCards, setCurrentCards] = useState(cards)
   const { user } = useAuth()
   const [car, setCar] = useState<IShoppingCard>()
   const { getData: getDataCar } = useCar()
   const [minutes, setMinutes] = useState('')
+  const [selectedCard, setSelectedCard] = useState<ICards | null>(cards.length ? cards[0] : null)
   const router = useRouter()
+  const formCheckbox = useRef<FormInstance>(null)
+  const [buttonDisabled, setButtonDisabled] = useState(true)
   useEffect(() => {
     if (user) {
       getData()
@@ -81,11 +84,37 @@ const Register = ({ cards }: { cards: ICards[] }) => {
     setCurrentCards(decodeValues(newCards))
   }
 
-  const onClick = () => {
-    setStep(stepsPageReservation.staffers)
+  const onClick = async () => {
+    const resp = await makePaymentShoppingCardFn(user?._id as string, encryptValues(selectedCard as ICards))
+    if (resp.status === StatusPayment.ACCEPTED) {
+      message.success('Pago realizado con éxito')
+      getDataCar()
+      router.push({ pathname: '/reserve/[id]', query: { id: car?._id } })
+    }
   }
 
   const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price).reduce((a, b) => a + b)
+
+  const validateDisable = async () => {
+    if (formCheckbox) {
+      const { terms, medical } = await formCheckbox.current?.validateFields()
+      if (!terms || !medical) {
+        setButtonDisabled(true)
+      } else {
+        if (selectedCard) {
+          setButtonDisabled(false)
+        } else {
+          setButtonDisabled(true)
+        }
+      }
+    } else {
+      setButtonDisabled(true)
+    }
+  }
+
+  useEffect(() => {
+    validateDisable()
+  }, [setSelectedCard])
 
   return (
     <Layout>
@@ -103,14 +132,20 @@ const Register = ({ cards }: { cards: ICards[] }) => {
             <div className="Container_termins h-1/4 text-stone-400 text-xs  ">
               <p>{`Cantidad de servicios:  ${car?.services?.length}`}</p>
               <p>{`Seras atendido por:  ${car?.services?.length}`}</p>
-              <div className="Container_termins flex mt-10">
-                <Checkbox name="Oferta" label="Acepto términos y condiciones" />
-                <Checkbox name="Oferta" label="Acepto Disclaimer Médico" />
-              </div>
+
+              <Form
+                onChange={validateDisable}
+                initialValues={{ terms: false, medical: false }}
+                className="Container_termins flex mt-10"
+                ref={formCheckbox}
+              >
+                <Checkbox name="terms" label="Acepto términos y condiciones" />
+                <Checkbox name="medical" label="Acepto Disclaimer Médico" />
+              </Form>
             </div>
           </div>
           <div className="Container_Info_Card ">
-            <CardTable cards={currentCards} onComplete={updateCards} />
+            <CardTable setSelectedCard={setSelectedCard} selectedCard={selectedCard} cards={currentCards} onComplete={updateCards} />
             <ModalCard onComplete={updateCards} />
             {/* <div style={{ marginBottom: '20px' }} className="Container_Offerts  pt-4 font-semibold ">
               <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
@@ -133,7 +168,6 @@ const Register = ({ cards }: { cards: ICards[] }) => {
                     </Tooltip>
                   </div>
                 </div>
-
                 <p>Precio servicios:</p>
                 <p>Tiempo de reserva:</p>
               </div>
@@ -148,7 +182,7 @@ const Register = ({ cards }: { cards: ICards[] }) => {
                 {`Tienes `} <b className="underline">{`${minutes ?? '00:00'}`}</b> {`minutos para realizar el pago`}
               </p>
             </div>
-            <Button title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>
+            <Button disabled={buttonDisabled} title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>
           </div>
         </div>
         <div className="container_pay  m-0"></div>

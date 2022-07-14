@@ -13,7 +13,7 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
     const { phone1, country }: { phone1: string; country: string } = await formRef.current?.validateFields()
     const data = await sendCodeFn({ phone1, country })
     if (data) {
-      setData({ phone1 })
+      setData({ phone1, country })
       setIsConfirm(true)
       message.info('Hemos enviado un código a tu correo electrónico')
     } else {

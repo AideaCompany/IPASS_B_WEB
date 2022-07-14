@@ -326,6 +326,57 @@ const shoppingCardSvg = () => (
     />
   </svg>
 )
+
+const historySVG = () => (
+  <svg
+    version="1.0"
+    xmlns="http://www.w3.org/2000/svg"
+    width="1em"
+    height="1em"
+    viewBox="0 0 36.000000 36.000000"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <g transform="translate(0.000000,36.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
+      <path
+        d="M60 346 c0 -7 -14 -16 -30 -20 l-31 -6 3 -142 3 -143 117 -3 c87 -2
+  119 -6 128 -17 19 -22 64 -18 88 8 31 33 28 70 -8 100 -28 24 -29 29 -32 114
+  -3 88 -3 88 -30 91 -23 3 -28 -1 -28 -17 0 -12 -4 -21 -10 -21 -5 0 -10 16
+  -10 35 0 19 -4 35 -10 35 -5 0 -10 -7 -10 -15 0 -11 -12 -15 -50 -15 -43 0
+  -50 -3 -50 -20 0 -11 -4 -20 -10 -20 -5 0 -10 16 -10 35 0 19 -4 35 -10 35 -5
+  0 -10 -6 -10 -14z m220 -154 c0 -42 -4 -51 -30 -70 -19 -15 -30 -31 -30 -47 0
+  -25 0 -25 -100 -25 l-100 0 0 95 0 95 130 0 130 0 0 -48z m45 -92 c11 -13 15
+  -27 11 -44 -11 -46 -81 -46 -92 0 -7 28 19 64 46 64 9 0 25 -9 35 -20z"
+      />
+      <path
+        d="M44 196 c-10 -26 4 -48 28 -44 17 2 23 10 23 28 0 18 -6 26 -23 28
+  -13 2 -25 -3 -28 -12z m36 -16 c0 -5 -4 -10 -10 -10 -5 0 -10 5 -10 10 0 6 5
+  10 10 10 6 0 10 -4 10 -10z"
+      />
+      <path
+        d="M124 196 c-10 -26 4 -48 28 -44 17 2 23 10 23 28 0 18 -6 26 -23 28
+  -13 2 -25 -3 -28 -12z m36 -16 c0 -5 -4 -10 -10 -10 -5 0 -10 5 -10 10 0 6 5
+  10 10 10 6 0 10 -4 10 -10z"
+      />
+      <path
+        d="M204 196 c-10 -26 4 -48 28 -44 17 2 23 10 23 28 0 18 -6 26 -23 28
+  -13 2 -25 -3 -28 -12z m36 -16 c0 -5 -4 -10 -10 -10 -5 0 -10 5 -10 10 0 6 5
+  10 10 10 6 0 10 -4 10 -10z"
+      />
+      <path
+        d="M44 116 c-10 -26 4 -48 28 -44 33 4 33 52 0 56 -13 2 -25 -3 -28 -12z
+  m36 -16 c0 -5 -4 -10 -10 -10 -5 0 -10 5 -10 10 0 6 5 10 10 10 6 0 10 -4 10
+  -10z"
+      />
+      <path
+        d="M124 116 c-10 -26 4 -48 28 -44 33 4 33 52 0 56 -13 2 -25 -3 -28
+  -12z m36 -16 c0 -5 -4 -10 -10 -10 -5 0 -10 5 -10 10 0 6 5 10 10 10 6 0 10
+  -4 10 -10z"
+      />
+      <path d="M280 81 c0 -19 17 -38 25 -29 7 7 -7 48 -16 48 -5 0 -9 -9 -9 -19z" />
+    </g>
+  </svg>
+)
+
 export interface IIconProps {
   style?: React.CSSProperties
   onClick?: () => void
@@ -340,3 +391,4 @@ export const BrandIcon = (props: IIconProps) => <Icon component={BrandSvg} {...p
 export const HouseIcon = (props: IIconProps) => <Icon component={HouseSvg} {...props} />
 export const Building = (props: IIconProps) => <Icon component={BuildingSvg} {...props} />
 export const Shield = (props: IIconProps) => <Icon component={ShieldSvg} {...props} />
+export const HistoryIcon = (props: IIconProps) => <Icon component={historySVG} {...props} />
