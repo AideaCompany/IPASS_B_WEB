@@ -28,13 +28,6 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
   }
   const formItems = [
     {
-      type: 'number',
-      label: ' Ingresa número de celular',
-      name: 'phone1',
-      required: true
-    },
-
-    {
       type: 'select',
       label: 'Selecciona tu país',
       required: true,
@@ -44,6 +37,12 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
         label: country.name,
         icon: <>{country.emoji}</>
       }))
+    },
+    {
+      type: 'number',
+      label: ' Ingresa número de celular',
+      name: 'phone1',
+      required: true
     }
   ]
 
@@ -57,7 +56,15 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
                 let element = <></>
 
                 if (item.type === 'select') {
-                  element = <Selector formRef={formRef} placeHolder={item.label} name={item.name} values={item.values ? item.values : []} />
+                  element = (
+                    <Selector
+                      formRef={formRef}
+                      label={item.label}
+                      placeHolder={item.label}
+                      name={item.name}
+                      values={item.values ? item.values : []}
+                    />
+                  )
                 }
                 if (item.type === 'number') {
                   element = <InputNumber item={item} />
