@@ -3,8 +3,7 @@ import { UserOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 import React, { FC } from 'react'
 import CarDrawer from './ShoppingCar/CarDrawer'
-import dynamic from 'next/dynamic'
-const VerifyDeviceDynamic = dynamic(() => import('./VerifyDevice'), { ssr: false })
+// const VerifyDeviceDynamic = dynamic(() => import('./VerifyDevice'), { ssr: false })
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuth()
   return (
