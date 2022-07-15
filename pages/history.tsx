@@ -26,8 +26,9 @@ const History = () => {
         <div className="Tittle">
           <p className="text-left text-black font-Gothic font-bold text-xl">Consulta el historial de tus servicios</p>
         </div>
-        <div className="CardH ">
+        <div className="CardH grid flex h-auto flex justify-center">
           <List
+            grid={{ gutter: 10, column: 2 }}
             itemLayout="vertical"
             size="large"
             dataSource={history}
@@ -40,7 +41,7 @@ const History = () => {
               onChange: page => {
                 console.log(page)
               },
-              pageSize: 3
+              pageSize: 4
             }}
           ></List>
         </div>

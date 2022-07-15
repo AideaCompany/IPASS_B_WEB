@@ -58,3 +58,13 @@ input[type='number'] {
 .toggle-checkbox:checked + .toggle-label {
   background-color: #68d391;
 }
+.ant-btn-primary {
+  color: black !important;
+  border-color: #d2b782 !important;
+  background: #d2b782 !important;
+}
+.ant-btn {
+  color: white !important;
+  border-color: black !important;
+  background: black;
+}

@@ -1,7 +1,7 @@
 .global_container {
   width: 100vw;
   height: 100%;
-  background-color: rgba($color: #f1efef, $alpha: 0.5);
+  background-color: rgba($color: #ffffff, $alpha: 0.5);
   display: flex;
   flex-direction: column;
 }
@@ -70,7 +70,7 @@
 
 .custom_button_disabled {
   background-color: $mainColorDisabled;
-  color: gray;
+  color: rgb(255, 255, 255);
 }
 
 .custom_input {
