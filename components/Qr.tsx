@@ -10,7 +10,7 @@ const qr = ({ id, value, hasMask }: { id: string; value: string; hasMask?: boole
           </div>
         </div>
       )}
-      <QrCode value={value} size={300} level={'M'} />
+      <QrCode value={value} size={150} level={'M'} />
     </span>
   )
 }

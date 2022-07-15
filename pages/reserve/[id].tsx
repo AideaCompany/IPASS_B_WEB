@@ -18,49 +18,76 @@ const reserve = ({ shoppingCar }: { shoppingCar: IShoppingCard }) => {
   const price = shoppingCar?.services?.map(e => (e.service as IService)?.price).reduce((a, b) => a + b)
   return (
     <Layout>
-      <div>
-        <h1>Resumen de tu reserva</h1>
-        <p>{`Fecha de la reserva: ${moment(shoppingCar.services[0].day)
-          .set('hours', parseInt(shoppingCar.services[0].hour?.split(':')[0] as string))
-          .set('minutes', parseInt(shoppingCar.services[0].hour?.split(':')[1] as string))
-          .format('DD/MM/YYYY hh:mm a')}`}</p>
-        <p>{`Tiempo estimado de reserva: ${shoppingCar?.services.map(e => (e.service as IService).serviceTime).reduce((a, b) => a + b)} min`}</p>
-        <h1>Servicios en reserva:</h1>
-        <Table
-          dataSource={shoppingCar.services}
-          columns={[
-            {
-              title: 'Servicio',
-              dataIndex: 'service',
-              render: (value: IService) => value.name
-            },
-            {
-              title: 'Staffer',
-              dataIndex: 'staff',
-              render: (value: IStaff) => `${value.name} ${value.lastName}`
-            },
-            {
-              title: 'Duración (min)',
-              dataIndex: 'service',
-              render: (value: IService) => value.serviceTime
-            },
-            {
-              title: 'Precio',
-              dataIndex: 'service',
-              render: (value: IService) => `Q${numeral(value.price).format('0,0')}`
-            }
-          ]}
-        />
-        <p>Información de pago:</p>
-        <p>{`Tu pago fue ${shoppingCar.status === statusShoppingCard.PAYED ? 'Aceptado' : 'Rechazado'}`}</p>
-        {shoppingCar.status === statusShoppingCard.PAYED && <p>{`Pago recibido: ${moment().format('DD/MM/YYYY hh:mm a')}`}</p>}
-        {shoppingCar.status === statusShoppingCard.PAYED && <p>{`Valor pagado de reserva: Q${numeral(price * 0.15).format('0,0')}`}</p>}
-        {shoppingCar.status === statusShoppingCard.PAYED && <p>{`Saldo a pagar por servicios: Q${numeral(price * 1).format('0,0')}`}</p>}
-        {shoppingCar.status === statusShoppingCard.PAYED && <p>{`Pagado por medio de tarjeta: **** **** **** 5280`}</p>}
-        <Qr id={'inputCode'} value={`${shoppingCar?._id as string}`} />
-        <Tooltip title="Descargar código">
-          <Button type="primary" onClick={() => download_qr('inputCode', `reserva`)} style={{ margin: '10px' }} icon={<DownloadOutlined />} />
-        </Tooltip>
+      <div className=" flex w-full h-96 pt-12">
+        <div className="Informatio_Resume_QR w-1/2 h-auto pt-6">
+          <h1 className=" w-full text-center font-bold text-xl">Resumen de tu reserva</h1>
+          <div className="pt-6 w-full  flex">
+            <div className="Titles font-bold text-left w-1/2 ">
+              <p> Fecha de la reserva:</p>
+              <p> Tiempo estimado de la reserva:</p>
+            </div>
+            <div className="Titles text-left w-1/2">
+              <p>{` ${moment(shoppingCar.services[0].day)
+                .set('hours', parseInt(shoppingCar.services[0].hour?.split(':')[0] as string))
+                .set('minutes', parseInt(shoppingCar.services[0].hour?.split(':')[1] as string))
+                .format('DD/MM/YYYY hh:mm a')}`}</p>
+              <p>{` ${shoppingCar?.services.map(e => (e.service as IService).serviceTime).reduce((a, b) => a + b)} min`}</p>
+            </div>
+          </div>
+          <h1 className="pt-6 font-bold pb-6">Servicios en reserva:</h1>
+          <Table
+            dataSource={shoppingCar.services}
+            columns={[
+              {
+                title: 'Servicio',
+                dataIndex: 'service',
+                render: (value: IService) => value.name
+              },
+              {
+                title: 'Staffer',
+                dataIndex: 'staff',
+                render: (value: IStaff) => `${value.name} ${value.lastName}`
+              },
+              {
+                title: 'Duración (min)',
+                dataIndex: 'service',
+                render: (value: IService) => value.serviceTime
+              },
+              {
+                title: 'Precio',
+                dataIndex: 'service',
+                render: (value: IService) => `Q${numeral(value.price).format('0,0')}`
+              }
+            ]}
+          />
+        </div>
+        <div className="Informatio_QR w-1/2 h-auto ">
+          <p className=" w-full text-center font-bold text-xl pt-6 ">Información de pago:</p>
+
+          <p className=" w-full text-left pt-12 ">{`Tu pago fue ${shoppingCar.status === statusShoppingCard.PAYED ? 'Aceptado' : 'Rechazado'}`}</p>
+          <div className="w-full flex">
+            <div className=" w-4/6 flex">
+              <div className="w-1/2 h-full ">
+                {shoppingCar.status === statusShoppingCard.PAYED && <p> Pago recibido:</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>Valor pagado de reserva</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>Saldo a pagar por servicios</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>Pagado por medio de tarjeta:</p>}
+              </div>
+              <div className="w-1/2 h-full ">
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` ${moment().format('DD/MM/YYYY hh:mm a')}`}</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` Q${numeral(price * 0.15).format('0,0')}`}</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` Q${numeral(price * 1).format('0,0')}`}</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` **** **** **** 5280`}</p>}
+              </div>
+            </div>
+            <div className="w-2/6 pt-6 pl-4">
+              <Qr id={'inputCode'} value={`${shoppingCar?._id as string}`} />
+              <Tooltip title="Descargar código">
+                <Button type="primary" onClick={() => download_qr('inputCode', `reserva`)} style={{ margin: '10px' }} icon={<DownloadOutlined />} />
+              </Tooltip>
+            </div>
+          </div>
+        </div>
       </div>
     </Layout>
   )

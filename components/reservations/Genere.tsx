@@ -65,8 +65,9 @@ const Genere = () => {
         ))}
       </div>
       {history.length > 0 && (
-        <div className="Historys flex w-full grid grid-cols-2 gap-4 ">
+        <div className="Historys flex w-full p-6 mt-4 flex justify-center">
           <List
+            grid={{ gutter: 10, column: 2 }}
             itemLayout="vertical"
             size="large"
             dataSource={history}
@@ -76,7 +77,7 @@ const Genere = () => {
               </React.Fragment>
             )}
             pagination={{
-              pageSize: 3
+              pageSize: 2
             }}
           ></List>
         </div>
