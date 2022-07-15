@@ -47,20 +47,20 @@ const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
         {user && (
           <>
             <div className="history  " style={{ fontSize: '30px' }}>
-              <Link href={'history'}>
+              <Link href={'/history'}>
                 <img src="/images/History.png" />
               </Link>
             </div>
             <CarDrawer />
             <div className="profile " style={{ fontSize: '30px' }}>
-              <Link href={'profile'}>
+              <Link href={'/profile'}>
                 <UserOutlined />
               </Link>
             </div>
           </>
         )}
       </div>
-      <div className="container mx-auto main_container  ">{children}</div>
+      <div className="container mx-auto main_container">{children}</div>
     </>
   )
 }

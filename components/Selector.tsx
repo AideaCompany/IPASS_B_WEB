@@ -12,8 +12,9 @@ const Selector: FC<{
   name: string
   placeHolder?: string
   values: valueSelector[]
+  label?: string
   formRef: React.RefObject<FormInstance<any>>
-}> = ({ name, placeHolder = '', values, formRef, required = false }) => {
+}> = ({ name, placeHolder = '', label = '', values, formRef, required = false }) => {
   const MyCustomSelect = ({ onChange, value }: { onChange: (value: string) => void; value: string }) => {
     const [open, setOpen] = useState(false)
     const selectorRef = useRef(null)
@@ -57,7 +58,7 @@ const Selector: FC<{
     }, [selectorRef])
     return (
       <div ref={selectorRef} className="relative">
-        {/* <label className="font-Gothic block flex items-center	 mb-2 text-base font-normal text-black">{`${label} `}</label> */}
+        <label className="font-Gothic block flex items-center	 mb-2 text-base font-normal text-black">{`${label} `}</label>
         <div className=" h-10 text-black  flex border border-gray-200 items-center">
           <input
             onClick={() => setOpen(true)}

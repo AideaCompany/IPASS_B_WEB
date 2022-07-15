@@ -57,7 +57,7 @@ const RegisterComponent: FC<{ formRef: React.RefObject<FormInstance<any>>; onSub
         </Link>
       </p>
       <div className="container_form">
-        <Form ref={formRef} initialValues={{ country: '' }}>
+        <Form ref={formRef} initialValues={{ country: countries.callingCountries.all.find(e => e.name === 'Guatemala')?.countryCallingCodes[0] }}>
           <div>
             <>
               {formItems.map((item, i) => {

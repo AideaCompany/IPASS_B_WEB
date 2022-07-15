@@ -57,7 +57,14 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
 
                 if (item.type === 'select') {
                   element = (
-                    <Selector required={true} formRef={formRef} placeHolder={item.label} name={item.name} values={item.values ? item.values : []} />
+                    <Selector
+                      label={item.label}
+                      required={true}
+                      formRef={formRef}
+                      placeHolder={item.label}
+                      name={item.name}
+                      values={item.values ? item.values : []}
+                    />
                   )
                 }
                 if (item.type === 'number') {
@@ -68,11 +75,6 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
               })}
             </>
           </div>
-          {/* <div className="text-right">
-        <Link href="/register">
-          <a className="text-black hover:underline">Olvide mi contraseña</a>
-        </Link>
-      </div> */}
         </Form>
       </div>
       <div className="container_buttons">

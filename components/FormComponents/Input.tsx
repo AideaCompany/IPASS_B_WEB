@@ -1,14 +1,14 @@
 import { Form } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const Input = ({ item }: { item: { label: string; name: string; required: boolean; type: string } }) => {
   const MyInput = ({ onChange, value }: { onChange: (value: string) => void; value: string }) => {
     const [myValue, setMyValue] = useState(value)
-    useEffect(() => {
-      if (!value) {
-        onChange('')
-      }
-    }, [])
+    // useEffect(() => {
+    //   if (!value) {
+    //     onChange('')
+    //   }
+    // }, [])
 
     return (
       <div className="mb-1">

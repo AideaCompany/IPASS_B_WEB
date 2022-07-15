@@ -80,10 +80,8 @@ export const InvalidateShoppingCardFn = async (client_id: string): Promise<IShop
 
 export const makePaymentShoppingCardFn = async (client_id: string, selectedCard: string): Promise<respPayment> => {
   client.cache.reset()
-  const paginated = await (
-    await client.mutate({ mutation: gql(makePaymentShoppingCard), variables: { client: client_id, selectedCard } })
-  ).data.goPayShoppingCard
-  return paginated
+  return (await client.mutate({ mutation: gql(makePaymentShoppingCard), variables: { client: client_id, selectedCard } })).data
+    .makePaymentShoppingCard
 }
 
 export const getShoppingCardFn = async (_id: string): Promise<IShoppingCard> => {
