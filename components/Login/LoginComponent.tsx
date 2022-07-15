@@ -49,7 +49,7 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
   return (
     <>
       <div className="container_form ">
-        <Form ref={formRef}>
+        <Form ref={formRef} initialValues={{ country: countries.callingCountries.all.find(e => e.name === 'Guatemala')?.countryCallingCodes[0] }}>
           <div>
             <>
               {formItems.map((item, i) => {
@@ -57,13 +57,7 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
 
                 if (item.type === 'select') {
                   element = (
-                    <Selector
-                      formRef={formRef}
-                      label={item.label}
-                      placeHolder={item.label}
-                      name={item.name}
-                      values={item.values ? item.values : []}
-                    />
+                    <Selector required={true} formRef={formRef} placeHolder={item.label} name={item.name} values={item.values ? item.values : []} />
                   )
                 }
                 if (item.type === 'number') {
