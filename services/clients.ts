@@ -10,6 +10,7 @@ import { IUpdateClient } from '@/types/interfaces/Clients/MutationClient.interfa
 import { createCard } from '@/graphql/Client/mutations/createCard'
 import { listClientCards } from '@/graphql/Client/queries/listClientCards'
 import { deleteCard } from '@/graphql/Client/mutations/deleteCard'
+import { generateTransferSessionToWeb } from '@/graphql/Client/mutations/generateTransferSessionToWeb'
 
 export const getClientFn = async (_id: string): Promise<IClient> => {
   client.cache.reset()
@@ -43,4 +44,9 @@ export const createCardFn = async (id: string, card: string): Promise<boolean> =
 export const deleteCardFn = async (id: string, card: string): Promise<boolean> => {
   client.cache.reset()
   return (await client.mutate({ mutation: gql(deleteCard), variables: { id, card } })).data.deleteCard
+}
+
+export const generateTransferSessionToWebFn = async (id: string): Promise<string> => {
+  client.cache.reset()
+  return (await client.mutate({ mutation: gql(generateTransferSessionToWeb), variables: { id } })).data.generateTransferSessionToWeb
 }

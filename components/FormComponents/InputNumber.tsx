@@ -1,5 +1,5 @@
 import { Form } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const InputNumber = ({ item }: { item: { label: string; name: string; required: boolean; type: string } }) => {
   const MyNumberInput = ({ value, onChange }: { onChange: (value: string) => void; value: string }) => {

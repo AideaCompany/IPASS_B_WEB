@@ -7,57 +7,60 @@ type valueSelector = {
   icon?: React.ReactNode
 }
 
-const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]; formRef: React.RefObject<FormInstance<any>> }> = ({
-  name,
-  placeHolder = '',
-  values,
-  formRef
-}) => {
-  const [open, setOpen] = useState(false)
-  const [search, setSearch] = useState('')
-  const selectorRef = useRef(null)
-
-  const calculateHeight = () => {
-    const totals = values.filter(value => (search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
-    switch (totals.length) {
-      case 3:
-        return 'h-40'
-      case 2:
-        return 'h-30'
-      case 1:
-        return 'h-10'
-      case 0:
-        return 'h-0'
-      default:
-        return 'h-40'
-    }
-  }
-
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    function handleClickOutside(event: MouseEvent) {
-      //@ts-ignore
-      if (selectorRef.current && !selectorRef.current.contains(event.target)) {
-        setOpen(false)
+const Selector: FC<{
+  required?: boolean
+  name: string
+  placeHolder?: string
+  values: valueSelector[]
+  formRef: React.RefObject<FormInstance<any>>
+}> = ({ name, placeHolder = '', values, formRef, required = false }) => {
+  const MyCustomSelect = ({ onChange, value }: { onChange: (value: string) => void; value: string }) => {
+    const [open, setOpen] = useState(false)
+    const selectorRef = useRef(null)
+    const [search, setSearch] = useState(value ? (values.find(e => e.value === value)?.label as string) : null)
+    useEffect(() => {
+      if (!value) {
+        onChange('')
+      }
+    }, [])
+    const calculateHeight = () => {
+      const totals = values.filter(value => (search && search !== '' ? value.label.toLocaleLowerCase().includes(search?.toLocaleLowerCase()) : true))
+      switch (totals.length) {
+        case 3:
+          return 'h-40'
+        case 2:
+          return 'h-30'
+        case 1:
+          return 'h-10'
+        case 0:
+          return 'h-0'
+        default:
+          return 'h-40'
       }
     }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [selectorRef])
-
-  return (
-    <Form.Item name={name}>
+    useEffect(() => {
+      /**
+       * Alert if clicked on outside of element
+       */
+      function handleClickOutside(event: MouseEvent) {
+        //@ts-ignore
+        if (selectorRef.current && !selectorRef.current.contains(event.target)) {
+          setOpen(false)
+        }
+      }
+      // Bind the event listener
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }, [selectorRef])
+    return (
       <div ref={selectorRef} className="relative">
         <div className=" h-10 text-black  flex border border-gray-200 items-center">
           <input
             onClick={() => setOpen(true)}
-            value={search}
+            value={search ?? ''}
             onChange={e => setSearch(e.target.value)}
             name="select"
             placeholder={placeHolder}
@@ -90,7 +93,7 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
         >
           {values.length > 0 &&
             values
-              .filter(value => (search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
+              .filter(value => (search && search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
               .map((value, i) => (
                 <div
                   key={i}
@@ -109,6 +112,15 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
               ))}
         </div>
       </div>
+    )
+  }
+
+  return (
+    <Form.Item name={name} style={{ margin: 0 }}>
+      {
+        //@ts-ignore
+        <MyCustomSelect />
+      }
     </Form.Item>
   )
 }

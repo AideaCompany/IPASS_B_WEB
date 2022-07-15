@@ -6,7 +6,7 @@ import CardTable from '@/components/Payment/CardTable'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
 import { stepsPageReservation } from '@/providers/ReservationContext'
-import { listClientCardsFn } from '@/services/clients'
+import { generateTransferSessionToWebFn, listClientCardsFn } from '@/services/clients'
 import { getClientCurrentShoppingCardToPayFn, InvalidateShoppingCardFn, makePaymentShoppingCardFn } from '@/services/shoppingCar'
 import { StatusPayment } from '@/types/interfaces/Payments/Payment.interface'
 import { IService } from '@/types/interfaces/services/Services.interface'
@@ -90,6 +90,8 @@ const Register = ({ cards }: { cards: ICards[] }) => {
       message.success('Pago realizado con éxito')
       getDataCar()
       router.push({ pathname: '/reserve/[id]', query: { id: car?._id } })
+    } else {
+      message.error('Ocurrió un error inténtalo mas tarde')
     }
   }
 
@@ -201,6 +203,18 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       const currentStep = ctx.query.step ?? stepsPageReservation.Genere
       return { props: { cards: decodeValues(cards), currentStep } }
     }
+  } else if (ctx.query.session) {
+    const session = await generateTransferSessionToWebFn(ctx.query.session as string)
+    if (!session || session === '') {
+      return {
+        notFound: true
+      }
+    }
+    ctx.res.setHeader('set-cookie', [`authIpassClient=${session}`])
+    const { data } = jwt.verify(session, $security.secretKey) as { data: IClient }
+    const cards = await listClientCardsFn(data._id as string)
+    const currentStep = ctx.query.step ?? stepsPageReservation.Genere
+    return { props: { cards: decodeValues(cards), currentStep } }
   } else {
     return {
       notFound: true
