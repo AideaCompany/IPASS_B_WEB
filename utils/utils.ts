@@ -203,3 +203,20 @@ export const validateShoppingStatus = (value: statusShoppingCard) =>
     [statusShoppingCard.WAITING_PAYMENT]: 'Esperando pago',
     [statusShoppingCard.DELETED]: 'Eliminado'
   }[value])
+
+export const formatHour = (value: string) => {
+  if (value.search(':') === -1) {
+    if (parseInt(value) < 10) {
+      value = `0${value}`
+    }
+    value = `${value}:00`
+  } else {
+    if (parseInt(value.split(':')[0]) < 10) {
+      value = `0${value.split(':')[0]}:${value.split(':')[1]}`
+    }
+    if (parseInt(value.split(':')[1]) < 10) {
+      value = `${value.split(':')[0]}:0${value.split(':')[1]}`
+    }
+  }
+  return value
+}

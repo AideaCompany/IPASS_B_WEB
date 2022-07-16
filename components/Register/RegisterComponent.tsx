@@ -45,7 +45,6 @@ const RegisterComponent: FC<{ formRef: React.RefObject<FormInstance<any>>; onSub
       required: true
     }
   ]
-  console.log(onSubmitSignUp)
 
   return (
     <>

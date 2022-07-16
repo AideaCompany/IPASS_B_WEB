@@ -16,9 +16,7 @@ const ServicesByStaff = () => {
   }, [car])
 
   const getData = async () => {
-    console.log(selectedStore?._id as string, selectedStaff?._id as string)
     const data = await listServiceByStaffAndStoreFn(selectedStore?._id as string, selectedStaff?._id as string)
-    console.log(data)
     setServices(data)
   }
 

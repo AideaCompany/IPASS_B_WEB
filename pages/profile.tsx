@@ -14,7 +14,6 @@ const profile = () => {
 
   const getData = async () => {
     const data = await listOccupationFn()
-    console.log(data)
     setOccupation(data)
   }
 

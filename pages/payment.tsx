@@ -98,7 +98,7 @@ const Register = ({ cards }: { cards: ICards[] }) => {
   const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price).reduce((a, b) => a + b)
 
   const validateDisable = async () => {
-    if (formCheckbox) {
+    if (formCheckbox.current) {
       const { terms, medical } = await formCheckbox.current?.validateFields()
       if (!terms || !medical) {
         setButtonDisabled(true)
@@ -120,25 +120,26 @@ const Register = ({ cards }: { cards: ICards[] }) => {
 
   return (
     <Layout>
-      <div className="main_container_payment ">
+      <div className="main_container_payment">
         <p className="container_description text-left  font-semibold text-base">{`${user?.name1} tu reserva`}</p>
-        <div className="Main_Payment ">
-          <div className="Container_CardResume ">
-            <div className="Container_cardsB h-3/4  ">
+        <div className="Main_Payment">
+          <div className="Container_CardResume">
+            <div className="Container_cardsB h-3/4">
               {car?.services?.map((service, i) => (
                 <React.Fragment key={i}>
                   <CardResume service={service} />
                 </React.Fragment>
               ))}
             </div>
-            <div className="Container_termins h-1/4 text-stone-400 text-xs  ">
-              <p>{`Cantidad de servicios:  ${car?.services?.length}`}</p>
-              <p>{`Seras atendido por:  ${car?.services?.length}`}</p>
+            <div className="container_terms">
+              <div className="info_terms">
+                <p>{`Cantidad de servicios:  ${car?.services?.length}`}</p>
+              </div>
 
               <Form
                 onChange={validateDisable}
                 initialValues={{ terms: false, medical: false }}
-                className="Container_termins flex mt-10"
+                className="checkbox_container flex"
                 ref={formCheckbox}
               >
                 <Checkbox name="terms" label="Acepto términos y condiciones" />
@@ -149,17 +150,6 @@ const Register = ({ cards }: { cards: ICards[] }) => {
           <div className="Container_Info_Card ">
             <CardTable setSelectedCard={setSelectedCard} selectedCard={selectedCard} cards={currentCards} onComplete={updateCards} />
             <ModalCard onComplete={updateCards} />
-            {/* <div style={{ marginBottom: '20px' }} className="Container_Offerts  pt-4 font-semibold ">
-              <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
-            </div> */}
-            {/* <div className="Container_OffertsC  flex pt-4 font-semibold ">
-              <div className="Medium w-2/3  h-12 aling-botton">
-                <input type="text" className="appearance-none bg-transparent w-full h-12  " placeholder="Ingresar código de descuento"></input>
-              </div>
-              <div className="Medium2 w-1/3  m-0 h-8 aling-botton">
-                <Button title="Aceptar" onClick={onClick} customClassName="b1 h-8 m-0 text-xs "></Button>
-              </div>
-            </div> */}
             <div className="Container_Info_Buy ">
               <div className="Titles_Buy font-helvetica text-left">
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -187,7 +177,6 @@ const Register = ({ cards }: { cards: ICards[] }) => {
             <Button disabled={buttonDisabled} title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>
           </div>
         </div>
-        <div className="container_pay  m-0"></div>
       </div>
     </Layout>
   )

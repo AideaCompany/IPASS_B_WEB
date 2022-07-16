@@ -52,12 +52,16 @@ const CardTable = ({
           onClick={() => setSelectedCard(card)}
           className="Info_T_Cards_preview 	cursor-pointer flex w-full text-center space-x-8 p-1 font-semibold "
         >
-          {card.ID === selectedCard?.ID && <CheckCircleOutlined style={{ fontSize: '15px', color: '#1BB66E' }} />}
+          {card.ID === selectedCard?.ID ? (
+            <CheckCircleOutlined style={{ fontSize: '15px', color: '#1BB66E' }} />
+          ) : (
+            <CheckCircleOutlined style={{ fontSize: '15px', color: '#5b5b5b' }} />
+          )}
           <div className="w-1/4">
             <p>{card.lastName1}</p>
           </div>
           <div className="w-1/4">
-            <p>{card.number.slice(-4)}</p>
+            <p>{card.number?.slice(-4)}</p>
           </div>
           <div className="w-1/4">
             <p>{card.Expired}</p>

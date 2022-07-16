@@ -38,9 +38,6 @@ const History = () => {
               </React.Fragment>
             )}
             pagination={{
-              onChange: page => {
-                console.log(page)
-              },
               pageSize: 4
             }}
           ></List>

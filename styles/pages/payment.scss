@@ -3,11 +3,6 @@
   height: 100vh;
   margin-top: 10%;
 
-  .container_description {
-    width: auto;
-    align-items: center;
-    justify-content: space-around;
-  }
   .Main_Payment {
     width: 100%;
     display: flex;
@@ -15,6 +10,10 @@
       width: 55%;
       height: auto;
       border: 0.63px solid #cfcfcf80;
+      .Container_cardsB {
+        overflow-y: scroll;
+        overflow-x: hidden;
+      }
     }
     .Container_Info_Card {
       width: 40%;
@@ -46,12 +45,37 @@
       }
     }
   }
+
   .dates {
     padding-top: 15%;
     height: auto;
     input {
       margin-bottom: 0;
       margin-top: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main_container_payment {
+    margin-top: 0%;
+    .container_description {
+      padding-left: 10px;
+    }
+    .Main_Payment {
+      flex-direction: column;
+      display: flex;
+      align-items: center;
+
+      .Container_CardResume {
+        width: 95%;
+        margin-bottom: 20px;
+      }
+      .Container_Info_Card {
+        width: 95%;
+        margin-bottom: 20px;
+        margin: 0;
+      }
     }
   }
 }

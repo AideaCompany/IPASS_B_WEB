@@ -4,22 +4,23 @@ import { IService } from '@/types/interfaces/services/Services.interface'
 import { IShoppingService, statusShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { QuestionCircleOutlined } from '@ant-design/icons'
 import { Badge, Drawer, Tooltip } from 'antd'
+import useWindowDimensions from 'hooks/useWindowDimensions'
 import { ShoppingCard } from 'icons/personalIcons'
 import { useRouter } from 'next/router'
 import numeral from 'numeral'
-import React, { useState } from 'react'
+import React from 'react'
 import Button from '../Button'
 import CardResume from '../CardResume'
 
-const CarDrawer = () => {
-  const [visible, setVisible] = useState(false)
+const CarDrawer = ({ visible, setVisible }: { visible: boolean; setVisible: React.Dispatch<React.SetStateAction<boolean>> }) => {
   const { car } = useCar()
   const router = useRouter()
   const reservation = useReservation()
-
+  const { width } = useWindowDimensions()
   const onClose = () => {
     setVisible(false)
   }
+
   const onClick = () => {
     if (car?.status !== statusShoppingCard.WAITING_PAYMENT && reservation.setStep) {
       reservation.setStep(stepsPageReservation.selectDate)
@@ -32,11 +33,10 @@ const CarDrawer = () => {
 
   return (
     <>
-      <div className="car " style={{ fontSize: '30px' }}>
-        <Badge color={'#D2B782'} count={car?.services?.length}>
-          <ShoppingCard style={{ fontSize: '30px' }} onClick={() => setVisible(true)} />
-        </Badge>
-      </div>
+      <Badge color={'#D2B782'} count={car?.services?.length}>
+        <ShoppingCard style={width > 768 ? { fontSize: '30px' } : { fontSize: '40px' }} onClick={() => setVisible(true)} />
+      </Badge>
+
       <Drawer title={car ? 'Contenido de la reserva ' : 'Carrito vació'} placement="right" onClose={onClose} visible={visible}>
         {car && (
           <>

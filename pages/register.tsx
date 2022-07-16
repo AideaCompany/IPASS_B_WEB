@@ -45,7 +45,6 @@ const Register: NextPage = () => {
   }
   const onConfirmSignUp = async () => {
     const values = (await formRefConfirm.current?.validateFields()) as registerConfirm
-    console.log(values)
     try {
       const res = await confirmClientFn(values.token)
       message.success({
@@ -55,7 +54,6 @@ const Register: NextPage = () => {
           marginTop: '20vh'
         }
       })
-      console.log(res)
       if (res.response === '200') {
         login(res.token)
       }
