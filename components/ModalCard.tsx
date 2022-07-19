@@ -82,7 +82,7 @@ const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
                   return <React.Fragment key={i}>{element}</React.Fragment>
                 })}
               </>
-            </div>{' '}
+            </div>
           </Form>
         </div>
       </Modal>

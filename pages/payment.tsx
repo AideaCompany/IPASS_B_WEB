@@ -3,11 +3,12 @@ import CardResume from '@/components/CardResume'
 import Checkbox from '@/components/Checkbox'
 import ModalCard from '@/components/ModalCard'
 import CardTable from '@/components/Payment/CardTable'
+import PaymentMinutes from '@/components/Payment/paymentMinutes'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
 import { stepsPageReservation } from '@/providers/ReservationContext'
 import { generateTransferSessionToWebFn, listClientCardsFn } from '@/services/clients'
-import { getClientCurrentShoppingCardToPayFn, InvalidateShoppingCardFn, makePaymentShoppingCardFn } from '@/services/shoppingCar'
+import { getClientCurrentShoppingCardToPayFn, makePaymentShoppingCardFn } from '@/services/shoppingCar'
 import { StatusPayment } from '@/types/interfaces/Payments/Payment.interface'
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IShoppingCard, IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
@@ -18,19 +19,17 @@ import { Form, FormInstance, message, Tooltip } from 'antd'
 import { $security } from 'config'
 import * as cookie from 'cookie'
 import jwt from 'jsonwebtoken'
-import moment from 'moment-timezone'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import numeral from 'numeral'
 import React, { useEffect, useRef, useState } from 'react'
 import Layout from '../components/Layout'
-let myInterval: any
+
 const Register = ({ cards }: { cards: ICards[] }) => {
   const [currentCards, setCurrentCards] = useState(cards)
   const { user } = useAuth()
   const [car, setCar] = useState<IShoppingCard>()
   const { getData: getDataCar } = useCar()
-  const [minutes, setMinutes] = useState('')
   const [selectedCard, setSelectedCard] = useState<ICards | null>(cards.length ? cards[0] : null)
   const router = useRouter()
   const formCheckbox = useRef<FormInstance>(null)
@@ -45,39 +44,6 @@ const Register = ({ cards }: { cards: ICards[] }) => {
     const value = await getClientCurrentShoppingCardToPayFn(user?._id as string)
     setCar(value)
   }
-
-  useEffect(() => {
-    ;(async () => {
-      if (car) {
-        let diff = moment.tz(car?.timeToPay, 'America/Guatemala').diff(moment.tz('America/Guatemala'), 'minutes', true)
-        let segs = diff % 1
-        let minutes = Math.trunc(diff)
-
-        if (diff <= 10 && diff >= 0) {
-          myInterval = setInterval(async () => {
-            diff = moment.tz(car?.timeToPay, 'America/Guatemala').diff(moment.tz('America/Guatemala'), 'minutes', true)
-            segs = diff % 1
-            minutes = Math.trunc(diff)
-            if (diff < 0) {
-              clearInterval(myInterval)
-              await InvalidateShoppingCardFn(user?._id as string)
-              getDataCar()
-              router.push(`/reservations?step=${stepsPageReservation.selectDate}`)
-            }
-            setMinutes(`${minutes}:${numeral(segs * 60).format('00')}`)
-          }, 1000)
-        } else {
-          clearInterval(myInterval)
-          await InvalidateShoppingCardFn(user?._id as string)
-          getDataCar()
-          router.push(`/reservations?step=${stepsPageReservation.selectDate}`)
-        }
-      }
-    })()
-    return () => {
-      clearInterval(myInterval)
-    }
-  }, [car])
 
   const updateCards = async () => {
     const newCards = await listClientCardsFn(user?._id as string)
@@ -169,11 +135,7 @@ const Register = ({ cards }: { cards: ICards[] }) => {
                 <p>{`20`}</p>
               </div>
             </div>
-            <div className="Titles_Buy font-helvetica text-center font-bold m-6">
-              <p>
-                {`Tienes `} <b className="underline">{`${minutes ?? '00:00'}`}</b> {`minutos para realizar el pago`}
-              </p>
-            </div>
+            {car && <PaymentMinutes car={car} />}
             <Button disabled={buttonDisabled} title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>
           </div>
         </div>

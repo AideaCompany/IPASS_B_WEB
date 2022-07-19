@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 const InputNumber = ({ item }: { item: { label: string; name: string; required: boolean; type: string } }) => {
   const MyNumberInput = ({ value, onChange }: { onChange: (value: string) => void; value: string }) => {
-    const [myValue, setMyValue] = useState(value ? parseInt(value) : '')
+    const [myValue, setMyValue] = useState<number>()
     // useEffect(() => {
     //   if (!value) {
     //     onChange('')
@@ -13,7 +13,7 @@ const InputNumber = ({ item }: { item: { label: string; name: string; required: 
       <div className="mb-1">
         <label className="font-Gothic block flex items-center	 mb-2 text-base font-normal text-black">
           {`${item.label} `}
-          &nbsp;
+
           <p style={{ color: 'gray' }} className="font-Helvetica text-xs">{`${item.required ? '' : '(Opcional)'}`}</p>
         </label>
         <input
