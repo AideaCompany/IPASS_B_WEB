@@ -54,8 +54,10 @@ export const getClientCurrentShoppingCard = /* GraphQL */ `
           _id
           name
           address
+          reservePercentage
         }
       }
+      timeToPay
       createdAt
       updatedAt
     }

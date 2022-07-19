@@ -1,3 +1,4 @@
+import { IClient } from '@/types/interfaces/Clients/client.interface'
 import Cookie from 'js-cookie'
 import jwt from 'jsonwebtoken'
 //next
@@ -6,7 +7,6 @@ import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from
 import { $security } from '../config'
 import { setToken } from '../graphql/config'
 import { getClientFn } from '../services/clients'
-import { IClient } from '../types/types'
 
 // import useData from './DataContext'
 
@@ -39,6 +39,7 @@ export const AuthProvider = (props: { children: JSX.Element }) => {
         const currentUser = await getClientFn(data.data._id as string)
         setUser(currentUser)
       }
+      setLoading(false)
     })()
   }, [])
 
@@ -47,14 +48,13 @@ export const AuthProvider = (props: { children: JSX.Element }) => {
   const login = async (token: string) => {
     const data = jwt.verify(token, $security.secretKey) as { data: IClient }
     const currentUser = await getClientFn(data.data._id as string)
-    console.log(currentUser)
     if (currentUser.active) {
       setUser(currentUser)
       Cookie.set('authIpassClient', token, { expires: 1 })
       setSpinning(false)
       setLoading(false)
       setToken(token)
-      router.push({ pathname: '/welcome' })
+      router.push({ pathname: '/reservations' })
     }
   }
 

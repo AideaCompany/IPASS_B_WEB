@@ -32,12 +32,12 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px black inset !important;
+  -webkit-box-shadow: 0 0 0 30px rgb(255, 255, 255) inset !important;
 }
 
 /*Change text in autofill textbox*/
 input:-webkit-autofill {
-  -webkit-text-fill-color: white !important;
+  -webkit-text-fill-color: black !important;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -57,4 +57,14 @@ input[type='number'] {
 }
 .toggle-checkbox:checked + .toggle-label {
   background-color: #68d391;
+}
+.ant-btn-primary {
+  color: black !important;
+  border-color: #d2b782 !important;
+  background: #d2b782 !important;
+}
+.ant-btn {
+  color: white !important;
+  border-color: black !important;
+  background: black;
 }

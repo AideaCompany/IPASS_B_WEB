@@ -1,21 +1,8 @@
+import { formatHour } from '@/utils/utils'
 import React from 'react'
 
 const CardHour = ({ onClick, hour }: { onClick: () => void; hour: string }) => {
   //#region functions
-
-  const formatHour = (value: string) => {
-    if (value.search(':') === -1) {
-      if (parseInt(value) < 10) {
-        value = `0${value}`
-      }
-      value = `${value}:00`
-    } else {
-      if (parseInt(value.split(':')[0]) < 10) {
-        value = `0${value.split(':')[0]}:${value.split(':')[1] === '0' ? `00` : value.split(':')[1]}`
-      }
-    }
-    return value
-  }
 
   return (
     <p

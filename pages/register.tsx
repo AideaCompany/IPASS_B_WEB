@@ -22,8 +22,21 @@ const Register: NextPage = () => {
         await SignUpClientFn(values)
         setData(values)
         setIsConfirm(true)
+        message.info({
+          content: 'Hemos enviado un código a tu correo',
+          duration: 10,
+          style: {
+            marginTop: '15vh'
+          }
+        })
       } else {
-        message.error('Debes aceptar los términos y condiciones para continuar')
+        message.error({
+          content: 'Debes aceptar los términos y condiciones para continuar',
+          duration: 10,
+          style: {
+            marginTop: '20vh'
+          }
+        })
       }
     } catch (error) {
       console.log(error)
@@ -32,10 +45,15 @@ const Register: NextPage = () => {
   }
   const onConfirmSignUp = async () => {
     const values = (await formRefConfirm.current?.validateFields()) as registerConfirm
-    message.success('Registro exitoso')
     try {
       const res = await confirmClientFn(values.token)
-      console.log(res)
+      message.success({
+        content: 'Inició de sesión exitoso',
+        duration: 10,
+        style: {
+          marginTop: '20vh'
+        }
+      })
       if (res.response === '200') {
         login(res.token)
       }
@@ -46,8 +64,8 @@ const Register: NextPage = () => {
   }
   return (
     <Layout>
-      <div className="main_container_register">
-        <p className="font-Butler font-medium text-2xl">Registro</p>
+      <div className="main_container_register ">
+        <p className="font-Butler font-medium mt-10 text-2xl">Registro</p>
         {isConfirm ? (
           <Confirm formRef={formRefConfirm} onConfirmSignUp={onConfirmSignUp} data={data as registerClient} />
         ) : (

@@ -1,9 +1,7 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import { fileType } from '@/types/typeTemplate'
 import { HeartOutlined } from '@ant-design/icons'
 import { Rate } from 'antd'
-import React from 'react'
 import Button from './Button'
 
 const ModalStaffer = ({ staffer }: { staffer: IStaff }) => {
@@ -16,9 +14,6 @@ const ModalStaffer = ({ staffer }: { staffer: IStaff }) => {
   return (
     <div>
       <div className="Main_Modal_Service m-0 w-72 ">
-        <div className="Photo_Modal h-52 flex justify-center content-center p-0 aling-center w-full">
-          <img src={(staffer.photo as fileType).key} className="sec-img aling-center h-52 flex w-full content-center justify-center"></img>
-        </div>
         <div className="Question_Information w-full  mt-2 text-center text-xs">
           <p>
             {' '}

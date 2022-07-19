@@ -1,3 +1,4 @@
+import ProtectRoute from '@/components/Auth/ProtectRoute'
 import { CarProvider } from '@/providers/CarContext'
 import { LoadingProvider } from '@/providers/LoadingContext'
 import { ApolloProvider } from '@apollo/client'
@@ -9,16 +10,18 @@ import Client from '../graphql/config'
 import { AuthProvider } from '../providers/AuthContext'
 import '../styles/index.scss'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, router }: AppProps) {
   return (
     <div className="global_container">
       <ApolloProvider client={Client}>
         <AuthProvider>
-          <CarProvider>
-            <LoadingProvider>
-              <Component {...pageProps} />
-            </LoadingProvider>
-          </CarProvider>
+          <ProtectRoute router={router}>
+            <CarProvider>
+              <LoadingProvider>
+                <Component {...pageProps} />
+              </LoadingProvider>
+            </CarProvider>
+          </ProtectRoute>
         </AuthProvider>
       </ApolloProvider>
     </div>

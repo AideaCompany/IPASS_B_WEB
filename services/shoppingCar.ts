@@ -1,13 +1,16 @@
 import client from '@/graphql/config'
 import { addShoppingCard } from '@/graphql/shoppingCar/mutation/addShoppingCard'
+import { deleteShoppingCardService } from '@/graphql/shoppingCar/mutation/deleteShoppingCardService'
 import { goPayShoppingCard } from '@/graphql/shoppingCar/mutation/goPayShoppingCard'
 import { InvalidateShoppingCard } from '@/graphql/shoppingCar/mutation/InvalidateShoppingCard'
-import { deleteShoppingCardService } from '@/graphql/shoppingCar/mutation/deleteShoppingCardService'
+import { makePaymentShoppingCard } from '@/graphql/shoppingCar/mutation/makePaymentShoppingCard'
 import { updateShoppingCardService } from '@/graphql/shoppingCar/mutation/updateShoppingCardService'
 import { validateShoppingCard } from '@/graphql/shoppingCar/mutation/validateShoppingCard'
 import { getClientCurrentShoppingCard } from '@/graphql/shoppingCar/queries/getClientCurrentShoppingCard'
 import { getClientCurrentShoppingCardToPay } from '@/graphql/shoppingCar/queries/getClientCurrentShoppingCardToPay'
 import { getClientShoppingCards } from '@/graphql/shoppingCar/queries/getClientShoppingCards'
+import { getShoppingCard } from '@/graphql/shoppingCar/queries/getShoppingCard'
+import { respPayment } from '@/types/interfaces/Payments/Payment.interface'
 import { IShoppingServiceBasic } from '@/types/interfaces/shoppingCard/MutationShoppingCard.interface'
 import { IShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
 import { convertTotable } from '@/utils/utils'
@@ -73,4 +76,17 @@ export const InvalidateShoppingCardFn = async (client_id: string): Promise<IShop
     await client.mutate({ mutation: gql(InvalidateShoppingCard), variables: { client: client_id } })
   ).data.InvalidateShoppingCard
   return paginated
+}
+
+export const makePaymentShoppingCardFn = async (client_id: string, selectedCard: string): Promise<respPayment> => {
+  client.cache.reset()
+  return (await client.mutate({ mutation: gql(makePaymentShoppingCard), variables: { client: client_id, selectedCard } })).data
+    .makePaymentShoppingCard
+}
+
+export const getShoppingCardFn = async (_id: string): Promise<IShoppingCard> => {
+  client.cache.reset()
+  return await (
+    await client.query({ query: gql(getShoppingCard), variables: { _id } })
+  ).data.getShoppingCard
 }

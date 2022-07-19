@@ -1,5 +1,6 @@
 import useAuth from '@/providers/AuthContext'
 import { updateClientFn } from '@/services/clients'
+import { uploadedFile } from '@/types/interfaces'
 import { message } from 'antd'
 import { DarkMode, DisableNotifications, History, PaymentMethods, Profile, Schedule, Support, TermsOfService } from 'icons/profileIcons'
 import { useRouter } from 'next/router'
@@ -67,7 +68,7 @@ const Config = () => {
     <div className="config_container">
       <p className="font-Helvetica text-black font-bold text-lg">{`${user?.name1} (${user?.email})`}</p>
       <div className="container_image">
-        <PhotoPicker onChange={updatePhoto} initialValue={user?.photo} />
+        <PhotoPicker onChange={updatePhoto} initialValue={user?.photo as uploadedFile} />
       </div>
       <div className="container_config_elements">
         {configElements.map((configElement, i) => (

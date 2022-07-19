@@ -6,72 +6,61 @@ import ServicesByStaff from '@/components/reservations/ServicesByStaff'
 import Staffers from '@/components/reservations/Staffers'
 import Steps from '@/components/reservations/Steps'
 import ListStores from '@/components/reservations/Stores/ListStores'
-import useAuth from '@/providers/AuthContext'
-import useCar from '@/providers/CarContext'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { addShoppingCardFn } from '@/services/shoppingCar'
-import React from 'react'
 import Genere from './Genere'
 import ServiceType from './ServiceType'
 
 const ReservationsComponent = () => {
   //#region  states
-  const { selectedStore, step, setStep, selectedStaff, selectedService, selectedServiceType, visibleAsk, setVisibleAsk } = useReservation()
+  const { selectedStore, step, setStep, selectedStaff, selectedServiceType, visibleAsk, setVisibleAsk } = useReservation()
   //#region ref
-  const { user } = useAuth()
-  const { getData } = useCar()
 
-  const addToCar = async () => {
-    await addShoppingCardFn(user?._id as string, {
-      service: selectedService?._id as string,
-      store: selectedStore?._id as string,
-      staff: selectedStaff?._id as string
-    })
-    await getData()
+  const goHours = async () => {
+    setStep(stepsPageReservation.selectDate)
     setVisibleAsk(false)
   }
 
-  const goHours = async () => {
-    await addToCar()
-    setStep(stepsPageReservation.selectDate)
-  }
-
   const goStart = async () => {
-    await addToCar()
     setStep(stepsPageReservation.Select)
+    setVisibleAsk(false)
   }
 
   const mySteps = [
-    stepsPageReservation.Genere,
-    stepsPageReservation.store,
-    stepsPageReservation.services,
-    stepsPageReservation.selectDate,
-    stepsPageReservation.payment
+    { step: stepsPageReservation.Genere, selectedStep: 0, title: 'Genero' },
+    { step: stepsPageReservation.store, selectedStep: 1, title: 'Sede' },
+    { step: stepsPageReservation.Select, selectedStep: 1, title: 'Staffer o servicio' },
+    { step: stepsPageReservation.servicesType, selectedStep: 2, title: 'Tipo de servicio' },
+    { step: stepsPageReservation.services, selectedStep: 3, title: 'Servicio' },
+    { step: stepsPageReservation.staffers, selectedStep: 2, title: 'Staffers' },
+    { step: stepsPageReservation.selectDate, selectedStep: 4, title: 'Horarios' }
   ]
 
   return (
     <>
       <div className="Container_Reservation ">
-        <p className="Title font-Gothic text-right pt-4 ">Mis reservas </p>
+        <p className="Title font-Gothic text-right pt-4 ">{mySteps.find(e => e.step === step)?.title ?? 'Proceso de reserva'}</p>
         <div className="Container_Steps w-full pt-4">
-          <Steps current={mySteps.findIndex(e => e === step)} />
+          <Steps current={mySteps.find(e => e.step === step)?.selectedStep ?? 0} />
         </div>
         <div className="Container_pages ">
           {step === stepsPageReservation.Genere && <Genere />}
           {step === stepsPageReservation.store && <ListStores />}
-          {step === stepsPageReservation.Select && <Select history={null} />}
+          {step === stepsPageReservation.Select && <Select />}
           {step === stepsPageReservation.staffers && selectedStore && <Staffers />}
           {/* {step === stepsPageReservation.hair && <Hair setStep={setStep} stores={props.stores} />} */}
           {step === stepsPageReservation.servicesType && selectedStore && <ServiceType />}
           {step === stepsPageReservation.services && selectedStore && selectedServiceType && <Services />}
           {step === stepsPageReservation.servicesByStaffer && selectedStore && selectedStaff && <ServicesByStaff />}
           {step === stepsPageReservation.selectDate && <SelectDate />}
-          {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
-          <AskContinueOrAdd goHours={goHours} goStart={goStart} visible={visibleAsk} onCancel={() => setVisibleAsk(false)} />
+          <AskContinueOrAdd
+            setVisible={setVisibleAsk}
+            goHours={goHours}
+            goStart={goStart}
+            visible={visibleAsk}
+            onCancel={() => setVisibleAsk(false)}
+          />
         </div>
       </div>
-
-      {/* {step === stepsPageReservation.Type && <Type setStep={setStep} stores={props.stores} />} */}
     </>
   )
 }

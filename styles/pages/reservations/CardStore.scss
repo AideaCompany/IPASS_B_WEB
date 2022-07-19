@@ -1,5 +1,4 @@
 .Container_Sto {
-  width: auto;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -8,15 +7,14 @@
   box-shadow: -4px 9px 13px -9px #797979;
   margin-bottom: 20px;
   .Image_containerS {
-    width: 90%;
+    width: 100%;
     height: 130px;
     align-items: center;
     justify-content: center;
     background-color: #ffff;
   }
   .Container_Information {
-    width: 90%;
-
+    width: 100%;
     background-color: #ffff;
   }
 }

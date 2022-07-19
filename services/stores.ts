@@ -13,7 +13,7 @@ export const getAllStores = async (): Promise<IStores[]> => {
 
 export const listStoresByGenereFn = async (
   genere: string,
-  filters: { department?: string | null; city?: string | null; zone?: number | null }
+  filters: { department: string | null; city: string | null; zone: number | null }
 ): Promise<IStores[]> => {
   client.cache.reset()
   return convertTotable<IStores>(

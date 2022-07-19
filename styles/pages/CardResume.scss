@@ -1,14 +1,46 @@
-.Main_C_Resume {
+.main_payment_resumen {
   width: 100%;
   display: flex;
   border: 0.63px solid #cfcfcf80;
-  .Main_Photo_Resu {
+  height: 16vh;
+  .main_photo_resumen {
     width: 30%;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    .img-card {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
   }
-  .Main_Info_Resu {
+  .main_info_resumen {
     width: 55%;
+    padding: 20px;
   }
-  .Main_Icons_Resu {
+  .main_icons_resumen {
     width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .icon_item {
+      font-size: 20px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  }
+}
+
+.container_terms {
+  border-top: 0.63px solid #cfcfcf80;
+  .info_terms {
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+  .checkbox_container {
+    height: 80px;
   }
 }

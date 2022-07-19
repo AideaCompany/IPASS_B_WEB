@@ -7,6 +7,8 @@ import useCar from '@/providers/CarContext'
 import { deleteShoppingCardServiceFn } from '@/services/shoppingCar'
 import useAuth from '@/providers/AuthContext'
 import { Popconfirm } from 'antd'
+import { capitalize, formatHour } from '@/utils/utils'
+import { HeartSelectedIcon, PencilIcon, TrashIcon } from 'icons/personalIcons'
 const CardResume = ({ service }: { service: IShoppingService }) => {
   const { user } = useAuth()
   const { getData } = useCar()
@@ -16,30 +18,34 @@ const CardResume = ({ service }: { service: IShoppingService }) => {
   }
 
   return (
-    <div className="Main_C_Resume  w-full h-30">
-      <div className="Main_Photo_Resu w-20  h-30">
-        <img src={(service.service as IService)?.photo?.key} className="sec-img"></img>
+    <div className="main_payment_resumen">
+      <div className="main_photo_resumen">
+        <img src={(service.service as IService)?.photo?.key} className="img-card" />
       </div>
-      <div className="Main_Info_Resu p-4  h-30">
-        <div className="Container_PR  h-1/4 font-helvetica text-left divide-y divide-slate-200">{(service?.service as IService)?.name}</div>
-        <div className="Container_TP    text-left h-1/4  divide-y divide-slate-200">
+      <div className="main_info_resumen">
+        <div className="Container_PR  font-helvetica text-left divide-y divide-slate-200 w-full text-ellipsis overflow-hidden">
+          <strong>{capitalize((service?.service as IService)?.name)}</strong>
+        </div>
+        <div className="Container_TP    text-left  divide-y divide-slate-200 w-full">
           {`Staffer: ${service.staff ? (service.staff as IStaff)?.name : 'No asignado '}`}
         </div>
-        <div className="Container_PR  font-helvetica h-1/4  text-left divide-y divide-slate-200">{`Hora: ${service.hour ?? 'No asignado '}`}</div>
-        <div className="Container_TP    text-left h-1/4 divide-y divide-slate-200">
+        <div className="Container_PR  font-helvetica  text-left divide-y divide-slate-200 w-full text-ellipsis overflow-hidden">{`Hora: ${
+          service.hour ? formatHour(service.hour as string) : 'No asignado '
+        }`}</div>
+        <div className="Container_TP    text-left divide-y divide-slate-200 w-full text-ellipsis overflow-hidden">
           {`Precio: Q${numeral((service?.service as IService)?.price).format('0,0')} `}
         </div>
       </div>
-      <div className="Main_Icons_Resu justify-center p-4 h-30">
-        <div className="Main_I_Heart w-20 justify-center h-1/3 cursor-pointer">
-          <img src="/images/Heart.png" className="sec-img"></img>
+      <div className="main_icons_resumen">
+        <div className="icon_item justify-center">
+          <HeartSelectedIcon />
         </div>
-        <div className="Main_I_Pencil w-20  content-center h-1/3 cursor-pointer">
-          <img src="/images/Pencil.png" className="sec-img"></img>
+        <div className="icon_item content-center">
+          <PencilIcon />
         </div>
         <Popconfirm title="¿Deseas eliminar del carrito?" onConfirm={deleteService} okText="Sí" cancelText="No">
-          <div className="Main_I_Gar w-20 content-center h-1/3 cursor-pointer">
-            <img src="/images/Garbage.png" className="sec-img"></img>
+          <div className="icon_item content-center">
+            <TrashIcon />
           </div>
         </Popconfirm>
       </div>

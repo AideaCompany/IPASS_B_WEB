@@ -16,14 +16,14 @@ const Map = ({ store }: { store: IStores }) => {
       console.error('Error con mapa', loadError)
     }
   }, [loadError])
-  console.log(isLoaded)
+
   return (
     <>
       {isLoaded && (
         <div style={{ width: '100%', height: '100%' }}>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            zoom={12}
+            zoom={14}
             center={store.location}
             options={{
               fullscreenControl: false,

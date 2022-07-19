@@ -4,7 +4,8 @@ import { encryptValues } from '@/utils/utils'
 import { Form, FormInstance, Modal } from 'antd'
 import React, { useRef, useState } from 'react'
 import Button from './Button'
-import Input from './Input'
+import Input from './FormComponents/Input'
+import InputNumber from './FormComponents/InputNumber'
 
 const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
   const [isModalVisible, setIsModalVisible] = useState(false)
@@ -16,6 +17,7 @@ const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
 
   const handleOk = async () => {
     const data = await formRef.current?.validateFields()
+    console.log(data)
     await createCardFn(user?._id as string, encryptValues(data))
     await onComplete()
     setIsModalVisible(false)
@@ -24,6 +26,32 @@ const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
   const handleCancel = () => {
     setIsModalVisible(false)
   }
+  const formItems = [
+    {
+      type: 'number',
+      label: 'Número de tarjeta',
+      name: 'number',
+      required: true
+    },
+    {
+      type: 'input',
+      label: 'Nombre',
+      required: true,
+      name: 'name1'
+    },
+    {
+      type: 'input',
+      label: 'Apellido',
+      required: true,
+      name: 'lastName1'
+    },
+    {
+      type: 'number',
+      label: 'Fecha de expiración',
+      name: 'Expired',
+      required: true
+    }
+  ]
   return (
     <div>
       <div className="New_form_Pay flex space-x-36 p-2 pl-4 font-semibold  ">
@@ -40,12 +68,22 @@ const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
       >
         <div className="overflow-auto">
           <Form ref={formRef} className="dates h-96 mb-0 mt-0 flex flex-col space-y-1">
-            <p className="font-Gothic text-black">Por favor ingresa los siguientes datos</p>
-            <Input required placeHolder="Número de tarjeta " name="number" />
-            <Input required placeHolder="Nombre" name="name1" />
-            <Input required placeHolder="Apellido" name="lastName1" />
-            <Input required placeHolder="Fecha de expiración" name="Expired" />
-            <Input required placeHolder="Documento" type="number" name="ID" />
+            <div>
+              <>
+                {formItems.map((item, i) => {
+                  let element = <></>
+                  if (item.type === 'input') {
+                    element = <Input item={item} />
+                  }
+
+                  if (item.type === 'number') {
+                    element = <InputNumber item={item} />
+                  }
+
+                  return <React.Fragment key={i}>{element}</React.Fragment>
+                })}
+              </>
+            </div>
           </Form>
         </div>
       </Modal>

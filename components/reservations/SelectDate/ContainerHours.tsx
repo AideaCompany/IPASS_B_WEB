@@ -10,20 +10,18 @@ import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { Modal } from 'antd'
 import moment, { Moment } from 'moment-timezone'
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
-import CardHour from './CardHour'
+import { useEffect, useState } from 'react'
 import ListHours from './ListHours'
 
 const ContainerHours = ({ day }: { day: Moment }) => {
   const [validHours, setValidHours] = useState<availableHours[][]>([])
-  const [HourSelect, setHourSelect] = useState('')
   const [loading, setLoading] = useState(true)
   const { car, getData: updateCar } = useCar()
   const [validHoursMorning, setValidHoursMorning] = useState<string[]>([])
   const [validHoursAfternoon, setValidHoursAfternoon] = useState<string[]>([])
   const [validHoursNight, setValidHoursNight] = useState<string[]>([])
-  const [hoursToShowModal, setHoursToShowModal] = useState<availableHours[][]>([])
   const [showModal, setShowModal] = useState(false)
+  const [selectedHour, setSelectedHour] = useState<availableHours[]>([])
   const { user } = useAuth()
   const router = useRouter()
 
@@ -36,10 +34,9 @@ const ContainerHours = ({ day }: { day: Moment }) => {
   const getData = async () => {
     console.log(car)
     setLoading(true)
-    console.log(car)
     const hours = (
       await listAvailableHourFn(
-        (car?.services[0].store as IStores)._id as string,
+        (car?.services[0].store as IStores)?._id as string,
         (car?.services as IShoppingService[]).filter(e => !e.staff).map(service => (service.service as IService)._id) as string[],
         (car?.services as IShoppingService[])
           .filter(e => e.staff)
@@ -69,14 +66,20 @@ const ContainerHours = ({ day }: { day: Moment }) => {
     const MyArrayS = new Set(MyArray)
     //@ts-ignore
     const result = [...MyArrayS]
-    setValidHoursMorning(result.filter(result => result < 12))
-    setValidHoursAfternoon(result.filter(result => result >= 12 && result < 17))
-    setValidHoursNight(result.filter(result => result >= 17))
+    setValidHoursMorning(
+      result.filter(result => result < 12).map(l => hours.filter(e => parseInt(e[0].hour.split(':')[0]) === parseInt(l))[0][0].hour)
+    )
+    setValidHoursAfternoon(
+      result.filter(result => result >= 12 && result < 17).map(l => hours.filter(e => parseInt(e[0].hour.split(':')[0]) === parseInt(l))[0][0].hour)
+    )
+    setValidHoursNight(
+      result.filter(result => result >= 17).map(l => hours.filter(e => parseInt(e[0].hour.split(':')[0]) === parseInt(l))[0][0].hour)
+    )
     setLoading(false)
   }
 
   const onClickHour = (value: string) => {
-    setHourSelect(value)
+    setSelectedHour(validHours.find(e => parseInt(e[0].hour.split(':')[0]) === parseInt(value)) ?? [])
     setShowModal(true)
   }
 
@@ -96,12 +99,6 @@ const ContainerHours = ({ day }: { day: Moment }) => {
     router.push('payment')
   }
 
-  useEffect(() => {
-    if (HourSelect) {
-      setHoursToShowModal(validHours.filter(e => parseInt(e[0].hour.split(':')[0]) === parseInt(HourSelect)))
-    }
-  }, [HourSelect])
-
   return (
     <>
       <Spin loading={loading}>
@@ -114,20 +111,24 @@ const ContainerHours = ({ day }: { day: Moment }) => {
         </div>
       </Spin>
       <Modal
-        title="Selecciona tu hora de reserva"
+        title="Resumen de tu reserva"
         visible={showModal}
+        okText={'Aceptar'}
+        cancelText={'Cambie de opinion'}
         onOk={() => {
+          onClick(selectedHour)
           setShowModal(false)
         }}
         onCancel={() => {
           setShowModal(false)
         }}
       >
-        <div className="box_Hour grid grid-cols-6 gap-4">
-          {hoursToShowModal.map((e, j) => (
-            <React.Fragment key={j}>
-              <CardHour onClick={() => onClick(e)} hour={e[0].hour} />
-            </React.Fragment>
+        <div className="box_Hour">
+          {selectedHour.map(e => (
+            <div>
+              <p>{`Servicio: ${e.service.name}`}</p>
+              <p>{`Staffer: ${e.staffer.name}  ${e.staffer.lastName}`}</p>
+            </div>
           ))}
         </div>
       </Modal>

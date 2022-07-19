@@ -1,6 +1,5 @@
 import Layout from '@/components/Layout'
 import CardHistory from '@/components/history/CardHistory'
-
 import useAuth from '@/providers/AuthContext'
 import { getClientShoppingCardsFn } from '@/services/shoppingCar'
 import { IShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
@@ -23,12 +22,13 @@ const History = () => {
 
   return (
     <Layout>
-      <div className="Container_MainH ">
+      <div className="Container_MainH">
         <div className="Tittle">
           <p className="text-left text-black font-Gothic font-bold text-xl">Consulta el historial de tus servicios</p>
         </div>
-        <div className="CardH">
+        <div className="CardH grid flex h-auto flex justify-center">
           <List
+            grid={{ gutter: 10, column: 2 }}
             itemLayout="vertical"
             size="large"
             dataSource={history}
@@ -38,10 +38,7 @@ const History = () => {
               </React.Fragment>
             )}
             pagination={{
-              onChange: page => {
-                console.log(page)
-              },
-              pageSize: 3
+              pageSize: 4
             }}
           ></List>
         </div>

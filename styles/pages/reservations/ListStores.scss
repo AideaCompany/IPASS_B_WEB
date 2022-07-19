@@ -47,14 +47,27 @@
       }
     }
     .Main_carousel1 {
-      margin-top: 40px;
       width: 30%;
       height: 100%;
       justify-content: right;
       display: flex;
       flex-direction: column;
-      overflow-y: scroll;
-      scroll-behavior: smooth;
+
+      .List {
+        overflow-y: scroll;
+        scroll-behavior: smooth;
+
+        &::-webkit-scrollbar {
+          width: 10px;
+          background-color: #ffff;
+          border-radius: 5px;
+          height: 60%;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: #000000;
+          border-radius: 5px;
+        }
+      }
     }
   }
 }

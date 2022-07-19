@@ -7,61 +7,66 @@ type valueSelector = {
   icon?: React.ReactNode
 }
 
-const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]; formRef: React.RefObject<FormInstance<any>> }> = ({
-  name,
-  placeHolder = '',
-  values,
-  formRef
-}) => {
-  const [open, setOpen] = useState(false)
-  const [search, setSearch] = useState('')
-  const selectorRef = useRef(null)
-
-  const calculateHeight = () => {
-    const totals = values.filter(value => (search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
-    switch (totals.length) {
-      case 3:
-        return 'h-40'
-      case 2:
-        return 'h-30'
-      case 1:
-        return 'h-10'
-      case 0:
-        return 'h-0'
-      default:
-        return 'h-40'
-    }
-  }
-
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    function handleClickOutside(event: MouseEvent) {
-      //@ts-ignore
-      if (selectorRef.current && !selectorRef.current.contains(event.target)) {
-        setOpen(false)
+const Selector: FC<{
+  required?: boolean
+  name: string
+  placeHolder?: string
+  values: valueSelector[]
+  label?: string
+  formRef: React.RefObject<FormInstance<any>>
+}> = ({ name, placeHolder = '', label = '', values, formRef, required = false }) => {
+  const MyCustomSelect = ({ onChange, value }: { onChange: (value: string) => void; value: string }) => {
+    const [open, setOpen] = useState(false)
+    const selectorRef = useRef(null)
+    const [search, setSearch] = useState(value ? (values.find(e => e.value === value)?.label as string) : null)
+    useEffect(() => {
+      if (!value) {
+        onChange('')
+      }
+    }, [])
+    const calculateHeight = () => {
+      const totals = values.filter(value => (search && search !== '' ? value.label.toLocaleLowerCase().includes(search?.toLocaleLowerCase()) : true))
+      switch (totals.length) {
+        case 3:
+          return 'h-40'
+        case 2:
+          return 'h-30'
+        case 1:
+          return 'h-10'
+        case 0:
+          return 'h-0'
+        default:
+          return 'h-40'
       }
     }
-    // Bind the event listener
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      // Unbind the event listener on clean up
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [selectorRef])
-
-  return (
-    <Form.Item name={name}>
+    useEffect(() => {
+      /**
+       * Alert if clicked on outside of element
+       */
+      function handleClickOutside(event: MouseEvent) {
+        //@ts-ignore
+        if (selectorRef.current && !selectorRef.current.contains(event.target)) {
+          setOpen(false)
+        }
+      }
+      // Bind the event listener
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => {
+        // Unbind the event listener on clean up
+        document.removeEventListener('mousedown', handleClickOutside)
+      }
+    }, [selectorRef])
+    return (
       <div ref={selectorRef} className="relative">
-        <div className="bg-black h-10 text-white bg-black flex border border-gray-200 items-center">
+        <label className="font-Gothic block flex items-center	 mb-2 text-base font-normal text-black">{`${label} `}</label>
+        <div className=" h-10 text-black  flex border border-gray-200 items-center">
           <input
             onClick={() => setOpen(true)}
-            value={search}
+            value={search ?? ''}
             onChange={e => setSearch(e.target.value)}
             name="select"
             placeholder={placeHolder}
-            className="bg-black px-4 appearance-none outline-none text-gray-800 w-full"
+            className=" px-4 appearance-none outline-none text-gray-800 w-full"
           />
 
           <button
@@ -84,13 +89,13 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
         </div>
 
         <div
-          className={`absolute z-50 shadow bg-black text-white overflow-y-scroll   ${
+          className={`absolute z-50 shadow bg-white text-black overflow-y-scroll   ${
             !open ? 'flex hidden' : ''
           } ${calculateHeight()} flex-col w-full mt-1 border border-gray-200`}
         >
           {values.length > 0 &&
             values
-              .filter(value => (search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
+              .filter(value => (search && search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
               .map((value, i) => (
                 <div
                   key={i}
@@ -101,7 +106,7 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
                   }}
                   className="cursor-pointer group"
                 >
-                  <a className="block text-white p-2 border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100 hover:text-gold">
+                  <a className="block text-black p-2 border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100 hover:text-gold">
                     <span className="pr-5">{value.icon}</span>
                     {value.label}
                   </a>
@@ -109,6 +114,15 @@ const Selector: FC<{ name: string; placeHolder?: string; values: valueSelector[]
               ))}
         </div>
       </div>
+    )
+  }
+
+  return (
+    <Form.Item name={name} style={{ margin: 0 }}>
+      {
+        //@ts-ignore
+        <MyCustomSelect />
+      }
     </Form.Item>
   )
 }

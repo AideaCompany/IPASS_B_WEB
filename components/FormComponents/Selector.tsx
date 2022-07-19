@@ -17,12 +17,12 @@ const Selector: FC<{
   const MyCustomSelect = ({ onChange, value }: { onChange: (value: string) => void; value: string }) => {
     const [open, setOpen] = useState(false)
     const selectorRef = useRef(null)
-    const [search, setSearch] = useState(value ?? '')
+    const [search, setSearch] = useState(value ? (values.find(e => e.value === value)?.label as string) : null)
     const calculateHeight = () => {
-      const totals = values.filter(value => (search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
+      const totals = values.filter(value => (search && search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
       switch (totals.length) {
         case 3:
-          return 'h-40'
+          return 'h-30'
         case 2:
           return 'h-30'
         case 1:
@@ -33,11 +33,11 @@ const Selector: FC<{
           return 'h-40'
       }
     }
-    useEffect(() => {
-      if (!value) {
-        onChange('')
-      }
-    }, [])
+    // useEffect(() => {
+    //   if (!value) {
+    //     onChange('')
+    //   }
+    // }, [])
 
     useEffect(() => {
       /**
@@ -62,9 +62,8 @@ const Selector: FC<{
         <div className="h-10 bg-gray-50 border border-gray text-black flex border border-gray-200 items-center">
           <input
             onClick={() => setOpen(true)}
-            value={search}
+            value={search ?? ''}
             onChange={e => {
-              onChange(e.target.value)
               setSearch(e.target.value)
             }}
             name="select"
@@ -101,13 +100,14 @@ const Selector: FC<{
         >
           {values.length > 0 &&
             values
-              .filter(value => (search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
+              .filter(value => (search && search !== '' ? value.label.toLocaleLowerCase().includes(search.toLocaleLowerCase()) : true))
               .map((value, i) => (
                 <div
                   key={i}
                   onClick={() => {
                     formRef.current?.setFieldsValue({ [name]: value.value })
-                    onChange(value.label)
+
+                    onChange(value.value)
                     setSearch(value.label)
                     setOpen(false)
                   }}

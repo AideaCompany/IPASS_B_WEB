@@ -3,144 +3,145 @@ import CardResume from '@/components/CardResume'
 import Checkbox from '@/components/Checkbox'
 import ModalCard from '@/components/ModalCard'
 import CardTable from '@/components/Payment/CardTable'
+import PaymentMinutes from '@/components/Payment/PaymentMinutes'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
-import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
-import { listClientCardsFn } from '@/services/clients'
-import { getClientCurrentShoppingCardToPayFn, InvalidateShoppingCardFn } from '@/services/shoppingCar'
+import { stepsPageReservation } from '@/providers/ReservationContext'
+import { generateTransferSessionToWebFn, listClientCardsFn } from '@/services/clients'
+import { makePaymentShoppingCardFn } from '@/services/shoppingCar'
+import { StatusPayment } from '@/types/interfaces/Payments/Payment.interface'
 import { IService } from '@/types/interfaces/services/Services.interface'
-import { IShoppingCard, IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { ICards, IClient } from '@/types/types'
-import { decodeValues } from '@/utils/utils'
+import { decodeValues, encryptValues } from '@/utils/utils'
+import { Form, FormInstance, message } from 'antd'
 import { $security } from 'config'
 import * as cookie from 'cookie'
 import jwt from 'jsonwebtoken'
-import moment from 'moment-timezone'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import numeral from 'numeral'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Layout from '../components/Layout'
-let myInterval: any
+
 const Register = ({ cards }: { cards: ICards[] }) => {
-  const { setStep } = useReservation()
   const [currentCards, setCurrentCards] = useState(cards)
   const { user } = useAuth()
-  const [car, setCar] = useState<IShoppingCard>()
-  const { getData: getDataCar } = useCar()
-  const [minutes, setMinutes] = useState('')
+  // const [car, setCar] = useState<IShoppingCard>()
+  const { car, getData: getDataCar } = useCar()
+  const [selectedCard, setSelectedCard] = useState<ICards | null>(cards.length ? cards[0] : null)
   const router = useRouter()
-  useEffect(() => {
-    if (user) {
-      getData()
-    }
-  }, [user])
+  const formCheckbox = useRef<FormInstance>(null)
+  const [buttonDisabled, setButtonDisabled] = useState(true)
+  // useEffect(() => {
+  //   if (user) {
+  //     getData()
+  //   }
+  // }, [user])
 
-  const getData = async () => {
-    const value = await getClientCurrentShoppingCardToPayFn(user?._id as string)
-    setCar(value)
-  }
-
-  useEffect(() => {
-    ;(async () => {
-      if (car) {
-        let diff = moment.tz(car?.timeToPay, 'America/Guatemala').diff(moment.tz('America/Guatemala'), 'minutes', true)
-        let segs = diff % 1
-        let minutes = Math.trunc(diff)
-
-        if (diff <= 10 && diff >= 0) {
-          myInterval = setInterval(async () => {
-            diff = moment.tz(car?.timeToPay, 'America/Guatemala').diff(moment.tz('America/Guatemala'), 'minutes', true)
-            segs = diff % 1
-            minutes = Math.trunc(diff)
-            if (diff < 0) {
-              clearInterval(myInterval)
-              await InvalidateShoppingCardFn(user?._id as string)
-              getDataCar()
-              router.push(`/reservations?step=${stepsPageReservation.selectDate}`)
-            }
-            setMinutes(`${minutes}:${numeral(segs * 60).format('00')}`)
-          }, 1000)
-        } else {
-          clearInterval(myInterval)
-          await InvalidateShoppingCardFn(user?._id as string)
-          getDataCar()
-          router.push(`/reservations?step=${stepsPageReservation.selectDate}`)
-        }
-      }
-    })()
-    return () => {
-      clearInterval(myInterval)
-    }
-  }, [car])
+  // const getData = async () => {
+  //   const value = await getClientCurrentShoppingCardToPayFn(user?._id as string)
+  //   setCar(value)
+  // }
 
   const updateCards = async () => {
     const newCards = await listClientCardsFn(user?._id as string)
     setCurrentCards(decodeValues(newCards))
   }
 
-  const onClick = () => {
-    setStep(stepsPageReservation.staffers)
+  const onClick = async () => {
+    const resp = await makePaymentShoppingCardFn(user?._id as string, encryptValues(selectedCard as ICards))
+    if (resp.status === StatusPayment.ACCEPTED) {
+      message.success('Pago realizado con éxito')
+      getDataCar()
+      router.push({ pathname: '/reserve/[id]', query: { id: car?._id } })
+    } else {
+      message.error('Ocurrió un error inténtalo mas tarde')
+    }
   }
 
   const price = (car?.services as IShoppingService[])?.map(e => (e.service as IService)?.price).reduce((a, b) => a + b)
 
+  const validateDisable = async () => {
+    if (formCheckbox.current) {
+      const { terms, medical } = await formCheckbox.current?.validateFields()
+      if (!terms || !medical) {
+        setButtonDisabled(true)
+      } else {
+        if (selectedCard) {
+          setButtonDisabled(false)
+        } else {
+          setButtonDisabled(true)
+        }
+      }
+    } else {
+      setButtonDisabled(true)
+    }
+  }
+
+  useEffect(() => {
+    validateDisable()
+  }, [setSelectedCard])
+  const percentage = (car?.services[0].store as IStores)?.reservePercentage
   return (
     <Layout>
-      <div className="main_container_payment ">
-        <p className="container_description text-left  font-semibold text-base">Juan Perez tu número de reserva es #123345</p>
-        <div className="Main_Payment ">
-          <div className="Container_CardResume ">
-            <div className="Container_cardsB h-3/4  ">
+      <div className="main_container_payment">
+        <p className="container_description text-left  font-semibold text-base">{`${user?.name1} tu reserva`}</p>
+        <div className="Main_Payment">
+          <div className="Container_CardResume">
+            <div className="Container_cardsB h-3/4">
               {car?.services?.map((service, i) => (
                 <React.Fragment key={i}>
                   <CardResume service={service} />
                 </React.Fragment>
               ))}
             </div>
-            <div className="Container_termins h-1/4 text-stone-400 text-xs  ">
-              <p>{`Cantidad de servicios:  ${car?.services?.length}`}</p>
-              <p>{`Seras atendido por:  ${car?.services?.length}`}</p>
-              <div className="Container_termins flex mt-10">
-                <Checkbox name="Oferta" label="Acepto términos y condiciones" />
-                <Checkbox name="Oferta" label="Acepto Disclaimer Médico" />
+            <div className="container_terms">
+              <div className="info_terms">
+                <p>{`Cantidad de servicios:  ${car?.services?.length}`}</p>
               </div>
+
+              <Form
+                onChange={validateDisable}
+                initialValues={{ terms: false, medical: false }}
+                className="checkbox_container flex"
+                ref={formCheckbox}
+              >
+                <Checkbox name="terms" label="Acepto términos y condiciones" />
+                <Checkbox name="medical" label="Acepto Disclaimer Médico" />
+              </Form>
             </div>
           </div>
           <div className="Container_Info_Card ">
-            <CardTable cards={currentCards} onComplete={updateCards} />
+            <CardTable setSelectedCard={setSelectedCard} selectedCard={selectedCard} cards={currentCards} onComplete={updateCards} />
             <ModalCard onComplete={updateCards} />
-            <div className="Container_Offerts  pt-4 font-semibold ">
-              <Checkbox name="Oferta" label="5% de descuento por ser la primera reserva" />
-            </div>
-            <div className="Container_OffertsC  flex pt-4 font-semibold ">
-              <div className="Medium w-2/3  h-12 aling-botton">
-                <input type="text" className="appearance-none bg-transparent w-full h-12  " placeholder="Ingresar código de descuento"></input>
+            <div className="Container_Info_Buy ">
+              <div className="Titles_Buy font-helvetica text-left">
+                <p>Precio servicios del ticket:</p>
+                <p>Tiempo de reserva:</p>
               </div>
-              <div className="Medium2 w-1/3  m-0 h-8 aling-botton">
-                <Button title="Aceptar" onClick={onClick} customClassName="b1 h-8 m-0 text-xs "></Button>
+              <div className="Container_Price text-right font-bold ">
+                <p>{`Q${numeral(price).format('0,0')}`}</p>
+                <p>{` ${car?.services.map(e => (e.service as IService).serviceTime).reduce((a, b) => a + b)} min`}</p>
               </div>
             </div>
             <div className="Container_Info_Buy ">
               <div className="Titles_Buy font-helvetica text-left">
-                <p> Valor de la reserva:</p>
-                <p>Precio Total:</p>
-                <p>Subtotal:</p>
+                <p>{`Precio de reserva (${percentage}%):`}</p>
               </div>
               <div className="Container_Price text-right font-bold ">
-                <p>{`Q${numeral(price * 0.15).format('0,0')}`}</p>
-                <p>{`Q${numeral(price * 1.15).format('0,0')}`}</p>
-                <p>{`Q${numeral(price).format('0,0')}`}</p>
+                <p>{`Q${numeral((price * percentage) / 100).format('0,0')}`}</p>
               </div>
             </div>
-            <div className="Titles_Buy font-helvetica text-center font-bold m-6">
-              <p>{`Tienes ${minutes ?? '00:00'} minutos para realizar el pago`}</p>
-            </div>
-            <Button title="PAGAR EN LA SEDE" onClick={onClick} customClassName="button  bg-indigo-500 w-20 text-xs"></Button>
-            <Button title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>
+            <strong>
+              <p>{`*Este monto corresponde al ${percentage}% del valor del ticket que se descuenta del monto total `}</p>
+            </strong>
+
+            {car && <PaymentMinutes car={car} />}
+            <Button disabled={buttonDisabled} title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>
           </div>
         </div>
-        <div className="container_pay  m-0"></div>
       </div>
     </Layout>
   )
@@ -156,6 +157,18 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       const currentStep = ctx.query.step ?? stepsPageReservation.Genere
       return { props: { cards: decodeValues(cards), currentStep } }
     }
+  } else if (ctx.query.session) {
+    const session = await generateTransferSessionToWebFn(ctx.query.session as string)
+    if (!session || session === '') {
+      return {
+        notFound: true
+      }
+    }
+    ctx.res.setHeader('set-cookie', [`authIpassClient=${session}`])
+    const { data } = jwt.verify(session, $security.secretKey) as { data: IClient }
+    const cards = await listClientCardsFn(data._id as string)
+    const currentStep = ctx.query.step ?? stepsPageReservation.Genere
+    return { props: { cards: decodeValues(cards), currentStep } }
   } else {
     return {
       notFound: true

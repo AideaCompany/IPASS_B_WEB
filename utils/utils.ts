@@ -9,6 +9,8 @@ import crypto from 'crypto'
 import jwt from 'jsonwebtoken'
 import { $security } from 'config'
 import { ICards } from '@/types/types'
+import { statusShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { generes } from '@/types/interfaces/Stores/stores.interface'
 
 export const capitalize = (s: string | undefined): string => {
   if (typeof s !== 'string') {
@@ -193,3 +195,37 @@ export const getKilometers = (lat1: number, lon1: number, lat2: number, lon2: nu
   var d = R * c
   return parseFloat(d.toFixed(3)) //Retorna tres decimales
 }
+
+export const validateShoppingStatus = (value: statusShoppingCard) =>
+  ({
+    [statusShoppingCard.CURRENT]: 'Sin finalizar',
+    [statusShoppingCard.PAYED]: 'Pagado',
+    [statusShoppingCard.FINISHED]: 'Finalizado',
+    [statusShoppingCard.WAITING_PAYMENT]: 'Esperando pago',
+    [statusShoppingCard.DELETED]: 'Eliminado'
+  }[value])
+
+export const formatHour = (value: string) => {
+  if (value.search(':') === -1) {
+    if (parseInt(value) < 10) {
+      value = `0${value}`
+    }
+    value = `${value}:00`
+  } else {
+    if (parseInt(value.split(':')[0]) < 10) {
+      value = `0${value.split(':')[0]}:${value.split(':')[1]}`
+    }
+    if (parseInt(value.split(':')[1]) < 10) {
+      value = `${value.split(':')[0]}:0${value.split(':')[1]}`
+    }
+  }
+  return value
+}
+
+export const translateGeneres = (value: generes) =>
+  ({
+    [generes.MEN]: 'Caballero',
+    [generes.WOMEN]: 'Dama',
+    [generes.CHILDREN]: 'Niños',
+    [generes.ALL]: 'Todos'
+  }[value])
