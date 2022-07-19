@@ -90,6 +90,7 @@ export const getClientCurrentShoppingCardToPay = /* GraphQL */ `
         day
         store {
           _id
+          reservePercentage
           name
           address
         }

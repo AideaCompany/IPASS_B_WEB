@@ -23,7 +23,7 @@ const Map = ({ store }: { store: IStores }) => {
         <div style={{ width: '100%', height: '100%' }}>
           <GoogleMap
             mapContainerStyle={mapContainerStyle}
-            zoom={12}
+            zoom={14}
             center={store.location}
             options={{
               fullscreenControl: false,

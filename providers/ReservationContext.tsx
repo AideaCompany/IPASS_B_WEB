@@ -1,7 +1,7 @@
 import { IService } from '@/types/interfaces/services/Services.interface'
 import { IServiceType } from '@/types/interfaces/ServiceType/serviceType.interface'
 import { IStaff } from '@/types/interfaces/staff/staff.interface'
-import { IStores } from '@/types/interfaces/Stores/stores.interface'
+import { generes, IStores } from '@/types/interfaces/Stores/stores.interface'
 import React, { useContext, useState } from 'react'
 export enum stepsPageReservation {
   'Genere' = 'Genere',
@@ -26,8 +26,8 @@ type reservationContext = {
   visibleAsk: boolean
   setVisibleAsk: React.Dispatch<React.SetStateAction<boolean>>
   setStep: React.Dispatch<React.SetStateAction<stepsPageReservation>>
-  genere: string
-  setGenere: React.Dispatch<React.SetStateAction<string>>
+  genere: generes
+  setGenere: React.Dispatch<React.SetStateAction<generes>>
   step: stepsPageReservation
   selectedServiceType: IServiceType | undefined
   setSelectedServiceType: React.Dispatch<React.SetStateAction<IServiceType | undefined>>
@@ -46,7 +46,7 @@ export const ReservationProvider = (props: { children: JSX.Element; currentStep:
   const [selectedServiceType, setSelectedServiceType] = useState<IServiceType | undefined>()
   const [visibleAsk, setVisibleAsk] = useState<boolean>(false)
   const [step, setStep] = useState(currentStep)
-  const [genere, setGenere] = useState<string>('')
+  const [genere, setGenere] = useState<generes>(generes.ALL)
   const [selected, setSelected] = useState<stepsPageReservation.services | stepsPageReservation.staffers>(stepsPageReservation.services)
   return (
     <ReservationContext.Provider
@@ -59,7 +59,6 @@ export const ReservationProvider = (props: { children: JSX.Element; currentStep:
         setGenere,
         visibleAsk,
         setVisibleAsk,
-
         selectedService,
         setSelectedService,
         selectedStaff,

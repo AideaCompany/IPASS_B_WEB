@@ -1,4 +1,5 @@
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
+import { translateGeneres } from '@/utils/utils'
 
 const Select = ({}: {}) => {
   const { setStep, setSelected, selectedStore, genere } = useReservation()
@@ -11,7 +12,7 @@ const Select = ({}: {}) => {
     <div className="Container_select ">
       <div className="oli">
         <p className="font-Gothic text-center font-bold text-lg w-full mt-2  ">
-          Seleccionaste el establecimiento: {selectedStore?.name} y el servicio sera para {genere}
+          Seleccionaste el establecimiento: {selectedStore?.name} y el servicio sera para {translateGeneres(genere)}
         </p>
       </div>
       <div className="oli">

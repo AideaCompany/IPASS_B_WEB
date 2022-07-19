@@ -9,7 +9,7 @@ import CardHistory from '../history/CardHistory'
 
 const Genere = () => {
   const { setStep, setGenere } = useReservation()
-  const onClick = (paramGenere: string) => {
+  const onClick = (paramGenere: generes) => {
     setStep(stepsPageReservation.store)
     setGenere(paramGenere)
   }
@@ -40,7 +40,7 @@ const Genere = () => {
     },
     {
       click: generes.CHILDREN,
-      title: 'Damas',
+      title: 'Niños y niñas',
       imagen: '/images/Niños.png'
     },
     {

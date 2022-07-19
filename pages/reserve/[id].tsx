@@ -14,8 +14,11 @@ import moment from 'moment-timezone'
 import { GetServerSidePropsContext } from 'next'
 import Layout from '../../components/Layout'
 import numeral from 'numeral'
+import { IStores } from '@/types/interfaces/Stores/stores.interface'
 const reserve = ({ shoppingCar }: { shoppingCar: IShoppingCard }) => {
   const price = shoppingCar?.services?.map(e => (e.service as IService)?.price).reduce((a, b) => a + b)
+  const percentage = (shoppingCar?.services[0].store as IStores)?.reservePercentage
+
   return (
     <Layout>
       <div className=" flex w-full h-96 pt-12">
@@ -69,14 +72,16 @@ const reserve = ({ shoppingCar }: { shoppingCar: IShoppingCard }) => {
             <div className=" w-4/6 flex">
               <div className="w-1/2 h-full ">
                 {shoppingCar.status === statusShoppingCard.PAYED && <p>Pago recibido:</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>Valor total de reserva</p>}
                 {shoppingCar.status === statusShoppingCard.PAYED && <p>Valor pagado de reserva</p>}
                 {shoppingCar.status === statusShoppingCard.PAYED && <p>Saldo a pagar por servicios</p>}
                 {shoppingCar.status === statusShoppingCard.PAYED && <p>Pagado por medio de tarjeta:</p>}
               </div>
               <div className="w-1/2 h-full ">
                 {shoppingCar.status === statusShoppingCard.PAYED && <p>{`${moment().format('DD/MM/YYYY hh:mm a')}`}</p>}
-                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` Q${numeral(price * 0.15).format('0,0')}`}</p>}
-                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` Q${numeral(price * 1).format('0,0')}`}</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` Q${numeral(price).format('0,0')}`}</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` Q${numeral((price * percentage) / 100).format('0,0')}`}</p>}
+                {shoppingCar.status === statusShoppingCard.PAYED && <p>{` Q${numeral(price - (price * percentage) / 100).format('0,0')}`}</p>}
                 {shoppingCar.status === statusShoppingCard.PAYED && <p>{` **** **** **** 5280`}</p>}
               </div>
             </div>
