@@ -3,7 +3,7 @@ import { deleteCardFn } from '@/services/clients'
 import { ICards } from '@/types/types'
 import { encryptValues } from '@/utils/utils'
 import { CheckCircleOutlined, CreditCardOutlined, DeleteOutlined } from '@ant-design/icons'
-import { message } from 'antd'
+import { message, Popconfirm } from 'antd'
 import React from 'react'
 const CardTable = ({
   cards = [],
@@ -67,9 +67,11 @@ const CardTable = ({
             <p>{card.Expired}</p>
           </div>
           <div className="w-1/4">
-            <span onClick={e => deleteCard(card)}>
-              <DeleteOutlined style={{ color: 'tomato', cursor: 'pointer' }} />
-            </span>
+            <Popconfirm onConfirm={() => deleteCard(card)} title={`Deseas eliminar tarjeta ${card.number?.slice(-4)}`}>
+              <span>
+                <DeleteOutlined style={{ color: 'tomato', cursor: 'pointer' }} />
+              </span>
+            </Popconfirm>
           </div>
         </div>
       ))}
