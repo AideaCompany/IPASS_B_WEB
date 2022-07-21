@@ -40,7 +40,7 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
             <p> Tiempo de duración</p>
           </div>
           <div className="Container_Rate w-1/2 mt-2 text-right ">
-            <p> {service?.returnTime}</p>
+            <p> {`${service?.returnTime} min`}</p>
           </div>
         </div>
         <div className="Information_Modal flex w-full">
@@ -48,7 +48,7 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
             <p> Tipo de servicio</p>
           </div>
           <div className="Container_Rate w-1/2  mt-2 divide-y text-right divide-slate-200">
-            <p>{(service?.type as IServiceType).name}</p>
+            <p>{(service?.type as IServiceType)?.name}</p>
           </div>
         </div>
         <div className="Information_Modal flex w-full ">
