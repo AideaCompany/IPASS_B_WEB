@@ -4,6 +4,7 @@ export const listServiceByStoreAndType = /* GraphQL */ `
       _id
       plus
       name
+      description
       abbreviation
       type {
         _id

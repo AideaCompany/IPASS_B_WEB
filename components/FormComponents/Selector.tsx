@@ -64,7 +64,6 @@ const Selector: FC<{
             onClick={() => setOpen(true)}
             value={search ?? ''}
             onChange={e => {
-              onChange(e.target.value)
               setSearch(e.target.value)
             }}
             name="select"
@@ -107,7 +106,8 @@ const Selector: FC<{
                   key={i}
                   onClick={() => {
                     formRef.current?.setFieldsValue({ [name]: value.value })
-                    onChange(value.label)
+
+                    onChange(value.value)
                     setSearch(value.label)
                     setOpen(false)
                   }}

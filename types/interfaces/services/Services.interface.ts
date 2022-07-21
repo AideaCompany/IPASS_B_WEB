@@ -17,6 +17,7 @@ export interface IService {
   products: IProducts[]
   photo: uploadedFile | graphqlFile
   eta: string
+  description: string
   price: number
   cost: number
   serviceFee: number

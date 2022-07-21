@@ -24,7 +24,7 @@ const CardServices = ({ service }: { service: IService }) => {
         </div>
         <div className="flex flex-col items-center justify-center text-white p-0 shadow rounded-lg">
           <h2 className="mt-4 font-bold text-xl text-white  text-right">{service?.name}</h2>
-          <p className="text-xs text-gray-500 text-center mt-48">Lorem ipsum dolor sit amet, consectetur adipisicing eli</p>
+          <p className="text-xs text-gray-500 text-center mt-48">{service.description ?? ''}</p>
         </div>
       </div>
     </Popover>

@@ -17,6 +17,7 @@ const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
 
   const handleOk = async () => {
     const data = await formRef.current?.validateFields()
+    console.log(data)
     await createCardFn(user?._id as string, encryptValues(data))
     await onComplete()
     setIsModalVisible(false)
@@ -29,7 +30,7 @@ const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
     {
       type: 'number',
       label: 'Número de tarjeta',
-      name: 'phone1',
+      name: 'number',
       required: true
     },
     {
@@ -47,7 +48,7 @@ const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
     {
       type: 'number',
       label: 'Fecha de expiración',
-      name: 'phone1',
+      name: 'Expired',
       required: true
     }
   ]
@@ -82,7 +83,7 @@ const ModalCard = ({ onComplete }: { onComplete: () => Promise<void> }) => {
                   return <React.Fragment key={i}>{element}</React.Fragment>
                 })}
               </>
-            </div>{' '}
+            </div>
           </Form>
         </div>
       </Modal>

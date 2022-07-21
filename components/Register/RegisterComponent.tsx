@@ -66,13 +66,7 @@ const RegisterComponent: FC<{ formRef: React.RefObject<FormInstance<any>>; onSub
                 }
                 if (item.type === 'select') {
                   element = (
-                    <Selector
-                      required={item.required}
-                      formRef={formRef}
-                      placeHolder={item.label}
-                      name={item.name}
-                      values={item.values ? item.values : []}
-                    />
+                    <Selector required={false} formRef={formRef} placeHolder={item.label} name={item.name} values={item.values ? item.values : []} />
                   )
                 }
                 if (item.type === 'number') {

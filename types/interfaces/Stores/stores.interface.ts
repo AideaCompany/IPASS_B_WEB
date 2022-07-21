@@ -17,6 +17,7 @@ export interface IStores extends basicTable {
   phone: string
   contact: string
   distance?: number
+  reservePercentage: number
 }
 
 export enum generes {

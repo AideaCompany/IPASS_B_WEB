@@ -63,7 +63,7 @@ const ModalService = ({ service, setVisible }: { service: IService; setVisible: 
           <p> Descripción</p>
         </div>
         <div className="Information_Modal border h-10 p-2 w-full divide-y divide-slate-200">
-          <p> Servicio de bla bla</p>
+          <p> {service.description ?? ''}</p>
         </div>
         {/* <div style={{ marginTop: '8px' }} className="Information_Modal font-bold w-full divide-y divide-slate-200">
           <p> Quienes lo realizan:</p>

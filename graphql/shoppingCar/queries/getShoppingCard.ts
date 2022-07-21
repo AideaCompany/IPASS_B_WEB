@@ -52,6 +52,7 @@ export const getShoppingCard = /* GraphQL */ `
           _id
           name
           address
+          reservePercentage
           generes
           department
           city

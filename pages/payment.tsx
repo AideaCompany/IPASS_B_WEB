@@ -3,81 +3,47 @@ import CardResume from '@/components/CardResume'
 import Checkbox from '@/components/Checkbox'
 import ModalCard from '@/components/ModalCard'
 import CardTable from '@/components/Payment/CardTable'
+import PaymentMinutes from '@/components/Payment/PaymentMinutes'
 import useAuth from '@/providers/AuthContext'
 import useCar from '@/providers/CarContext'
 import { stepsPageReservation } from '@/providers/ReservationContext'
 import { generateTransferSessionToWebFn, listClientCardsFn } from '@/services/clients'
-import { getClientCurrentShoppingCardToPayFn, InvalidateShoppingCardFn, makePaymentShoppingCardFn } from '@/services/shoppingCar'
+import { makePaymentShoppingCardFn } from '@/services/shoppingCar'
 import { StatusPayment } from '@/types/interfaces/Payments/Payment.interface'
 import { IService } from '@/types/interfaces/services/Services.interface'
-import { IShoppingCard, IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { IShoppingService } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { IStores } from '@/types/interfaces/Stores/stores.interface'
 import { ICards, IClient } from '@/types/types'
 import { decodeValues, encryptValues } from '@/utils/utils'
-import { InfoCircleOutlined } from '@ant-design/icons'
-import { Form, FormInstance, message, Tooltip } from 'antd'
+import { Form, FormInstance, message } from 'antd'
 import { $security } from 'config'
 import * as cookie from 'cookie'
 import jwt from 'jsonwebtoken'
-import moment from 'moment-timezone'
 import { GetServerSidePropsContext } from 'next'
 import { useRouter } from 'next/router'
 import numeral from 'numeral'
 import React, { useEffect, useRef, useState } from 'react'
 import Layout from '../components/Layout'
-let myInterval: any
+
 const Register = ({ cards }: { cards: ICards[] }) => {
   const [currentCards, setCurrentCards] = useState(cards)
   const { user } = useAuth()
-  const [car, setCar] = useState<IShoppingCard>()
-  const { getData: getDataCar } = useCar()
-  const [minutes, setMinutes] = useState('')
+  // const [car, setCar] = useState<IShoppingCard>()
+  const { car, getData: getDataCar } = useCar()
   const [selectedCard, setSelectedCard] = useState<ICards | null>(cards.length ? cards[0] : null)
   const router = useRouter()
   const formCheckbox = useRef<FormInstance>(null)
   const [buttonDisabled, setButtonDisabled] = useState(true)
-  useEffect(() => {
-    if (user) {
-      getData()
-    }
-  }, [user])
+  // useEffect(() => {
+  //   if (user) {
+  //     getData()
+  //   }
+  // }, [user])
 
-  const getData = async () => {
-    const value = await getClientCurrentShoppingCardToPayFn(user?._id as string)
-    setCar(value)
-  }
-
-  useEffect(() => {
-    ;(async () => {
-      if (car) {
-        let diff = moment.tz(car?.timeToPay, 'America/Guatemala').diff(moment.tz('America/Guatemala'), 'minutes', true)
-        let segs = diff % 1
-        let minutes = Math.trunc(diff)
-
-        if (diff <= 10 && diff >= 0) {
-          myInterval = setInterval(async () => {
-            diff = moment.tz(car?.timeToPay, 'America/Guatemala').diff(moment.tz('America/Guatemala'), 'minutes', true)
-            segs = diff % 1
-            minutes = Math.trunc(diff)
-            if (diff < 0) {
-              clearInterval(myInterval)
-              await InvalidateShoppingCardFn(user?._id as string)
-              getDataCar()
-              router.push(`/reservations?step=${stepsPageReservation.selectDate}`)
-            }
-            setMinutes(`${minutes}:${numeral(segs * 60).format('00')}`)
-          }, 1000)
-        } else {
-          clearInterval(myInterval)
-          await InvalidateShoppingCardFn(user?._id as string)
-          getDataCar()
-          router.push(`/reservations?step=${stepsPageReservation.selectDate}`)
-        }
-      }
-    })()
-    return () => {
-      clearInterval(myInterval)
-    }
-  }, [car])
+  // const getData = async () => {
+  //   const value = await getClientCurrentShoppingCardToPayFn(user?._id as string)
+  //   setCar(value)
+  // }
 
   const updateCards = async () => {
     const newCards = await listClientCardsFn(user?._id as string)
@@ -117,7 +83,7 @@ const Register = ({ cards }: { cards: ICards[] }) => {
   useEffect(() => {
     validateDisable()
   }, [setSelectedCard])
-
+  const percentage = (car?.services[0].store as IStores)?.reservePercentage
   return (
     <Layout>
       <div className="main_container_payment">
@@ -152,28 +118,27 @@ const Register = ({ cards }: { cards: ICards[] }) => {
             <ModalCard onComplete={updateCards} />
             <div className="Container_Info_Buy ">
               <div className="Titles_Buy font-helvetica text-left">
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <p style={{ margin: 0, padding: 0, marginRight: 5 }}> Valor de la reserva:</p>
-                  <div style={{ display: 'flex', alignItems: 'center' }} className="pt-0">
-                    <Tooltip title="Este valor se cobrará unicamente si no se asiste o no se re programa la reserva">
-                      <InfoCircleOutlined style={{ fontSize: '15px' }} />
-                    </Tooltip>
-                  </div>
-                </div>
-                <p>Precio servicios:</p>
+                <p>Precio servicios del ticket:</p>
                 <p>Tiempo de reserva:</p>
               </div>
               <div className="Container_Price text-right font-bold ">
-                <p>{`Q${numeral(price * 0.15).format('0,0')}`}</p>
-                <p>{`Q${numeral(price * 1).format('0,0')}`}</p>
-                <p>{`20`}</p>
+                <p>{`Q${numeral(price).format('0,0')}`}</p>
+                <p>{` ${car?.services.map(e => (e.service as IService).serviceTime).reduce((a, b) => a + b)} min`}</p>
               </div>
             </div>
-            <div className="Titles_Buy font-helvetica text-center font-bold m-6">
-              <p>
-                {`Tienes `} <b className="underline">{`${minutes ?? '00:00'}`}</b> {`minutos para realizar el pago`}
-              </p>
+            <div className="Container_Info_Buy ">
+              <div className="Titles_Buy font-helvetica text-left">
+                <p>{`Precio de reserva (${percentage}%):`}</p>
+              </div>
+              <div className="Container_Price text-right font-bold ">
+                <p>{`Q${numeral((price * percentage) / 100).format('0,0')}`}</p>
+              </div>
             </div>
+            <strong>
+              <p>{`*Este monto corresponde al ${percentage}% del valor del ticket que se descuenta del monto total `}</p>
+            </strong>
+
+            {car && <PaymentMinutes car={car} />}
             <Button disabled={buttonDisabled} title="COMPLETAR PAGO" onClick={onClick} customClassName="button  text-xs"></Button>
           </div>
         </div>

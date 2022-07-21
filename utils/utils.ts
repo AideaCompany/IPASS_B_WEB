@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken'
 import { $security } from 'config'
 import { ICards } from '@/types/types'
 import { statusShoppingCard } from '@/types/interfaces/shoppingCard/shoppingCard.interface'
+import { generes } from '@/types/interfaces/Stores/stores.interface'
 
 export const capitalize = (s: string | undefined): string => {
   if (typeof s !== 'string') {
@@ -220,3 +221,11 @@ export const formatHour = (value: string) => {
   }
   return value
 }
+
+export const translateGeneres = (value: generes) =>
+  ({
+    [generes.MEN]: 'Caballero',
+    [generes.WOMEN]: 'Dama',
+    [generes.CHILDREN]: 'Niños',
+    [generes.ALL]: 'Todos'
+  }[value])
