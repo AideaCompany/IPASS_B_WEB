@@ -6,7 +6,7 @@ const CardHour = ({ onClick, hour }: { onClick: () => void; hour: string }) => {
 
   return (
     <p
-      className="hover:underline  hover:bg-gold hover:text-white font-Butler cursor-pointer border font-medium text-center font-bond text-lg"
+      className="text_hour hover:underline  hover:bg-gold hover:text-white font-Butler cursor-pointer border font-medium text-center font-bond text-lg"
       onClick={onClick}
     >
       {formatHour(hour)}

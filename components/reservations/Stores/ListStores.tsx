@@ -1,20 +1,23 @@
 import Button from '@/components/Button'
+import MenuSelectors from '@/components/MenuSelectors'
 import SelectorStores from '@/components/SelectorStores'
 import Spin from '@/components/Spin'
 import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { listStoresByGenereFn } from '@/services/stores'
 import { getKilometers } from '@/utils/utils'
-import { FormInstance, List } from 'antd'
+import { FormInstance } from 'antd'
+import useWindowDimensions from 'hooks/useWindowDimensions'
 import lodash from 'lodash'
 import React, { useEffect, useRef, useState } from 'react'
+import HorizontalScroll from 'react-scroll-horizontal'
 import { IStores, storeFilter } from '../../../types/interfaces/Stores/stores.interface'
 import CardStore from './CardStore'
 import Map from './Map'
-
 const ListStores = () => {
   const [stores, setStores] = useState<IStores[]>([])
   const [currentStore, setCurrentStore] = useState<IStores>()
   const [loading, setLoading] = useState(true)
+
   const [currentFilters, setCurrentFilters] = useState<{
     department: null | string
     city: null | string
@@ -40,8 +43,8 @@ const ListStores = () => {
     setSelectedStore(currentStore)
   }
 
-  const handleButton = (item: IStores) => {
-    setCurrentStore(item)
+  const handleButton = (i: IStores) => {
+    setCurrentStore(i)
   }
 
   useEffect(() => {
@@ -49,7 +52,7 @@ const ListStores = () => {
       getData()
     }
   }, [genere, currentFilters])
-
+  const { width } = useWindowDimensions()
   const getData = async () => {
     navigator.geolocation.getCurrentPosition(
       async position => {
@@ -87,46 +90,54 @@ const ListStores = () => {
       <Spin loading={loading}>
         <div className="container_list_stores ">
           {/* <p className="Title font-Gothic text-right pt-4 ">Selección de establecimiento</p> */}
-          <div className="Container_bar mt-6 ">
-            <div className="Container_bar1 flex grid-cols-3 gap-x-28  mt-6 pt-6 w-full">
-              <SelectorStores
-                formRef={formRef}
-                name="department"
-                onChange={value => setCurrentFilters(old => ({ ...old, department: value === '' ? null : value }))}
-                placeHolder="Seleccione un departamento"
-                values={filters.department.map(e => ({ value: e, label: e }))}
-              />
-              <SelectorStores
-                formRef={formRef}
-                name="city"
-                onChange={value => setCurrentFilters(old => ({ ...old, city: value === '' ? null : value }))}
-                placeHolder="Seleccione una ciudad"
-                values={filters.city.map(e => ({ value: e, label: e }))}
-              />
-              <SelectorStores
-                formRef={formRef}
-                onChange={value => setCurrentFilters(old => ({ ...old, zone: value === '' ? null : parseInt(value) }))}
-                name="zone"
-                placeHolder="Seleccione zona"
-                values={filters.zone.map(e => ({ value: e?.toString(), label: e?.toString() }))}
-              />
-            </div>
+          <div className="button_menu">
+            {width > 768 ? (
+              <>
+                <div className="Container_Select flex grid-cols-3 gap-x-28  mt-6 pt-6 w-full">
+                  <SelectorStores
+                    formRef={formRef}
+                    name="department"
+                    onChange={value => setCurrentFilters(old => ({ ...old, department: value === '' ? null : value }))}
+                    placeHolder="Seleccione un departamento"
+                    values={filters.department.map(e => ({ value: e, label: e }))}
+                  />
+                  <SelectorStores
+                    formRef={formRef}
+                    name="city"
+                    onChange={value => setCurrentFilters(old => ({ ...old, city: value === '' ? null : value }))}
+                    placeHolder="Seleccione una ciudad"
+                    values={filters.city.map(e => ({ value: e, label: e }))}
+                  />
+                  <SelectorStores
+                    formRef={formRef}
+                    onChange={value => setCurrentFilters(old => ({ ...old, zone: value === '' ? null : parseInt(value) }))}
+                    name="zone"
+                    placeHolder="Seleccione zona"
+                    values={filters.zone.map(e => ({ value: e?.toString(), label: e?.toString() }))}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="icon">
+                <MenuSelectors />
+              </div>
+            )}
           </div>
+          <div className="Container_bar mt-6 "></div>
           <div className="Container_select1  w-full ">
             <div className="Image_container ">{currentStore && <Map store={currentStore} />}</div>
             <div className="Main_carousel1  m-2">
               <div style={{ display: 'flex', justifyContent: 'center' }} className="Button_Select  w-full">
                 <Button title="Seleccionar" onClick={onClick} />
               </div>
-              <div className="List">
-                <List
-                  dataSource={stores}
-                  renderItem={item => (
-                    <React.Fragment key={item.name}>
-                      <CardStore isSelect={currentStore === item} store={item} onClick={() => handleButton(item)} />
+              <div className="list_stores">
+                <div className="scroll">
+                  {stores.map((store, i) => (
+                    <React.Fragment key={i}>
+                      <CardStore isSelect={currentStore === store} store={store} onClick={() => handleButton(store)} />
                     </React.Fragment>
-                  )}
-                />
+                  ))}
+                </div>
               </div>
             </div>
           </div>

@@ -45,7 +45,7 @@ const Home: NextPage = () => {
         </svg>
         <p className="font-Gothic text-black mt-0 text-right text-lg">BEAUTY SALON</p>
       </div>
-      <p className="font-butler text-black mt-0  text-justicify w-96  mt-20  text-sm ">
+      <p className="Login_Welcome font-butler text-black mt-0  text-center w-96  mt-20  text-sm ">
         Hola, para acceder a nuestros servicios debes iniciar sesión o si aún no tienes una cuenta debes registrarte
       </p>
       <div className="flex flex-col space-y-4 w-60 mt-20 ">

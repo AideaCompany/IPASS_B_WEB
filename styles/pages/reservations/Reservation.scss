@@ -1,8 +1,9 @@
-.Container_Reservation {
+.Container_Reservation1 {
   width: 100%;
   height: auto;
   display: flex;
   flex-direction: column;
+
   .Container_Steps {
     width: 100%;
     margin-top: 10px;
@@ -31,4 +32,26 @@
 }
 .ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
   color: #000000;
+}
+@media screen and (max-width: 415px) {
+  .Container_Reservation1 {
+    width: 100%;
+    margin-right: 0px;
+  }
+
+  .Container_Steps {
+    // border: 1px solid;
+    padding-top: 0;
+    > div {
+      > div {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .ant-steps-item-tail {
+          margin-left: 40px;
+        }
+      }
+    }
+  }
 }

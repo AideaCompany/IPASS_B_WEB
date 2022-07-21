@@ -15,7 +15,7 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
     if (data) {
       setData({ phone1, country })
       setIsConfirm(true)
-      message.info('Hemos enviado un código a tu correo electrónico')
+      message.info('Hemos enviado un código a tu whatsapp')
     } else {
       console.log('El número de teléfono no es válido')
     }
@@ -48,9 +48,9 @@ const LoginComponent = ({ setIsConfirm, setData }: { setIsConfirm: Dispatch<SetS
 
   return (
     <>
-      <div className="container_form ">
+      <div className="container_Login_Component">
         <Form ref={formRef} initialValues={{ country: countries.callingCountries.all.find(e => e.name === 'Guatemala')?.countryCallingCodes[0] }}>
-          <div>
+          <div className="Login_Selector">
             <>
               {formItems.map((item, i) => {
                 let element = <></>

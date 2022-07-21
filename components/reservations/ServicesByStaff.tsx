@@ -38,7 +38,7 @@ const ServicesByStaff = () => {
           <p className="Title font-Gothic text-right "> Servicios</p>
         </div> */}
       </div>
-      <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-0">
+      <div className="Container_personal  grid grid-cols-3 gap-x-8 gap-y-2 mt-4">
         {services.map((service, i) => (
           <React.Fragment key={i}>
             <CardServices service={service} />
