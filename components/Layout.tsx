@@ -1,9 +1,11 @@
 import useAuth from '@/providers/AuthContext'
+import useReservation, { stepsPageReservation } from '@/providers/ReservationContext'
 import { UserOutlined } from '@ant-design/icons'
 import { Tooltip } from 'antd'
 import useWindowDimensions from 'hooks/useWindowDimensions'
 import { HistoryIcon, VantLogoIcon } from 'icons/personalIcons'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { FC, useState } from 'react'
 import MenuDrawer from './MenuDrawer'
 import CarDrawer from './ShoppingCar/CarDrawer'
@@ -11,16 +13,25 @@ import CarDrawer from './ShoppingCar/CarDrawer'
 const Layout: FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user } = useAuth()
   const { width } = useWindowDimensions()
+  const router = useRouter()
   // <VerifyDeviceDynamic />
-
+  const reservation = useReservation()
   const [visibleCar, setVisibleCar] = useState(false)
+  const goStart = () => {
+    console.log('aqui')
+    if (reservation) {
+      reservation.setStep(stepsPageReservation.Genere)
+    } else {
+      router.push('reservation')
+    }
+  }
   return (
     <div className="layout_container">
       <div className="header">
         <div className="title">
-          <Link href={'/reservations'}>
+          <div style={{ cursor: 'pointer' }} onClick={goStart}>
             <VantLogoIcon />
-          </Link>
+          </div>
         </div>
 
         {user && (
