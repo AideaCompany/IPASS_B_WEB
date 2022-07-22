@@ -22,7 +22,7 @@ const Confirm: FC<{ data: registerClient; onConfirmSignUp: () => Promise<void>; 
       <div className="container_form ">
         <Form ref={formRef}>
           <div className=" text-center font-Gothic">
-            <p>{`Ingresa el código que hemos enviado a ${data.email}`}</p>
+            <p>{`Ingresa el código que hemos enviado a ${data.phone1}`}</p>
           </div>
           <div className="mt-4">
             {formItems.map((item, i) => {

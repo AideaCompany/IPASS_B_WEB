@@ -6,7 +6,7 @@ import React from 'react'
 const CardStaffers = ({ staffer }: { staffer: IStaff }) => {
   return (
     <>
-      <Popover content={<ModalStaffer staffer={staffer} />} placement="leftBottom" trigger="click">
+      <Popover content={<ModalStaffer staffer={staffer} />} placement="leftTop" trigger="click">
         <div className="Container_Ser w-56  h-72 lg:max-w-full lg:flex cursor-pointer ">
           <div className="card_blur"></div>
           <div className="Image_containerSec ">

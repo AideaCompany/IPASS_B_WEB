@@ -48,7 +48,7 @@ const RegisterComponent: FC<{ formRef: React.RefObject<FormInstance<any>>; onSub
 
   return (
     <>
-      <p className="font-Gothic text-center">
+      <p className="Title_Register font-Gothic text-center">
         Si ya tienes una cuenta <br />
         puedes
         <Link href="/login">
@@ -57,7 +57,7 @@ const RegisterComponent: FC<{ formRef: React.RefObject<FormInstance<any>>; onSub
       </p>
       <div className="container_form">
         <Form ref={formRef} initialValues={{ country: countries.callingCountries.all.find(e => e.name === 'Guatemala')?.countryCallingCodes[0] }}>
-          <div>
+          <div className="Register_Selector">
             <>
               {formItems.map((item, i) => {
                 let element = <></>

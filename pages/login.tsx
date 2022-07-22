@@ -19,7 +19,7 @@ const Login: NextPage = () => {
             Si no tienes una cuenta puedes
             <br />
             <Link href="/register">
-              <a className="text-gold m-14 w-full  hover:underline">¡Registrarte acá!</a>
+              <a className="Register_link text-gold w-full  hover:underline">¡Registrarte acá!</a>
             </Link>
           </p>
         )}

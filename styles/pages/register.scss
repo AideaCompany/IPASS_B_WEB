@@ -14,3 +14,11 @@
     width: 60%;
   }
 }
+
+@media screen and (max-width: 376px) {
+  .main_container_register {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+  }
+}

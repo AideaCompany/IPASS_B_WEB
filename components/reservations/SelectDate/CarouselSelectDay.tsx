@@ -1,3 +1,4 @@
+import useWindowDimensions from 'hooks/useWindowDimensions'
 import moment, { Moment } from 'moment-timezone'
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -16,10 +17,19 @@ const CarouselSelectDay = ({ onChange }: { onChange: (value: Moment) => void }) 
     }
     setDaysToShow(days)
   }, [])
-
+  const { width } = useWindowDimensions()
+  const [perView, setPerView] = useState(11)
+  useEffect(() => {
+    if (width < 500) {
+      setPerView(6)
+    }
+    if (width > 500) {
+      setPerView(11)
+    }
+  }, [width])
   return (
     <div className="container_carousel">
-      <Swiper slidesPerView={11} spaceBetween={0} initialSlide={10} centeredSlides={true}>
+      <Swiper slidesPerView={perView} spaceBetween={0} initialSlide={10} centeredSlides={true}>
         {daysToShow.map((e, i) => (
           <SwiperSlide key={i}>
             <CardDay

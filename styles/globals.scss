@@ -68,3 +68,10 @@ input[type='number'] {
   border-color: black !important;
   background: black;
 }
+.ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
+  background-color: #000000;
+}
+.gmnoprint.gm-bundled-control.gm-bundled-control-on-bottom {
+  bottom: 500px !important;
+  right: 40px !important;
+}

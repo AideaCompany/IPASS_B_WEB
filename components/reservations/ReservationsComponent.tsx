@@ -37,7 +37,7 @@ const ReservationsComponent = () => {
 
   return (
     <>
-      <div className="Container_Reservation ">
+      <div className="Container_Reservation1 ">
         <p className="Title font-Gothic text-right pt-4 ">{mySteps.find(e => e.step === step)?.title ?? 'Proceso de reserva'}</p>
         <div className="Container_Steps w-full pt-4">
           <Steps current={mySteps.find(e => e.step === step)?.selectedStep ?? 0} />
