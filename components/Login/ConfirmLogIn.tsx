@@ -41,7 +41,7 @@ const Confirm: FC<{ data: registerClient }> = ({ data }) => {
   ]
   return (
     <>
-      <div className="container_form">
+      <div className="container_form mt-4">
         <Form ref={formRef}>
           <p>{`Ingresa el código que hemos enviado a ${data.country} ${data.phone1}`}</p>
           <>

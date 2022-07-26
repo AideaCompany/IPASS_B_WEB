@@ -26,7 +26,7 @@ const Register: NextPage = () => {
           content: 'Hemos enviado un código a tu correo',
           duration: 10,
           style: {
-            marginTop: '15vh'
+            marginTop: '10vh'
           }
         })
       } else {
@@ -34,7 +34,7 @@ const Register: NextPage = () => {
           content: 'Debes aceptar los términos y condiciones para continuar',
           duration: 10,
           style: {
-            marginTop: '20vh'
+            marginTop: '10vh'
           }
         })
       }
@@ -51,7 +51,7 @@ const Register: NextPage = () => {
         content: 'Inició de sesión exitoso',
         duration: 10,
         style: {
-          marginTop: '20vh'
+          marginTop: '10vh'
         }
       })
       if (res.response === '200') {
@@ -65,7 +65,7 @@ const Register: NextPage = () => {
   return (
     <Layout>
       <div className="main_container_register ">
-        <p className="font-Butler font-medium mt-10 text-2xl">Registro</p>
+        <p className="font-Butler font-medium mt-16 text-2xl">Registro</p>
         {isConfirm ? (
           <Confirm formRef={formRefConfirm} onConfirmSignUp={onConfirmSignUp} data={data as registerClient} />
         ) : (

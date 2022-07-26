@@ -2,7 +2,7 @@ import SelectorStores from '@/components/SelectorStores'
 import useAuth from '@/providers/AuthContext'
 import { storeFilter } from '@/types/interfaces/Stores/stores.interface'
 import { MenuOutlined } from '@ant-design/icons'
-import { Drawer, FormInstance, Modal } from 'antd'
+import { FormInstance, Modal } from 'antd'
 import { useRef, useState } from 'react'
 const MenuSelectors = () => {
   const [visible, setVisible] = useState(false)
@@ -30,7 +30,7 @@ const MenuSelectors = () => {
   return (
     <>
       <MenuOutlined style={{ fontSize: '30px' }} onClick={() => setVisible(true)} />
-      <Modal title={'Menu'} visible={visible}>
+      <Modal title={'Filtros'} visible={visible}>
         <div className="Container_Select flex flex-col  mt-6 pt-6 w-full">
           <SelectorStores
             formRef={formRef}

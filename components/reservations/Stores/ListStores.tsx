@@ -9,7 +9,6 @@ import { FormInstance } from 'antd'
 import useWindowDimensions from 'hooks/useWindowDimensions'
 import lodash from 'lodash'
 import React, { useEffect, useRef, useState } from 'react'
-import HorizontalScroll from 'react-scroll-horizontal'
 import { IStores, storeFilter } from '../../../types/interfaces/Stores/stores.interface'
 import CardStore from './CardStore'
 import Map from './Map'
@@ -123,7 +122,7 @@ const ListStores = () => {
               </div>
             )}
           </div>
-          <div className="Container_bar mt-6 "></div>
+
           <div className="Container_select1  w-full ">
             <div className="Image_container ">{currentStore && <Map store={currentStore} />}</div>
             <div className="Main_carousel1  m-2">

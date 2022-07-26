@@ -19,7 +19,7 @@ const Confirm: FC<{ data: registerClient; onConfirmSignUp: () => Promise<void>; 
   ]
   return (
     <>
-      <div className="container_form ">
+      <div className="container_form mt-12 ">
         <Form ref={formRef}>
           <div className=" text-center font-Gothic">
             <p>{`Ingresa el código que hemos enviado a ${data.phone1}`}</p>

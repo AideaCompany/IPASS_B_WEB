@@ -47,6 +47,11 @@
     }
   }
 }
+@media screen and (max-width: 1024px) {
+  .Container_bar {
+    border: 1px solid;
+  }
+}
 @media screen and (max-width: 410px) {
   .container_list_stores {
     width: 100%;
