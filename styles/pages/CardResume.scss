@@ -9,7 +9,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
+
+    height: auto;
     .img-card {
       height: 100%;
       width: 100%;
@@ -18,17 +19,19 @@
   }
   .main_info_resumen {
     width: 55%;
-    padding: 20px;
+    height: 100%;
   }
   .main_icons_resumen {
     width: 15%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     .icon_item {
-      font-size: 20px;
-      margin: 5px;
+      font-size: 15px;
+      margin: 2px;
       cursor: pointer;
     }
   }
@@ -36,6 +39,7 @@
 
 .container_terms {
   border-top: 0.63px solid #cfcfcf80;
+  height: 100%;
   .info_terms {
     padding-left: 10px;
     padding-top: 10px;
